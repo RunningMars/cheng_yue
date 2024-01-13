@@ -1,0 +1,64 @@
+/* 清除默认样式，初始化样式 */
+* {
+    /* 清除内外边距*/
+    margin: 0;
+    padding: 0;
+    /* 自减盒子模型 */
+    box-sizing: border-box;
+}
+
+ul, ol {
+    /* 清除默认圆点 */
+    list-style: none;
+}
+
+a {
+    /* 取消下划线 */
+    text-decoration: none;
+    /* 字体颜色 */
+    color: #333;
+}
+
+input, button {
+    /*去掉input的轮廓线*/
+    outline: none;
+    border: 0;
+}
+
+/* 左浮动 */
+.fl {
+    float: left;
+}
+
+/* 右浮动 */
+.fr {
+    float: right;
+}
+
+/*  .clearfix::before 作用: 解决外边距塌陷问题,清除浮动 */
+/*.clearfix::before, */
+.clearfix::after {
+    content: '';
+    display: table;
+}
+
+/* 真正清除浮动的标签 */
+.clearfix::after {
+    clear:both;
+}
+
+/* 设置字体 */
+body {
+    font: 16px/1.5 微软雅黑;
+    color: #333;
+}
+
+/* 取消标签的字体倾斜 */
+em, i {
+    font-style: normal;
+}
+
+/* 清除img 自带的一点边距 */
+img {
+    list-style: none;
+}
