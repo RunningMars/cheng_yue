@@ -11,7 +11,7 @@ import router from '@/router';
 //底下的代码也是创建axios实例
 let requests = axios.create({
     //基础路径
-    // baseURL: "/api",
+    baseURL: "/api",
     //请求不能超过5S
     timeout: 5000,
   });
