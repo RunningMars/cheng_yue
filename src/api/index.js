@@ -38,3 +38,6 @@ export const reqGetMemberDetail = (params) => requests({url:"/member/detail", pa
 // 更新member Detail
 export const reqUpdateMemberDetail = (params) => requests({url:"/member/save", params , method:"post"});
 
+
+// uploadImage
+export const reqUploadImage = (params) => requests({url:"/uploadImage" , params ,method:"post"});

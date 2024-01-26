@@ -48,7 +48,7 @@
                     <viewer :images="member.member_image">
                       <img
                           v-for="(member_image,index) in member.member_image"
-                          :src="member_image.image"
+                          :src="member_image.url"
                           :key="index"
                           class="pro-img"
                         >

@@ -33,7 +33,7 @@
                       <div class="member_info">
 
 
-                          <span class="" style="font-size:20px;">TA的信息</span>
+                          <span class="" style="font-size:20px;">我的信息</span>
                           <!-- 基本资料 -->
                           <div class="member_basic_info clearfix">
 
@@ -51,9 +51,8 @@
                                       <el-input style="width:320px;" v-model="member.mobile"></el-input>
                                   </el-form-item>
 
-
                                   <el-form-item label="性别">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.sex"></el-input>
                                   </el-form-item>
                   
                                   <el-form-item label="生日">
@@ -100,15 +99,21 @@
                                   </el-form-item>
                   
 
-                                  <el-form-item label="体重">
-                                      <el-input style="width:320px;" v-model="member.weight"></el-input>
-                                  </el-form-item>
-                  
-
                                   <el-form-item label="身高">
                                       <el-input style="width:320px;" v-model="member.height"></el-input>
                                   </el-form-item>
                   
+
+                                  <el-form-item label="体重">
+                                      <el-input style="width:320px;" v-model="member.weight"></el-input>
+                                  </el-form-item>
+                
+
+                                  <el-form-item label="体型">
+                                      <el-input style="width:320px;" v-model="member.body_size"></el-input>
+                                  </el-form-item>
+                  
+
                                   <el-form-item label="民族">
                                       <el-input style="width:320px;" v-model="member.ethnic"></el-input>
                                   </el-form-item>
@@ -119,29 +124,29 @@
                   
 
                                   <el-form-item label="家庭情况">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.about_family"></el-input>
                                   </el-form-item>
                   
 
                                   <el-form-item label="何时结婚">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.about_marry"></el-input>
                                   </el-form-item>
                   
 
                                   <el-form-item label="是否要孩子">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.about_child"></el-input>
                                   </el-form-item>
 
                                   <el-form-item label="是否吸烟">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.is_smoke"></el-input>
                                   </el-form-item>
 
                                   <el-form-item label="是否喝酒">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.is_drink"></el-input>
                                   </el-form-item>
 
                                   <el-form-item label="兴趣爱好">
-                                      <el-input style="width:320px;" v-model="member.age"></el-input>
+                                      <el-input style="width:320px;" v-model="member.interest"></el-input>
                                   </el-form-item>
 
                                   <el-form-item label="自我介绍">
@@ -152,247 +157,37 @@
                                       <el-input style="width:320px;" v-model="member.hope_you"></el-input>
                                   </el-form-item>
 
-                                  <el-form-item label="兴趣爱好">
-                                      <el-input style="width:320px;" v-model="member.interest"></el-input>
-                                  </el-form-item>
-
-                                  <el-form-item label="兴趣爱好">
-                                      <el-input style="width:320px;" v-model="member.interest"></el-input>
+                                  <el-form-item label="择偶要求">
+                                      <el-input style="width:320px;" v-model="member.mating_requirement"></el-input>
                                   </el-form-item>
                   
-                                  <div class="info fl">
-                                    <span>{{member.age}}岁</span>
-                                  </div>
-                                  <div class="info fl">
-                                    <span>{{member.height}}cm</span>
-                                  </div>
-                                  <div class="info fl">
-                                    <span>{{member.education_background}}</span>
-                                  </div>
-                                  <div class="info fl">
-                                    <span>{{member.province}}</span>
-                                    <span>/{{member.city}}</span>
-                                  </div>
-                                  <div class="info fl">
-                                    <span>{{member.job}}</span>
-                                  </div>
-                                
-                                  <div v-show="member.annual_income" class="info fl">
-                                    <span>{{member.annual_income}}W</span>
-                                  </div>
-
-                                  <div v-show="member.asset_house" class="info fl">
-                                    <span>{{member.asset_house}}</span>
-                                  </div>
-
-                                  <div v-show="member.asset_car" class="info fl">
-                                    <span>{{member.asset_car}}</span>
-                                  </div>
                               </div>
                           </div>
 
+                        </div>
 
 
-                            <div class="member_basic_info clearfix">
-                            <div class="block_label fl">
-                                <span class="">家庭情况</span>
-                            </div>
-                            <div class="block_content fl clearfix">
-                                <div class="info fl">
-                                  <span>汉族</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>独生子女</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>籍贯:成都</span>
-                                </div>
-                            </div>
-                          </div>
+                      <div class="member_pics">
+                        <viewer :images="member.member_image">
+                          <img
+                              v-for="(member_image,index) in member.member_image"
+                              :src="member_image.url"
+                              :key="index"
+                              class="pro-img"
+                            >
+                        </viewer>
+                      </div>  
+                    
+                 
+                      <UploadImageComponent v-model="member.member_image" ></UploadImageComponent>
+                
 
-
-                          <div class="member_basic_info clearfix">
-                            <div class="block_label fl">
-                                <span class="">婚姻观念</span>
-                            </div>
-                            <div class="block_content fl clearfix">
-                                <div class="info fl">
-                                  <span>未婚</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>何时结婚,看情况</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>等时机成熟</span>
-                                </div>
-                            </div>
-                          </div>
-
-
-                          <div class="member_basic_info clearfix">
-                            <div class="block_label fl">
-                                <span class="">生活习惯</span>
-                            </div>
-                            <div class="block_content fl clearfix">
-                                <div class="info fl">
-                                  <span>不吸烟</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>不喝酒</span>
-                                </div>
-                            </div>
-                          </div>
-
-
-
-
-                          <div class="member_basic_info clearfix">
-                            <div class="block_label fl">
-                                <span class="">兴趣爱好</span>
-                            </div>
-                            <div class="block_content fl clearfix">
-                                <div class="info fl">
-                                  <span>旅游</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>瑜伽</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>跑步</span>
-                                </div>
-                                <div class="info fl">
-                                  <span>跳舞</span>
-                                </div>
-                            </div>
-                          </div>
-
-
-
-                          <div class="member_basic_info clearfix">
-                            <div class="block_label fl">
-                                <span class="">自我介绍</span>
-                            </div>
-                            <div class="block_content fl clearfix">
-                                <div class="info fl">
-                                  <span>阳光..健康..</span>
-                                </div>
-                            </div>
-                          </div>
-
-
-
-                          </div>
-
-
-
-
-
-
-
-
-                          <!-- TA的信息 -->
-                          <div class="member_info">
-
-
-                              <span class="" style="font-size:20px;">TA的择偶观</span>
-                              <!-- 基本资料 -->
-                              <div class="member_basic_info clearfix">
-                                <div class="block_label fl">
-                                    <span class="">基本要求</span>
-                                </div>
-                                <div class="block_content fl clearfix">
-                                    <div class="info fl">
-                                      <span>{{member.age}}岁-{{member.age}}岁</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>{{member.height}}cm-{{member.height}}cm</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>{{member.education_background}}</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>{{member.province}}</span>
-                                      <span>/{{member.city}}</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>{{member.job}}</span>
-                                    </div>
-                                </div>
-                              </div>
-
-
-
-                              <div class="member_basic_info clearfix">
-                                <div class="block_label fl">
-                                    <span class="">婚姻观念</span>
-                                </div>
-                                <div class="block_content fl clearfix">
-                                    <div class="info fl">
-                                      <span>不限</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>不限</span>
-                                    </div>
-                                </div>
-                              </div>
-
-
-                              <div class="member_basic_info clearfix">
-                                <div class="block_label fl">
-                                    <span class="">生活习惯</span>
-                                </div>
-                                <div class="block_content fl clearfix">
-                                    <div class="info fl">
-                                      <span>不吸烟</span>
-                                    </div>
-                                    <div class="info fl">
-                                      <span>不喝酒</span>
-                                    </div>
-                                </div>
-                              </div>
-
-
-
-
-                              <div class="member_basic_info clearfix">
-                                <div class="block_label fl">
-                                    <span class="">其他要求</span>
-                                </div>
-                                <div class="block_content fl clearfix">
-                                    <div class="info fl">
-                                      <span>暂无</span>
-                                    </div>
-                                </div>
-                              </div>
-
-
-
-                            
-                          </div>
-
-
-
-
-                          <div class="member_pics">
-                            <viewer :images="member.member_image">
-                              <img
-                                  v-for="(member_image,index) in member.member_image"
-                                  :src="member_image.image"
-                                  :key="index"
-                                  class="pro-img"
-                                >
-                            </viewer>
-                          </div>  
-
-                      
-
-                        <el-form-item>
-                            <el-button type="primary" @click="save">保存</el-button>
-                            <el-button>取消</el-button>
-                        </el-form-item>
+                      <el-form-item>
+                          <el-button type="primary" @click="save">保存</el-button>
+                          <el-button>取消</el-button>
+                      </el-form-item>
                 </el-form>
           </div>
-
 
     </div>
   
@@ -406,11 +201,14 @@
 // import { mapGetters } from "vuex";
 import { reqUpdateMemberDetail } from "@/api";
 
-
+import UploadImageComponent from "../../../components/Upload";
 
 export default {
   name: 'MemberDetail',
   props:  ['member_id'],
+  components: {
+    UploadImageComponent
+  },
   data(){
     return {
       member: {
@@ -433,8 +231,8 @@ export default {
 
       if (id){
         await this.$store.dispatch("member/getMemberDetail", {id:id});
-        if (this.$store.state.user.userInfo.member){
-            this.member = this.$store.state.user.userInfo.member
+        if (this.$store.state.member.member){
+            this.member = this.$store.state.member.member
         }
       }
     },
@@ -460,15 +258,33 @@ export default {
                });          
            }
            return response
+    },
+    uploadedImages(uploadedImages){
+        //this.member.uploaded_images = uploadedImages;
+        console.log('uploadedImages',uploadedImages);
+        uploadedImages.forEach((itm) => {
+            let index = this.member.member_image.findIndex((it) => {
+                return it.url == itm;
+            });
+            if (-1 == index || this.member.member_image.length <= index) {
+                this.member.member_image.push({'url':itm})
+            }
+        });
+        console.log('this.member.member_image',this.member.member_image)
+
     }
   },
   mounted() {
+    this.$bus.$on('uploadedImages',this.uploadedImages)
     this.getData();
   },
   
   computed:{
     //mapGetters里面的写法：传递的数组，因为getters计算是没有划分模块【home,search】
     //...mapGetters('member',["member"]),
+  },
+  beforeDestroy() {
+    this.$bus.$off('uploaded')
   }
 }
 </script>
