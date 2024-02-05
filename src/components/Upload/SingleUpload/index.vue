@@ -7,17 +7,15 @@
       :on-remove="handleRemove"
       :file-list="fileList"
       :on-success="uploaded"
-      multiple
-      :limit="5"
       list-type="picture">
-      <el-button size="small" type="primary">点击上传</el-button>
+      <el-button size="small" type="primary">点击上传图片</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
 </template>
 
 <script>
   export default {
-    name:"UploadImageComponet",
+    name:"UploadSingleImageComponet",
     data() {
       return {
         fileList: [],
@@ -31,15 +29,15 @@
         console.log(file);
       },
       uploaded(response,file, fileList) {
-        let imgs = [];
+        let img = '';
         fileList.forEach( i => {
           if (i.response.status_code == 200){
-            imgs.push(i.response.result.url);
+            img = i.response.result.url;
           }
           return true;
         });
 
-        this.$bus.$emit('uploadedImages',imgs)
+        this.$bus.$emit('uploadedSingleImage',img)
       }
     }
   }

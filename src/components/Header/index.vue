@@ -9,8 +9,8 @@
 
       <ul class="header nav fr clearfix">
 
-          <li class="fl"> <router-link to="/login" v-show="!$store.state.user.token">登录</router-link></li>
-          <li class="fl"> <router-link to="/register" v-show="!$store.state.user.token">注册</router-link></li>
+          <li class="fl"> <router-link to="/login" v-show="!$store.state.user.userInfo">登录</router-link></li>
+          <li class="fl"> <router-link to="/register" v-show="!$store.state.user.userInfo">注册</router-link></li>
           
           <li class="fl"> <router-link to="/home">广场</router-link></li>
           <li class="fl"> <router-link to="/personal/edit">编辑我的资料</router-link></li>

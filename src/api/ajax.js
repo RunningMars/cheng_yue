@@ -5,7 +5,7 @@ import axios from "axios";
 import store from '@/store';
 
 //import nprogress from "nprogress";
-import { removeToken } from '@/utils/token' 
+import { removeToken,removeUserInfo } from '@/utils/token' 
 import router from '@/router';
 
 //底下的代码也是创建axios实例
@@ -46,6 +46,7 @@ requests.interceptors.response.use(
       } else {
           if (response.status === 401){  
               removeToken();
+              removeUserInfo();
               router.replace({
                   path: '/login'
               })
@@ -56,6 +57,7 @@ requests.interceptors.response.use(
     (error) => {
       if (error.response.status === 401){
           removeToken();
+          removeUserInfo();
           router.replace({
               path: '/login'
           })

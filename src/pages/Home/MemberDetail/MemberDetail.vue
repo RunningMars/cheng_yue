@@ -46,6 +46,12 @@
                       <span>{{member.height}}cm</span>
                     </div>
                     <div class="info fl">
+                      <span>{{member.weight}}cm</span>
+                    </div>
+                    <div class="info fl">
+                      <span>{{member.body_size}}cm</span>
+                    </div>
+                    <div class="info fl">
                       <span>{{member.education_background}}</span>
                     </div>
                     <div class="info fl">
@@ -78,13 +84,13 @@
               </div>
               <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>汉族</span>
+                    <span>{{member.ethnic}}</span>
                   </div>
                   <div class="info fl">
-                    <span>独生子女</span>
+                    <span>{{member.about_family}}</span>
                   </div>
                   <div class="info fl">
-                    <span>籍贯:成都</span>
+                    <span>{{member.city}}</span>
                   </div>
               </div>
             </div>
@@ -96,13 +102,16 @@
               </div>
               <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>未婚</span>
+                    <span>{{member.marital_status}}</span>
                   </div>
                   <div class="info fl">
-                    <span>何时结婚,看情况</span>
+                    <span>{{member.about_marry}}</span>
                   </div>
                   <div class="info fl">
-                    <span>等时机成熟</span>
+                    <span>{{member.about_child}}</span>
+                  </div>
+                  <div class="info fl">
+                    <span>{{member.about_child}}</span>
                   </div>
               </div>
             </div>
@@ -114,10 +123,10 @@
               </div>
               <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>不吸烟</span>
+                    <span>{{member.about_smoke}}</span>
                   </div>
                   <div class="info fl">
-                    <span>不喝酒</span>
+                    <span>{{member.about_drink}}</span>
                   </div>
               </div>
             </div>
@@ -129,18 +138,23 @@
               <div class="block_label fl">
                   <span class="">兴趣爱好</span>
               </div>
+              
               <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>旅游</span>
+                    <span>{{ member.interest }}</span>
                   </div>
+
+              </div>
+            </div>
+
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">关于我</span>
+              </div>
+              
+              <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>瑜伽</span>
-                  </div>
-                  <div class="info fl">
-                    <span>跑步</span>
-                  </div>
-                  <div class="info fl">
-                    <span>跳舞</span>
+                      <span class="">{{ member.about_me }}</span>
                   </div>
               </div>
             </div>
@@ -149,13 +163,24 @@
 
             <div class="member_basic_info clearfix">
               <div class="block_label fl">
-                  <span class="">自我介绍</span>
+                  <span class="">希望你</span>
               </div>
               <div class="block_content fl clearfix">
                   <div class="info fl">
-                    <span>阳光..健康..</span>
+                    <span>{{ member.hope_you }}</span>
                   </div>
               </div>
+
+            </div>
+
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">择偶要求</span>
+              </div>
+
+              <div class="info fl">
+                    <span>{{member.mating_requirement}}</span>
+                  </div>
             </div>
 
 
@@ -176,21 +201,21 @@
                   </div>
                   <div class="block_content fl clearfix">
                       <div class="info fl">
-                        <span>{{member.age}}岁-{{member.age}}岁</span>
+                        <span>不限</span>
+                      </div>
+                      <!-- <div class="info fl">
+                        <span>不限</span>
                       </div>
                       <div class="info fl">
-                        <span>{{member.height}}cm-{{member.height}}cm</span>
+                        <span>不限</span>
                       </div>
                       <div class="info fl">
-                        <span>{{member.education_background}}</span>
+                        <span>不限</span>
+                        <span>不限</span>
                       </div>
                       <div class="info fl">
-                        <span>{{member.province}}</span>
-                        <span>/{{member.city}}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{member.job}}</span>
-                      </div>
+                        <span>不限</span>
+                      </div> -->
                   </div>
                 </div>
 
@@ -217,10 +242,10 @@
                   </div>
                   <div class="block_content fl clearfix">
                       <div class="info fl">
-                        <span>不吸烟</span>
+                        <span>不限</span>
                       </div>
                       <div class="info fl">
-                        <span>不喝酒</span>
+                        <span>不限</span>
                       </div>
                   </div>
                 </div>
@@ -294,7 +319,7 @@ export default {
     let id = '';
 
     if ( this.$router.currentRoute.path == "/personal/info"  ){
-      if (typeof this.$store.state.user.userInfo.member !== 'undefined' && this.$store.state.user.userInfo.member.id){
+      if (this.$store.state.user.userInfo && typeof this.$store.state.user.userInfo.member !== 'undefined' && this.$store.state.user.userInfo.member.id){
         id = this.$store.state.user.userInfo.member.id;
       }else{
         this.$router.push({
