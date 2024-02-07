@@ -7,8 +7,9 @@
       :on-remove="handleRemove"
       :file-list="fileList"
       :on-success="uploaded"
+      :before-upload="before_upload"
       multiple
-      :limit="5"
+      :limit="8"
       list-type="picture">
       <el-button size="small" type="primary">点击上传图片</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -31,6 +32,16 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      before_upload(file) {
+        console.log(file);
+        if (this.fileList.length >= 8)
+        {
+           this.$message.error('最多只能上传8张图片!');
+           return false;
+        }
+        //this.fileList.push(file);
+        return true;
       },
       uploaded(response,file, fileList) {
         console.log(file, fileList);
