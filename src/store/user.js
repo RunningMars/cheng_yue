@@ -101,8 +101,10 @@ export default {
         },
         // 用户登出
         async userLogout({ commit }, params = {}) {
-            let response = await reqLogout(params);
             commit("USER_LOGOUT");
+
+            let response = await reqLogout(params);
+
             if (response.status_code == 200) {
                 Message({
                     message: response.message,

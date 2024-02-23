@@ -3,6 +3,9 @@
 
     <!--搜索栏-->
     <div class="search clearfix">
+
+        <li class="el-icon-back" v-show="this.is_favorite || this.is_thumbs_up" @click="$router.back()"></li>
+
         <div class="search_input fr">
             <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
@@ -80,21 +83,15 @@
 import { mapGetters } from "vuex";
 export default {
   name: 'MemberList',
-  props: {
-    msg: String
-  },
+  props: ['msg','is_favorite','is_thumbs_up'],
   data(){
     return {
       searchParams: {
+        is_favorite:0,
+        is_thumbs_up:0,
         //搜索的关键字
         key_word:"",
-        //相应的id
-        category1Id: "",
-        category2Id: "",
-        category3Id: "",
-        //名字
-        categoryName: "",
-        keyword: "",
+
         //排序:初始状态应该是综合且降序
         order: "1:desc",
         //第几页
@@ -105,8 +102,7 @@ export default {
         last_page: 1,
         //平台属性的操作
         props: [],
-        //
-        trademark: "",
+
       }
     }
   },
@@ -131,7 +127,16 @@ export default {
     }
   },
   mounted() {
-    //console.log('memberlist mounted');
+
+    if (this.is_favorite)
+    {
+      this.searchParams.is_favorite = this.is_favorite;
+    }
+
+    if (this.is_thumbs_up)
+    {
+      this.searchParams.is_thumbs_up = this.is_thumbs_up;
+    }
     if (this.$store.state.user.token){
       this.getData();
     }else{

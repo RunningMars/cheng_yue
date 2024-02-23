@@ -38,6 +38,30 @@ export const reqGetMemberDetail = (params) => requests({url:"/member/detail", pa
 // 更新member Detail
 export const reqUpdateMemberDetail = (params) => requests({url:"/member/save", params , method:"post"});
 
+// 更新收藏
+export const reqUpdateMyFavorite = (params) => requests({url:"/member/favorite/update", params , method:"post"});
 
-// uploadImage
+// 更新点赞
+export const reqUpdateMythumbsUp = (params) => requests({url:"/member/thumbs_up/update", params , method:"post"});
+
+// 获取被点赞列表
+export const reqReceiveMythumbsUpList = (params) => requests({url:"/member/thumbs_up/list", params , method:"get"});
+
+/**
+ * Message
+ */
+
+// 获取聊天列表 chat list
+export const reqGetChatList = (params) => requests({url:"/message/chat/list", params , method:"get"});
+ 
+// 获取聊天记录 chat message
+export const reqGetChatMessage = (params) => requests({url:"/message/chat/message", params , method:"get"});
+
+// 发送消息 send message
+export const reqSendMessage = (params) => requests({url:"/message/chat/send", params , method:"post"});
+
+/**
+ * uploadImage
+ */
+
 export const reqUploadImage = (params) => requests({url:"/uploadImage" , params ,method:"post"});

@@ -46,10 +46,10 @@
                       <span>{{member.height}}cm</span>
                     </div>
                     <div class="info fl">
-                      <span>{{member.weight}}cm</span>
+                      <span>{{member.weight}}kg</span>
                     </div>
                     <div class="info fl">
-                      <span>{{member.body_size}}cm</span>
+                      <span>{{member.body_size}}</span>
                     </div>
                     <div class="info fl">
                       <span>{{member.education_background}}</span>
@@ -63,7 +63,7 @@
                     </div>
                   
                     <div v-show="member.annual_income" class="info fl">
-                      <span>{{member.annual_income}}W</span>
+                      <span>{{member.annual_income}}</span>
                     </div>
 
                     <div v-show="member.asset_house" class="info fl">
@@ -188,7 +188,6 @@
           </div>
 
 
-
           <!-- TA的信息 -->
           <div class="member_info">
 
@@ -270,8 +269,6 @@
           </div>
 
 
-
-
           <div class="member_pics">
               <viewer :images="member.member_image">
                 <img
@@ -282,6 +279,23 @@
                   >
               </viewer>
           </div>  
+
+          <div style="width:700px">
+            <div class="send" style="display:flex;justify-content:center;text-align:center;">
+              <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
+                <el-button type="primary" @click="updateFavorites(member.id)" round> {{member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
+              </div>
+              <div class="search_input" ></div>
+              <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
+                <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{member.member_thumbs_up_to_member.length === 0 ? '点赞' : '已点赞'}} </el-button>
+              </div>
+              <div class="search_input" ></div>
+              <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
+                <el-button type="primary" @click="openChat(member.id)" round >私信</el-button>
+              </div>
+            </div>
+          </div>
+        
 
 
     </div>
@@ -294,6 +308,7 @@
 <script>
 
 import { mapGetters } from "vuex";
+import { reqUpdateMyFavorite , reqUpdateMythumbsUp } from "@/api";
 export default {
   name: 'MemberDetail',
   props:  ['member_id'],
@@ -312,6 +327,25 @@ export default {
     //将来需要再次发请求，你只需要在调用这个函数即可
     getData(id) {
         this.$store.dispatch("member/getMemberDetail", {id:id});
+    },
+    openChat(to_member_id){
+      this.$router.push({ path: "/message", query: {to_member_id:to_member_id} });
+    },
+    async updateFavorites(to_member_id){
+
+      let is_favorite = this.$store.state.member.member.member_favorite_to_member.length === 0 ? 1 : 0;
+      
+      await reqUpdateMyFavorite({to_member_id:to_member_id,is_favorite:is_favorite});
+
+      this.getData(to_member_id);
+    },
+    async updateThumbsUp(to_member_id){
+
+      let is_thumbs_up = this.$store.state.member.member.member_thumbs_up_to_member.length === 0 ? 1 : 0;
+
+      await reqUpdateMythumbsUp({to_member_id:to_member_id,is_thumbs_up:is_thumbs_up});
+
+      this.getData(to_member_id);
     }
   },
   mounted() {

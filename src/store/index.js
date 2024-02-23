@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import order from './order'
 import user from './user'
 import member from './member'
+import message from './message'
 
 //应用Vuex插件
 Vue.use(Vuex)
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     modules:{
         order:order,
         user:user,
-        member:member
+        member:member,
+        message:message,
     }
 })

@@ -5,9 +5,12 @@ import MemberList from '../pages/Home/MemberList/MemberList.vue'
 import AboutPage from '../pages/About/AboutPage'
 import MemberDetail from '../pages/Home/MemberDetail/MemberDetail.vue'
 import MemberEdit from '../pages/Home/MemberDetail/MemberEdit.vue'
+import ReceiveThumbsUpList from '../pages/Home/MemberThumbsUp/ReceiveThumbsUpList.vue'
 import LoginPage from '../pages/Auth/LoginPage.vue'
 import RegisterPage from '../pages/Auth/RegisterPage.vue'
 import TestPage from '../pages/Test/TestPage.vue'
+import ChatList from '../pages/Message/ChatList.vue'
+import ChatMessage from '../pages/Message/ChatMessage.vue'
 
 //*******以下为添加内容*******
 const RouterPush = VueRouter.prototype.push
@@ -23,7 +26,6 @@ VueRouter.prototype.replace = function replace (to) {
 
 const router = new VueRouter({
     routes: [
-       
         {
             path: '/login',
             component: LoginPage,
@@ -39,22 +41,46 @@ const router = new VueRouter({
         {
             path: '/home',
             component: MemberList,
-            meta:{title:'广场'}
+            meta:{title:'首页'}
+        },
+        {
+            path: '/chat',
+            component: ChatList,
+            meta:{ title: '私信列表' }
+        },
+        {
+            path: '/favorite',
+            component: MemberList,
+            meta:{title:'已收藏'},
+            props($route) {
+                return {
+                  is_favorite: 1,
+                  id: $route.query.id,
+                }
+            }
+        },
+        {
+            path: '/thumbs_up',
+            component: MemberList,
+            meta:{title:'已点赞'},
+            props($route) {
+                return {
+                  is_thumbs_up: 1,
+                  id: $route.query.id,
+                }
+            }
+        },
+        {
+            path: '/personal/edit',
+            component: MemberEdit,
+            meta:{title:'编辑信息'}
         },
         {
             path: '/personal/info',
             component: MemberDetail,
-            meta:{title:'我的预览'}
+            meta:{title:'预览信息'}
         },
         
-        {
-            path: '/personal/edit',
-            component: MemberEdit,
-            meta:{title:'编辑个人资料'}
-        },
-
-
-
 
         {
             path: '/member/:id',
@@ -69,7 +95,7 @@ const router = new VueRouter({
         {
             path: 'member/edit/:id',
             component: MemberEdit,
-            meta:{title:'编辑会员资料'},
+            meta:{title:'编辑信息'},
             props($route) {
                 return {
                   member_id: $route.params.id,
@@ -77,6 +103,19 @@ const router = new VueRouter({
             }
         },
 
+      
+        {
+            path: '/receive_thumbs_up',
+            component: ReceiveThumbsUpList,
+            meta:{ title: '我收到的点赞' }
+        },
+
+      
+        {
+            path: '/message',
+            component: ChatMessage,
+            meta:{ title: '私信对话' }
+        },
 
         {
             path: '/about',

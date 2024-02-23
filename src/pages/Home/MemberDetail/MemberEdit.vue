@@ -28,17 +28,17 @@
 
           <div class="edit_area_form">
 
-                <ul class="tabs_navi clearfix">
-                    <li :class="tab==1 ? 'fl active' : 'fl' " @click="tab=1">我的信息</li>
-                    <li :class="tab==2 ? 'fl active' : 'fl' " @click="tab=2">择偶要求</li>
+                <ul class="tabs_navi">
+                    <li :class="tab==1 ? 'active' : '' " @click="tab=1">我的信息</li>
+                    <li :class="tab==2 ? 'active' : '' " @click="tab=2">择偶要求</li>
                 </ul>
-
-                <el-form ref="member" :model="member" label-width="80px">
+                <hr>
+                <el-form ref="member" :model="member" label-width="auto">
 
                     <!-- TA的信息 -->
-                    <div v-show="tab==1" class="member_info">
+                    <div v-if="tab==1" class="member_info">
 
-                        <span class="" style="font-size:20px;">我的信息</span>
+                        <span class="title" style="font-size:20px;">我的信息</span>
                         <!-- 基本资料 -->
                         <div class="member_basic_info clearfix">
 
@@ -47,17 +47,20 @@
                             </div>
 
 
-                            <UploadSingleImageComponet v-model="member.profile_photo" ></UploadSingleImageComponet>
 
                             <div class="block_content fl clearfix">
 
+                                <el-form-item label="上传头像">
+                                    <UploadSingleImageComponet v-model="member.profile_photo" ></UploadSingleImageComponet>
+                                </el-form-item>
+                          
                                 <el-form-item label="昵称">
                                     <el-input style="width:320px;" v-model="member.nick_name"></el-input>
                                 </el-form-item>
 
-                                <el-form-item label="电话">
+                                <!-- <el-form-item label="电话">
                                     <el-input style="width:320px;" v-model="member.mobile"></el-input>
-                                </el-form-item>
+                                </el-form-item> -->
 
                                 <el-form-item label="性别">
                                 <el-radio v-model="member.sex" :label="1">男</el-radio>
@@ -275,8 +278,9 @@
                                     </viewer>
                                 </div>   -->
                                 
-                            
-                                <UploadMultiImageComponet v-model="member.member_image" :fileList="member.member_image"></UploadMultiImageComponet>
+                                <el-form-item label="我的照片">
+                                    <UploadMultiImageComponet v-model="member.member_image" :fileList="member.member_image"></UploadMultiImageComponet>
+                                </el-form-item>
                             </div>
                         </div>
 
@@ -284,9 +288,9 @@
             
                 
                     <!-- 择偶条件 -->
-                    <div v-show="tab==2" class="member_info">
+                    <div v-if="tab==2" class="member_info">
 
-                        <span class="" style="font-size:20px;">择偶条件</span>
+                        <span  class="title" style="font-size:20px;">择偶条件</span>
                         <!-- 基本资料 -->
                         <div class="member_basic_info clearfix">
 
@@ -442,7 +446,7 @@
                     </div>
 
 
-                    <el-form-item>
+                    <el-form-item class="sumbmit_button" >
                         <el-button type="primary" @click="save">保存</el-button>
                         <el-button @click="$router.back()">取消</el-button>
                     </el-form-item>
@@ -771,6 +775,11 @@ export default {
     color:whitesmoke;
 }
 
+.edit_area_form .title {
+  margin-left:30%;
+  margin-bottom:30px;
+}
+
 .member_basic_info .block_label {
   width:130px;
 }
@@ -806,19 +815,37 @@ export default {
     margin-left:2px;
 }
 
+.tabs_navi {
+    margin-top:10px;
+    margin-bottom:10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color:black; */
+}
+
 .tabs_navi .active{
     color:gray;
     background-color:black;
 }
-.tabs_navi ul{
-    margin: 0 auto;
-}
-.tabs_navi ul li{
-    padding:4px;
+
+.tabs_navi li{
+    padding:1px;
     margin-left:10px;
-    width:30%;
-    height:20px;
+    margin-right:10px;
+    width:8%;
+    /* height:20px; */
     border:1px solid lightgray;
     text-align:center;
+    border-radius: 10px;
+}
+
+
+.sumbmit_button {
+    display: flex;
+    /* justify-content: flex-start;
+    align-items: center; */
+    flex-wrap:wrap;
+    justify-content:space-evenly;
 }
 </style>

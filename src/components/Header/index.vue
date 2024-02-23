@@ -9,16 +9,22 @@
 
       <ul class="header nav fr clearfix">
 
-          <li class="fl"> <router-link to="/login" v-show="!$store.state.user.userInfo">登录</router-link></li>
-          <li class="fl"> <router-link to="/register" v-show="!$store.state.user.userInfo">注册</router-link></li>
+          <li class="fl"> <router-link to="/login" v-show="!$store.state.user.token">登录</router-link></li>
+          <li class="fl"> <router-link to="/register" v-show="!$store.state.user.token">注册</router-link></li>
           
-          <li class="fl"> <router-link to="/home">广场</router-link></li>
-          <li class="fl"> <router-link to="/personal/edit">编辑我的资料</router-link></li>
-          <li class="fl"> <router-link to="/personal/info">我的</router-link></li>
-          <li class="fl"> <a @click="logout">退出</a> </li>
+          <li class="fl"> <router-link to="/home">首页</router-link></li>
+          <li class="fl"> <router-link to="/chat">私信</router-link></li>
+          <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
+          <li class="fl"> <router-link to="/thumbs_up">已点赞</router-link></li>
+          <li class="fl"> <router-link to="/personal/edit">编辑信息</router-link></li>
+          <li class="fl"> <router-link to="/personal/info">预览信息</router-link></li>
+          <li class="fl"> <router-link to="/receive_thumbs_up">我收到的点赞</router-link></li>
 
-          <li class="fl"> <router-link to="/about">关于</router-link></li>
-          <li class="fl"> <router-link to="/test">test</router-link></li>
+          <!-- <li class="fl"> <router-link to="/message">私信对话</router-link></li> -->
+
+          <li class="fl"> <a @click="logout">退出</a> </li>
+          <!-- <li class="fl"> <router-link to="/about">关于</router-link></li>
+          <li class="fl"> <router-link to="/test">test</router-link></li> -->
       </ul>
     </div>
   </div>
@@ -40,9 +46,10 @@ export default {
       {
         let toPath = this.$route.query.redirect || "/login";
         await this.$store.dispatch('member/clearMemberList');
+      
         this.$router.push(toPath);
       }
-      
+     
     }
   }
 }

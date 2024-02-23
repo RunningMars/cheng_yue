@@ -9,10 +9,10 @@
       :on-success="uploaded"
       :before-upload="before_upload"
       multiple
-      :limit="8"
+      :limit="4"
       list-type="picture">
       <el-button size="small" type="primary">点击上传图片</el-button>
-      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过5MB</div>
     </el-upload>
 </template>
 
@@ -35,9 +35,9 @@
       },
       before_upload(file) {
         console.log(file);
-        if (this.fileList.length >= 8)
+        if (this.fileList.length >= 4)
         {
-           this.$message.error('最多只能上传8张图片!');
+           this.$message.error('最多只能上传4张图片!');
            return false;
         }
         //this.fileList.push(file);

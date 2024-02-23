@@ -1,4 +1,4 @@
-import { reqGetMemberList,reqGetMemberDetail} from "@/api";
+import { reqGetMemberList,reqGetMemberDetail,reqReceiveMythumbsUpList } from "@/api";
 import { Message } from 'element-ui';
 
 export default {
@@ -7,10 +7,14 @@ export default {
         result:[], 
         member:{},
         name:'rdgtest',
+        thumbs_up_result:[], 
     },
     mutations:{
         GET_MEMBER_LIST(state, result) {
             state.result = result;
+        },
+        GET_RECEIVE_THUMBS_UP_LIST(state, result) {
+            state.thumbs_up_result = result;
         },
         CLEAR_GET_MEMBER_LIST(state) {
             state.result = [];
@@ -26,6 +30,21 @@ export default {
            
             if (response.status_code == 200) {
                 commit("GET_MEMBER_LIST", response.result);
+            }else{
+                Message({
+                    message: response.message,
+                    type: 'warning',
+                    duration:2000
+                });          
+            }
+            return response
+        },
+        // 获取被点赞列表
+        async getReceiveThumbsUpList({ commit }, params = {}) {
+            let response = await reqReceiveMythumbsUpList(params);
+          
+            if (response.status_code == 200) {
+                commit("GET_RECEIVE_THUMBS_UP_LIST", response.result);
             }else{
                 Message({
                     message: response.message,
@@ -64,6 +83,9 @@ export default {
         },
         member(state){
             return state.member || {};
+        },
+        receiveThumbsUpList(state){
+            return state.thumbs_up_result.data || [];
         }
     }
 }
