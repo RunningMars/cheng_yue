@@ -13,7 +13,15 @@
 
     <div class="content">
         <div  class="chat_list">
-            <h3>我的私信</h3>
+            <div >
+              <div >
+                <h3>我的私信</h3>  
+              </div>
+              <div style="margin-top:15px;" >
+                <span>{{ this.$store.state.message.unread_chat_count ? ' 未读 ' + this.$store.state.message.unread_chat_count  : '' }}</span>
+                <el-button style="margin-left:20px;" @click="readAll" v-show="this.$store.state.message.unread_chat_count" type="info" size="mini" round>全部已读</el-button>
+              </div>
+            </div>
           <el-table
             :data="chatList"
             class="row_hover"
@@ -134,7 +142,8 @@ export default {
 
         //最后一页
         last_page: 1,
-      }
+      },
+      timer:null
     }
   },
   methods:{
@@ -174,7 +183,8 @@ export default {
       this.$router.push({ path: "/message", query: {chat_id:row.id,to_member_id:row.chat_room_member_opposite[0].member_id} });
     },
     cellClick(row, column){
-        if (column.property == 'chat_room_member_opposite[0].member.nick_name' || !column.property)
+        // if (column.property == 'chat_room_member_opposite[0].member.nick_name' || !column.property)
+        if ( !column.property)
         {
           this.routeToViewMemberDetail(row.chat_room_member_opposite[0].member_id);
         }else{
@@ -185,6 +195,24 @@ export default {
     formatDateTime(dateTime) {
       return moment(dateTime).format('YYYY-MM-DD HH:mm'); // 将时间按指定格式进行格式化
     },
+    startTimer(){
+      this.timer = setInterval(() => {
+        this.getData();
+      },14 * 1000);
+
+      // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
+      // this.$once('hook:beforeDestroy', () => {
+      //   clearInterval(this.timer);
+      // });  
+    },
+    stopTimer(){
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    readAll(){
+      this.$store.dispatch("message/readAll");
+      this.getData();
+    }
   },
   mounted() {
     if (this.$store.state.user.token){
@@ -192,8 +220,28 @@ export default {
     }else{
       this.$router.push("/login");
     }
+
+    this.startTimer();
   },
-  
+  // unmounted(){
+  //   console.log('unmounted');
+  //   this.stopTimer();
+  // },
+  beforeDestroy() {
+    console.log('beforeDestroy ChatList');
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  },
+  // beforeRouteLeave(to, from, next){
+  //   console.log('beforeRouteLeave');
+  //   if (this.timer) {
+  //     clearInterval(this.timer);
+  //     this.timer = null;
+  //   }
+  //   next();
+  // },
   computed:{
     //mapGetters里面的写法：传递的数组，因为getters计算是没有划分模块【home,search】
     ...mapGetters('message',["chatList"]),

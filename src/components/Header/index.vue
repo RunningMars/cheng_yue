@@ -13,7 +13,17 @@
           <li class="fl"> <router-link to="/register" v-show="!$store.state.user.token">注册</router-link></li>
           
           <li class="fl"> <router-link to="/home">首页</router-link></li>
-          <li class="fl"> <router-link to="/chat">私信</router-link></li>
+          <li class="fl">
+             <router-link to="/chat">
+              <span v-if="!$store.state.message.unread_chat_count">私信</span>
+                <el-badge 
+                v-if="$store.state.message.unread_chat_count" 
+                :value="$store.state.message.unread_chat_count" 
+                class="item">
+                  <span>私信</span>
+                </el-badge>
+            </router-link>
+          </li>
           <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
           <li class="fl"> <router-link to="/thumbs_up">已点赞</router-link></li>
           <li class="fl"> <router-link to="/personal/edit">编辑信息</router-link></li>
@@ -37,6 +47,11 @@ export default {
   props: {
     msg: String
   },
+  data(){
+    return {
+      timer:null
+    };
+  },
   methods:{
     async logout(){
       
@@ -49,9 +64,39 @@ export default {
       
         this.$router.push(toPath);
       }
+      
+      this.stopTimer();
+
+      this.$store.commit('message/READ_ALL');
      
+    },
+    startTimer(){
+      if (!this.timer){
+        this.timer = setInterval(() => {
+          this.$store.dispatch("message/getUnreadChatCount");
+        }, 10 * 1000)
+      }
+    },
+    stopTimer(){
+      if (this.timer){
+        clearInterval(this.timer);
+        this.timer = null;
+      }
     }
-  }
+  },
+  mounted(){
+    this.$bus.$on('startQueryUnreadCount',this.startTimer);
+    if (this.$store.state.user.token )
+    {
+      this.$store.dispatch("message/getUnreadChatCount");
+      this.startTimer();
+    }
+  },
+  beforeDestroy() {
+    console.log('beforeDestroy HeaderComponent')
+    this.stopTimer();
+    this.$bug.$off('startQueryUnreadCount');
+  },
 }
 </script>
 
@@ -73,10 +118,6 @@ export default {
     margin-bottom:3px;
     border-radius:23px;
     width:45px;
-}
-.header .nav{
-    /*vertical-align: middle;*/
-    /*float:right;*/
 }
 .header .nav li{
     margin-top:10px;

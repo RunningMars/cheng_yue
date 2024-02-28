@@ -1,11 +1,16 @@
-import { reqGetChatList,reqGetChatMessage} from "@/api";
+import { reqGetChatList,reqGetChatMessage,reqGetUnreadChatCount,reqReadAll } from "@/api";
 import { Message } from 'element-ui';
 
 export default {
     namespaced:true,
     state:{
+        //chat列表
         result:[], 
-        chat_message:{},
+        //聊天消息记录
+        chat_message:{
+            to_member:{}
+        },
+        unread_chat_count: null
     },
     mutations:{
         GET_CHAT_LIST(state, result) {
@@ -22,6 +27,14 @@ export default {
 
         CLEAR_CHAT_MEASSAGE(state) {
             state.chat_message = [];
+        },
+
+        GET_UNREAD_CHAT_COUNT(state,result) {
+            state.unread_chat_count = result;
+        },
+
+        READ_ALL(state) {
+            state.unread_chat_count = null;
         },
     },
     actions:{
@@ -52,6 +65,36 @@ export default {
                     type: 'warning',
                     duration:2000
                 });
+            }
+            return response
+        },
+        // 获取未读聊天数量
+        async getUnreadChatCount({ commit }, params = {}) {
+            let response = await reqGetUnreadChatCount(params);
+        
+            if (response.status_code == 200) {
+                commit("GET_UNREAD_CHAT_COUNT", response.result.unread_chat_count);
+            }else{
+                Message({
+                    message: response.message,
+                    type: 'warning',
+                    duration:2000
+                });          
+            }
+            return response
+        },
+        // 全部已读
+        async readAll({ commit }, params = {}) {
+            let response = await reqReadAll(params);
+        
+            if (response.status_code == 200) {
+                commit("READ_ALL");
+            }else{
+                Message({
+                    message: response.message,
+                    type: 'warning',
+                    duration:2000
+                });          
             }
             return response
         },

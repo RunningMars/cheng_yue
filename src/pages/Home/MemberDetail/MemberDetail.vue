@@ -200,21 +200,32 @@
                   </div>
                   <div class="block_content fl clearfix">
                       <div class="info fl">
-                        <span>不限</span>
-                      </div>
-                      <!-- <div class="info fl">
-                        <span>不限</span>
+                        <span>{{ member && member.member_request.age_request }}</span>
                       </div>
                       <div class="info fl">
-                        <span>不限</span>
+                        <span>{{ member && member.member_request.height_request }}</span>
                       </div>
                       <div class="info fl">
-                        <span>不限</span>
-                        <span>不限</span>
+                        <span>{{ member && member.member_request.weight_request }}</span>
                       </div>
                       <div class="info fl">
-                        <span>不限</span>
-                      </div> -->
+                        <span>{{ member && member.member_request.body_size_request }}</span>
+                      </div>
+                      <div class="info fl">
+                        <span>{{ member.member_request.education_background_request }}</span>
+                      </div>
+                      <div class="info fl">
+                        <span>{{ member.member_request.annual_income_request }}</span>
+                      </div>
+                      <div class="info fl">
+                        <span>{{ member.member_request.job_request }}</span>
+                      </div>
+                      <div class="info fl">
+                        <span>{{ member.member_request.asset_house_request }}</span>
+                      </div>
+                      <div class="info fl">
+                        <span>{{ member.member_request.asset_car_request }}</span>
+                      </div>
                   </div>
                 </div>
 
@@ -226,10 +237,10 @@
                   </div>
                   <div class="block_content fl clearfix">
                       <div class="info fl">
-                        <span>不限</span>
+                        <span>{{ member.member_request.marital_status_request }}</span>
                       </div>
                       <div class="info fl">
-                        <span>不限</span>
+                        <span>{{ member.member_request.about_child_request }}</span>
                       </div>
                   </div>
                 </div>
@@ -240,11 +251,11 @@
                       <span class="">生活习惯</span>
                   </div>
                   <div class="block_content fl clearfix">
-                      <div class="info fl">
-                        <span>不限</span>
+                     <div class="info fl">
+                        <span>{{ member.member_request.about_smoke_request }}</span>
                       </div>
                       <div class="info fl">
-                        <span>不限</span>
+                        <span>{{ member.member_request.about_drink_request }}</span>
                       </div>
                   </div>
                 </div>
@@ -258,7 +269,7 @@
                   </div>
                   <div class="block_content fl clearfix">
                       <div class="info fl">
-                        <span>暂无</span>
+                        <span>{{ member.member_request.about_family_request }}</span>
                       </div>
                   </div>
                 </div>
@@ -283,11 +294,11 @@
           <div style="width:700px">
             <div class="send" style="display:flex;justify-content:center;text-align:center;">
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
-                <el-button type="primary" @click="updateFavorites(member.id)" round> {{member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
+                <el-button type="primary" @click="updateFavorites(member.id)" round> {{ !member.member_favorite_to_member || member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
               </div>
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
-                <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{member.member_thumbs_up_to_member.length === 0 ? '点赞' : '已点赞'}} </el-button>
+                <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{ !member.member_thumbs_up_to_member || member.member_thumbs_up_to_member.length === 0 ? '点赞' : '已点赞'}} </el-button>
               </div>
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
@@ -340,12 +351,15 @@ export default {
       this.getData(to_member_id);
     },
     async updateThumbsUp(to_member_id){
+      // if (to_member_id != this.$store.state.user.userInfo.member.id)
+      // {
+        let is_thumbs_up = this.$store.state.member.member.member_thumbs_up_to_member.length === 0 ? 1 : 0;
 
-      let is_thumbs_up = this.$store.state.member.member.member_thumbs_up_to_member.length === 0 ? 1 : 0;
+        await reqUpdateMythumbsUp({to_member_id:to_member_id,is_thumbs_up:is_thumbs_up});
 
-      await reqUpdateMythumbsUp({to_member_id:to_member_id,is_thumbs_up:is_thumbs_up});
-
-      this.getData(to_member_id);
+        this.getData(to_member_id);
+      // }
+     
     }
   },
   mounted() {

@@ -10,18 +10,16 @@
 
     <div class="content">
         <div  class="chat_message_list" style="margin-left:40px;width:680px">
-            <div class="target_member_info" style="display:flex;justify-content:center;" @click="routeToViewMemberDetail(chatMessage.to_member.id)">
-                    <div style="height:40px;width:40px;">
+            <div class="target_member_info" @click="routeToViewMemberDetail(chatMessage.to_member.id)">
+                    <div style="max-height:40px;max-width:40px;margin:0 auto;">
                       <img class="profile_photo" style="border-radius:20px;" :src="chatMessage.to_member.profile_photo">
                     </div>
-                    <h3 style="text-align:center;">{{chatMessage.to_member.nick_name}}</h3>
+                    <h4 style="text-align:center;">{{chatMessage.to_member.nick_name}}</h4>
             </div>
-            
 
-            <div style="margin-top:20px;">
+            <div style="margin-top:30px;">
               <div class="chat_msg" v-for="msg in chatMessage.data" :key="msg.id"> 
 
-                <!-- <div><span style="display:block;text-align:center;font-size:11px;">{{msg.created_at}}</span></div> -->
                 <div><span style="display:block;text-align:center;font-size:11px;">{{formatDateTime(msg.created_at)}}</span></div>
 
                 <div class="clearfix"  >
@@ -52,14 +50,15 @@
             </div>
           
 
-            <div class="send_message_input" style="margin-top:15px;">
-              <el-input style="width:590px" class="input" v-model="msg" v-on:keyup.enter.native="sendMessage()" ></el-input>
+            <div class="send_message_input" style="margin-top:20px;">
+              <!-- <el-input style="width:590px" class="input" v-model="msg" v-on:keyup.enter.native="sendMessage()" ></el-input> -->
+              <el-input style="width:590px" class="input" v-model="msg" v-on:keypress.enter.native="sendMessage()" ></el-input>
               <el-button style="width:90px" type="primary" icon="el-icon-search" @click="sendMessage()"  >发送</el-button>
             </div>
 
         </div>
 
-        <!-- <el-pagination class="pagination"
+        <el-pagination class="pagination"
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -69,7 +68,7 @@
           :pager-count="21"
           layout="sizes, prev, pager, next, jumper, total "
           :total="total">
-        </el-pagination> -->
+        </el-pagination>
 
     </div>
 </div>
@@ -114,21 +113,25 @@ export default {
 
         //最后一页
         last_page: 1,
-      }
+      },
+      timer:null
     }
   },
   methods:{
     //把发请求的这个action封装到一个函数里面
     //将来需要再次发请求，你只需要在调用这个函数即可
     async getData() {
-      this.$store.dispatch("message/getChatMessage", {chat_id:this.chat_id,to_member_id:this.to_member_id});
+      this.$store.dispatch("message/getChatMessage", {...this.searchParams,chat_id:this.chat_id,to_member_id:this.to_member_id});
     },
 
     sendMessage(){
       // this.$store.dispatch("message/sendMessage", {to_member_id:this.msg,to_member_id:this.to_member_id});
       console.log('sendMessage',this.msg);
       console.log('this.to_member_id',this.to_member_id);
-
+      if (this.msg === '')
+      {
+        return true;
+      }
       let response = reqSendMessage({chat_id:this.chat_id,to_member_id:this.to_member_id,message:this.msg});
       console.log('response',response)
       //console.log('status_code',response.status_code)
@@ -164,8 +167,21 @@ export default {
     },
     routeToViewMemberDetail(memberId){
       this.$router.push('/member/' + memberId);
-    }
+    },
+    startTimer(){
+      this.timer = setInterval(()=>{
+          this.getData();
+      },7 * 1000);
 
+      // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
+      // this.$once('hook:beforeDestroy', () => {
+      //   clearInterval(this.timer);
+      // });     
+    },
+    stopTimer(){
+      clearInterval(this.timmer); 
+      this.timer = null;    
+    }
   },
   mounted() {
     if (this.$route.query.chat_id)
@@ -186,13 +202,33 @@ export default {
     }else{
       this.$router.push("/login");
     }
+    this.startTimer();
+    this.$store.dispatch("message/getUnreadChatCount");
   },
-  
+  // unmounted(){
+  //   console.log('unmounted');
+  //   this.stopTimer();
+  // },
+  beforeDestroy() {
+    console.log('beforeDestroy ChatMessage');
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  },
+  // beforeRouteLeave(to, from, next){
+  //   console.log('beforeRouteLeave');
+  //   if (this.timer) {
+  //     clearInterval(this.timer);
+  //     this.timer = null;
+  //   }
+  //   next();
+  // },
   computed:{
     //mapGetters里面的写法：传递的数组，因为getters计算是没有划分模块【home,search】
     ...mapGetters('message',["chatMessage"]),
     total(){
-      return this.$store.state.message.result.total || 0;
+      return this.$store.state.message.chat_message.total || 0;
     }
   }
 }
@@ -228,6 +264,11 @@ export default {
 }
 .target_member_info:hover {
   cursor:pointer;
+}
+
+.pagination {
+  margin-left:30px;
+  margin-top:35px;
 }
 
 

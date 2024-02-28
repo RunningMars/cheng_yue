@@ -27,6 +27,7 @@ export default {
             //本地存储数据清空
             removeToken();
             removeUserInfo();
+            //this.$store.state.message.unread_chat_count = null;
         },
         USER_REGISTER_PASS(state) {
             state.userRegisterPass = true;
@@ -101,11 +102,11 @@ export default {
         },
         // 用户登出
         async userLogout({ commit }, params = {}) {
-            commit("USER_LOGOUT");
 
             let response = await reqLogout(params);
 
             if (response.status_code == 200) {
+                commit("USER_LOGOUT");
                 Message({
                     message: response.message,
                     type: 'success',

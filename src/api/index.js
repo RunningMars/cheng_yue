@@ -47,6 +47,7 @@ export const reqUpdateMythumbsUp = (params) => requests({url:"/member/thumbs_up/
 // 获取被点赞列表
 export const reqReceiveMythumbsUpList = (params) => requests({url:"/member/thumbs_up/list", params , method:"get"});
 
+
 /**
  * Message
  */
@@ -60,8 +61,18 @@ export const reqGetChatMessage = (params) => requests({url:"/message/chat/messag
 // 发送消息 send message
 export const reqSendMessage = (params) => requests({url:"/message/chat/send", params , method:"post"});
 
+// 获取未读聊天数量
+export const reqGetUnreadChatCount = (params) => requests({url:"/message/chat/unread_count", params , method:"get"});
+
+// 全部已读
+export const reqReadAll = (params) => requests({url:"/message/chat/read_all", params , method:"get"});
+
 /**
  * uploadImage
  */
-
 export const reqUploadImage = (params) => requests({url:"/uploadImage" , params ,method:"post"});
+
+/**
+ * captcha
+ */
+export const reqCaptchaVerify = (params) => requests.post("/captcha/verify" , params );

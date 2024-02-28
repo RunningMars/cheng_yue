@@ -14,9 +14,9 @@
                     <el-input style="width:320px;" type="password" v-model="form.password_confirmation" show-password></el-input>
                     </el-form-item>
 
-                    <el-form-item label="同意协议">
+                    <!-- <el-form-item label="同意协议">
                     <el-switch v-model="form.is_agree"></el-switch>
-                    </el-form-item>
+                    </el-form-item> -->
 
                     <el-form-item>
                     <el-button type="primary" @click="register">注册</el-button>

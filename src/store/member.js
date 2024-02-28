@@ -4,9 +4,17 @@ import { Message } from 'element-ui';
 export default {
     namespaced:true,
     state:{
+        //member 列表
         result:[], 
-        member:{},
+
+        //member详情
+        member:{
+            member_request:{}
+        },
+
         name:'rdgtest',
+        
+        //收到的点赞列表
         thumbs_up_result:[], 
     },
     mutations:{
