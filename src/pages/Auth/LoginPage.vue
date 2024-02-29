@@ -14,14 +14,14 @@
                     </el-form-item>
 
                     <!-- 验证码组件 -->
-                    <CaptchaA></CaptchaA>
+                    <CaptchaA type="login"></CaptchaA>
 
                     <!-- <el-form-item label="同意协议">
                     <el-switch v-model="form.is_agree"></el-switch>
                     </el-form-item> -->
 
                     <el-form-item>
-                    <el-button type="primary" id="login-button">登录</el-button>
+                    <el-button type="primary" id="verify-button">登录</el-button>
                     <el-button>取消</el-button>
                     </el-form-item>
 
@@ -91,10 +91,11 @@ export default {
         }
     },
     mounted(){
-        this.$bus.$on('captchaPass',this.captchaPassed);
+        this.$bus.$on('loginCaptchaPass',this.captchaPassed);
+        this.$bus.$emit('stopQueryUnreadCount');
     },
     beforeDestroy(){
-        this.$bus.$off('captchaPass');
+        this.$bus.$off('loginCaptchaPass');
     },
 }
 </script>

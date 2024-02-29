@@ -13,6 +13,9 @@
           <li class="fl"> <router-link to="/register" v-show="!$store.state.user.token">注册</router-link></li>
           
           <li class="fl"> <router-link to="/home">首页</router-link></li>
+          <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
+          <li class="fl"> <router-link to="/thumbs_up">已点赞</router-link></li>
+
           <li class="fl">
              <router-link to="/chat">
               <span v-if="!$store.state.message.unread_chat_count">私信</span>
@@ -24,8 +27,7 @@
                 </el-badge>
             </router-link>
           </li>
-          <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
-          <li class="fl"> <router-link to="/thumbs_up">已点赞</router-link></li>
+
           <li class="fl"> <router-link to="/personal/edit">编辑信息</router-link></li>
           <li class="fl"> <router-link to="/personal/info">预览信息</router-link></li>
           <li class="fl"> <router-link to="/receive_thumbs_up">我收到的点赞</router-link></li>
@@ -74,7 +76,7 @@ export default {
       if (!this.timer){
         this.timer = setInterval(() => {
           this.$store.dispatch("message/getUnreadChatCount");
-        }, 10 * 1000)
+        }, 30 * 1000)
       }
     },
     stopTimer(){
@@ -86,6 +88,7 @@ export default {
   },
   mounted(){
     this.$bus.$on('startQueryUnreadCount',this.startTimer);
+    this.$bus.$on('stopQueryUnreadCount',this.stopTimer);
     if (this.$store.state.user.token )
     {
       this.$store.dispatch("message/getUnreadChatCount");
@@ -95,7 +98,8 @@ export default {
   beforeDestroy() {
     console.log('beforeDestroy HeaderComponent')
     this.stopTimer();
-    this.$bug.$off('startQueryUnreadCount');
+    this.$bus.$off('startQueryUnreadCount');
+    this.$bus.$off('stopQueryUnreadCount');
   },
 }
 </script>

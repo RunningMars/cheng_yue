@@ -56,7 +56,8 @@ requests.interceptors.response.use(
     }
     ,
     (error) => {
-      if (error.response.status === 401){
+
+      if (error.response && error.response.status === 401){
           removeToken();
           removeUserInfo();
           router.replace({
@@ -66,7 +67,7 @@ requests.interceptors.response.use(
 
       //console.log('error',error)
       //alert("服务器响应数据失败");
-      return error.response.data;
+      return error.response;
       // return Promise.reject(error);
     }
 );

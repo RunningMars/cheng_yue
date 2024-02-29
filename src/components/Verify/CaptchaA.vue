@@ -10,7 +10,7 @@
 import { reqCaptchaVerify } from '@/api';
 export default {
   name: 'CaptchaA',
-  props: {},
+  props: ["type"],
   data() {
     return {
       captcha: null,
@@ -31,7 +31,7 @@ export default {
       mode: 'popup', // 验证码模式。popup 表示要集成的验证码模式为弹出式。无需修改 ;embed 表示要集成的验证码模式为嵌入式。无需修改
       // mode: 'embed', // 验证码模式。popup 表示要集成的验证码模式为弹出式。无需修改 ;embed 表示要集成的验证码模式为嵌入式。无需修改
       element: '#captcha-element', // 页面上预留的渲染验证码的元素，与原代码中预留的页面元素保持一致。
-      button: '#login-button', // 触发验证码弹窗的元素。button表示单击登录按钮后，触发captchaVerifyCallback函数。您可以根据实际使用的元素修改element的值
+      button: '#verify-button', // 触发验证码弹窗的元素。button表示单击登录按钮后，触发captchaVerifyCallback函数。您可以根据实际使用的元素修改element的值
       captchaVerifyCallback: this.captchaVerifyCallback, // 业务请求(带验证码校验)回调函数，无需修改
       onBizResultCallback: this.onBizResultCallback, // 业务请求结果回调函数，无需修改
       getInstance: this.getInstance, // 绑定验证码实例函数，无需修改
@@ -69,10 +69,14 @@ export default {
       }
     },
     // 验证通过后调用
-    onBizResultCallback() {
-      this.$bus.$emit('captchaPass');
-      console.log('onBizResultCallback captchaPass');
-      //this.verifying = false;
+    onBizResultCallback(data) {
+      console.log('onBizResultCallback data',data);
+      if (this.type && this.type == 'login'){
+        this.$bus.$emit('loginCaptchaPass');
+      }
+      if (this.type && this.type == 'register'){
+        this.$bus.$emit('registerCaptchaPass');
+      }
     },
   },
 };

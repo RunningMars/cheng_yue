@@ -2,10 +2,11 @@
 
   <div class="private_message">
 
-    <li class="el-icon-back" @click="$router.back()"></li>
+
     <!--搜索栏-->
     <div class="search clearfix">
-        
+            <!-- <li class="el-icon-back" @click="$router.back()"></li> -->
+    <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
     </div>
 
     <div class="content">

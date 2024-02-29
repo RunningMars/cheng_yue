@@ -1,10 +1,10 @@
 <template>
 
 <div class="content">
-
+    <div style="background-color: #7d7777;height:1px;" ></div>
     <div class="member_info">
 
-          <li class="el-icon-back" @click="$router.back()"></li>
+
 
           <!--  member detail header-->
           <div class="member_header clearfix">
@@ -19,24 +19,29 @@
                 <div class="member_name fl">{{member.nick_name}}</div>
 
                 <ul class="member_abstract fl clearfix">
-                    <li class="fl">{{member.age}}岁</li>
-                    <li class="fl">{{member.height}}cm</li>
-                    <li class="fl">{{member.city}}</li>
-                    <li class="fl">{{member.job}}</li>
+                    <li class="fl" v-show="member.age" >{{member.age}}岁</li>
+                    <li class="fl" v-show="member.height" >{{member.height}}cm</li>
+                    <li class="fl" v-show="member.city" >{{member.city}}</li>
+                    <li class="fl" v-show="member.job" >{{member.job}}</li>
                 </ul>
           </div>
 
           <div class="edit_area_form">
 
+                <div style="margin-top:8px;margin-bottom:8px;">
+                    <el-button type="primary"  icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
+                </div>
+
                 <ul class="tabs_navi">
                     <li :class="tab==1 ? 'active' : '' " @click="tab=1">我的信息</li>
                     <li :class="tab==2 ? 'active' : '' " @click="tab=2">择偶要求</li>
+                
                 </ul>
                 <hr>
                 <el-form ref="member" :model="member" label-width="auto">
 
                     <!-- TA的信息 -->
-                    <div v-if="tab==1" class="member_info">
+                    <div v-if="tab==1" class="member_info" >
 
                         <span class="title" style="font-size:20px;">我的信息</span>
                         <!-- 基本资料 -->
@@ -64,7 +69,7 @@
                                     { required: true, message: '请设置您的昵称', trigger: 'blur' },
                                     { min: 1, max: 14, message: '长度在 1 到 14 个字符', trigger: 'blur' }
                                 ]">
-                                    <el-input style="width:320px;" v-model="member.nick_name"></el-input>
+                                    <el-input style="width:190px;" v-model="member.nick_name"></el-input>
                                 </el-form-item>
 
                                 <!-- <el-form-item label="电话">
@@ -90,18 +95,11 @@
                                     <el-date-picker
                                         v-model="member.birth_day"
                                         type="date"
-                                        placeholder="选择日期"> 
+                                        placeholder="选择日期"
+                                        value-format="yyyy-MM-dd"
+                                        > 
                                     </el-date-picker>
                                 </el-form-item> 
-
-                                <el-form-item label="微信号">
-                                    <el-input style="width:320px;" v-model="member.wechat_no"></el-input>
-                                </el-form-item>
-                                
-                                <el-form-item label="邮箱">
-                                    <el-input style="width:320px;" v-model="member.email"></el-input>
-                                </el-form-item>
-        
 
                                 <el-form-item 
                                 label="当前城市"   
@@ -109,7 +107,7 @@
                                 :rules="[
                                     { required: true, message: '请选择您所在的城市', trigger: 'blur' },
                                 ]">
-                                    <el-input style="width:320px;" v-model="member.city"></el-input>
+                                    <el-input style="width:80px;" v-model="member.city"></el-input>
                                 </el-form-item>
                 
                                 <el-form-item 
@@ -135,7 +133,7 @@
                                 :rules="[
                                     { required: true, message: '请填写你的职业', trigger: 'blur' },
                                 ]">
-                                    <el-input style="width:320px;" v-model="member.job"></el-input>
+                                    <el-input style="width:100px;" v-model="member.job"></el-input>
                                 </el-form-item>
                 
 
@@ -204,14 +202,19 @@
                                     </el-select>
                                 </el-form-item>
                                 
-
                                 <el-form-item label="身高cm">
-                                    <el-input style="width:320px;" v-model="member.height"></el-input>
+                                    <el-select v-model="member.height" placeholder="请选择">
+                                        <el-option
+                                            v-for="item in height_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                        </el-option>
+                                    </el-select>      
                                 </el-form-item>
                 
-
                                 <el-form-item label="体重kg">
-                                    <el-input style="width:320px;" v-model="member.weight"></el-input>
+                                    <el-input style="width:80px;" v-model="member.weight"></el-input>
                                 </el-form-item>
             
 
@@ -228,7 +231,7 @@
                 
 
                                 <el-form-item label="民族">
-                                    <el-input style="width:320px;" v-model="member.ethnic"></el-input>
+                                    <el-input style="width:80px;" v-model="member.ethnic"></el-input>
                                 </el-form-item>
                 
                                 <el-form-item label="星座">
@@ -260,7 +263,7 @@
                 
 
                                 <el-form-item label="何时结婚">
-                                    <el-select v-model="member.about_marry" placeholder="请选择">
+                                    <el-select v-model="member.want_marry" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_marry_options"
                                         :key="item.value"
@@ -272,7 +275,7 @@
                 
 
                                 <el-form-item label="是否要孩子">
-                                    <el-select v-model="member.about_child" placeholder="请选择">
+                                    <el-select v-model="member.want_child" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_child_options"
                                         :key="item.value"
@@ -305,19 +308,26 @@
                                 </el-form-item>
 
                                 <el-form-item label="兴趣爱好">
-                                    <el-input style="width:320px;" v-model="member.interest"></el-input>
+                                    <el-input 
+                                    type="textarea"
+                                    :rows="2"
+                                    v-model="member.interest">
+                                    </el-input>
                                 </el-form-item>
 
                                 <el-form-item label="自我介绍">
-                                    <el-input style="width:320px;" v-model="member.about_me"></el-input>
+                                    <el-input  type="textarea"
+                                    :rows="2" v-model="member.about_me"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="希望你">
-                                    <el-input style="width:320px;" v-model="member.hope_you"></el-input>
+                                    <el-input  type="textarea"
+                                    :rows="2" v-model="member.hope_you"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="择偶要求">
-                                    <el-input style="width:320px;" v-model="member.mating_requirement"></el-input>
+                                    <el-input  type="textarea"
+                                    :rows="2" v-model="member.mating_requirement"></el-input>
                                 </el-form-item>
                 
                                 <!-- <div class="member_pics">
@@ -338,12 +348,14 @@
                         </div>
 
                     </div>
-            
                 
                     <!-- 择偶条件 -->
                     <div v-if="tab==2" class="member_info">
-
-                        <span  class="title" style="font-size:20px;">择偶条件</span>
+                        <div style="font-size:20px;margin-bottom:15px;">
+                            <span  class="title" >择偶条件</span>
+                        </div>
+                    
+                        
                         <!-- 基本资料 -->
                         <div class="member_basic_info clearfix">
 
@@ -362,15 +374,25 @@
                                             :value="item.value">
                                         </el-option>
                                     </el-select>
+
+                                    <!-- <div class="block">
+                                        <el-slider
+                                        v-model="member.member_request.age_request"
+                                        range
+                                        show-stops
+                                        :min="20"
+                                        :max="60">
+                                        </el-slider>
+                                    </div> -->
                                 </el-form-item>
 
                                 <el-form-item label="身高cm">
-                                    <el-input style="width:320px;" v-model="member.member_request.height_request"></el-input>
+                                    <el-input style="width:80px;" v-model="member.member_request.height_request"></el-input>
                                 </el-form-item>
 
 
                                 <el-form-item label="体重kg">
-                                    <el-input style="width:320px;" v-model="member.member_request.weight_request"></el-input>
+                                    <el-input style="width:80px;" v-model="member.member_request.weight_request"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="体型">
@@ -396,7 +418,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="职业">
-                                    <el-input style="width:320px;" v-model="member.member_request.job_request"></el-input>
+                                    <el-input style="width:100px;" v-model="member.member_request.job_request"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="年收入">
@@ -434,7 +456,7 @@
 
 
                                 <el-form-item label="工作地区">
-                                    <el-input style="width:320px;" v-model="member.member_request.city_request"></el-input>
+                                    <el-input style="width:80px;" v-model="member.member_request.city_request"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="婚姻情况">
@@ -460,7 +482,7 @@
                                 </el-form-item> -->
 
                                 <el-form-item label="是否要孩子">
-                                    <el-select v-model="member.member_request.about_child_request" placeholder="请选择">
+                                    <el-select v-model="member.member_request.want_child_request" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_child_request_options"
                                         :key="item.value"
@@ -492,6 +514,14 @@
                                     </el-select>
                                 </el-form-item>
 
+                                <!-- <el-form-item label="微信号">
+                                    <el-input style="width:320px;" v-model="member.wechat_no"></el-input>
+                                </el-form-item>
+                                
+                                <el-form-item label="邮箱">
+                                    <el-input style="width:320px;" v-model="member.email"></el-input>
+                                </el-form-item> -->
+        
                             </div>
                             
                         </div>
@@ -589,24 +619,24 @@ export default {
         ],
       car_options:[
             {label:"暂无",value:"暂无"},
-            {label:"准备购买",value:"准备购买"},
+            {label:"准备买车",value:"准备买车"},
             {label:"有车",value:"有车"}
         ],
       car_request_options:[
             {label:"不限",value:"不限"},
             {label:"暂无",value:"暂无"},
-            {label:"准备购买",value:"准备购买"},
+            {label:"准备买车",value:"准备买车"},
             {label:"有车",value:"有车"}
         ],
       house_options:[
             {label:"暂无",value:"暂无"},
-            {label:"准备购买",value:"准备购买"},
+            {label:"准备买房",value:"准备买房"},
             {label:"有房",value:"有房"}
         ],
       house_request_options:[
             {label:"不限",value:"不限"},
             {label:"暂无",value:"暂无"},
-            {label:"准备购买",value:"准备购买"},
+            {label:"准备买房",value:"准备买房"},
             {label:"有房",value:"有房"}
         ],
       education_background_options:[
@@ -730,6 +760,59 @@ export default {
             {label:"35岁-40岁",value:"35岁-40岁"},
             {label:"40岁以上",value:"40岁以上"},
         ],
+        height_options:[
+        {label:"140cm 以上",value:140},
+        {label:"141cm 以上",value:141},
+        {label:"142cm 以上",value:142},
+        {label:"143cm 以上",value:143},
+        {label:"144cm 以上",value:144},
+        {label:"145cm 以上",value:145},
+        {label:"146cm 以上",value:146},
+        {label:"147cm 以上",value:147},
+        {label:"148cm 以上",value:148},
+        {label:"149cm 以上",value:149},
+        {label:"150cm 以上",value:150},
+        {label:"151cm 以上",value:151},
+        {label:"152cm 以上",value:152},
+        {label:"153cm 以上",value:153},
+        {label:"154cm 以上",value:154},
+        {label:"155cm 以上",value:155},
+        {label:"156cm 以上",value:156},
+        {label:"157cm 以上",value:157},
+        {label:"158cm 以上",value:158},
+        {label:"159cm 以上",value:159},
+        {label:"160cm 以上",value:160},
+        {label:"161cm 以上",value:161},
+        {label:"162cm 以上",value:162},
+        {label:"163cm 以上",value:163},
+        {label:"164cm 以上",value:164},
+        {label:"165cm 以上",value:165},
+        {label:"166cm 以上",value:166},
+        {label:"167cm 以上",value:167},
+        {label:"168cm 以上",value:168},
+        {label:"169cm 以上",value:169},
+        {label:"170cm 以上",value:170},
+        {label:"171cm 以上",value:171},
+        {label:"172cm 以上",value:172},
+        {label:"173cm 以上",value:173},
+        {label:"174cm 以上",value:174},
+        {label:"175cm 以上",value:175},
+        {label:"176cm 以上",value:176},
+        {label:"177cm 以上",value:177},
+        {label:"178cm 以上",value:178},
+        {label:"179cm 以上",value:179},
+        {label:"180cm 以上",value:180},
+        {label:"181cm 以上",value:181},
+        {label:"182cm 以上",value:182},
+        {label:"183cm 以上",value:183},
+        {label:"184cm 以上",value:184},
+        {label:"185cm 以上",value:185},
+        {label:"186cm 以上",value:186},
+        {label:"187cm 以上",value:187},
+        {label:"188cm 以上",value:188},
+        {label:"189cm 以上",value:189},
+        {label:"190cm 以上",value:190},
+      ],
     }
   },
   methods:{
@@ -898,6 +981,10 @@ export default {
   width:550px;
   /* width:100px; */
 }
+.content .edit_area_form .member_info {
+    margin-top:20px;
+}
+
 .content .member_info .info {
     font-size:16px;
     background-color: rgb(244,244,244);
@@ -927,8 +1014,9 @@ export default {
 }
 
 .tabs_navi {
-    margin-top:10px;
-    margin-bottom:10px;
+    margin-left:20%;
+    margin-top:12px;
+    margin-bottom:12px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

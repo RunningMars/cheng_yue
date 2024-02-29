@@ -14,12 +14,15 @@
                     <el-input style="width:320px;" type="password" v-model="form.password_confirmation" show-password></el-input>
                     </el-form-item>
 
+                    <!-- 验证码组件 -->
+                    <CaptchaA type="register"></CaptchaA>
+
                     <!-- <el-form-item label="同意协议">
                     <el-switch v-model="form.is_agree"></el-switch>
                     </el-form-item> -->
 
                     <el-form-item>
-                    <el-button type="primary" @click="register">注册</el-button>
+                    <el-button type="primary" id="verify-button" @click="register">注册</el-button>
                     <el-button>取消</el-button>
                     </el-form-item>
             </el-form>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+    import CaptchaA from '../../components/Verify/CaptchaA.vue'
     export default {
         data() {
             return {
@@ -39,8 +43,18 @@
                 }
             }
         },
+        components: {
+            CaptchaA
+        },
         methods: {
-            async register() {
+            register() {
+                if (!this.form.mobile || !this.form.password || !this.form.password_confirmation )
+                {
+                    this.$message.warning("请填写手机号和密码.");
+                }
+                return true;
+            },
+            async registerCaptchaPassed(){
                 if (this.form.mobile && this.form.password && this.form.password_confirmation )
                 {
                     console.log('请求 register!');
@@ -50,10 +64,16 @@
                         this.$router.push("/login");
                     }
                 }else{
-                    this.$message.warning("mobile and password is requried.");
+                    this.$message.warning("请填写手机号和密码.");
                 }
             }
-        }
+        },
+        mounted(){
+            this.$bus.$on('registerCaptchaPass',this.registerCaptchaPassed);
+        },
+        beforeDestroy(){
+            this.$bus.$off('registerCaptchaPass');
+        },
     }
 </script>
 

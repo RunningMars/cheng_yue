@@ -1,15 +1,111 @@
 <template>
   <div class="home">
 
-    <!--搜索栏-->
-    <div class="search clearfix">
-
-        <li class="el-icon-back" v-show="this.is_favorite || this.is_thumbs_up" @click="$router.back()"></li>
-
-        <div class="search_input fr">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
-            <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
+      <!--搜索栏-->
+      <div class="search clearfix">
+        
+        <div>
+          <el-button type="primary" v-show="this.is_favorite || this.is_thumbs_up" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         </div>
+
+        <div style="height:130px;margin-left:12px;margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-around; align-content:space-evenly;">
+
+          <div class="search_item">
+            <el-input class="input" style="width:190px;" v-model="searchParams.key_word" placeholder="搜索昵称" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+          </div>
+
+          <div class="search_item">
+            <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <span style="color:grey;"> 至 </span>
+            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+          </div>
+
+          <div class="search_item">
+            <!-- <el-input class="input" style="width:190px;" v-model="searchParams.height_request" placeholder="请输入搜索的身高(cm)" v-on:keyup.enter.native="getData()" ></el-input> -->
+            <el-select v-model="searchParams.height_request" placeholder="搜索身高" clearable size="small">
+              <el-option
+                  v-for="item in height_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.education_background_request" placeholder="搜索学历" clearable size="small">
+              <el-option
+                  v-for="item in education_background_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.annual_income_request" placeholder="选择年收入" clearable size="small">
+              <el-option
+                  v-for="item in annual_income_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.asset_house_request" placeholder="搜索住房情况" clearable size="small">
+              <el-option
+                  v-for="item in house_asset_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.asset_car_request" placeholder="搜索车辆情况" clearable size="small">
+              <el-option
+                  v-for="item in car_asset_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.marital_status_request" placeholder="搜索婚姻情况" clearable size="small">
+              <el-option
+                  v-for="item in marital_status_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-select v-model="searchParams.want_child_request" placeholder="搜索生孩观念" clearable size="small">
+              <el-option
+                  v-for="item in want_child_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
+            <el-button type="primary" icon="el-icon-delete" @click="clearSearch()"  >清除</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
+
+          </div>
+
+      </div>
+
     </div>
 
     <div class="content">
@@ -103,7 +199,120 @@ export default {
         //平台属性的操作
         props: [],
 
-      }
+        age_min_request:null,
+        age_max_request:null,
+        height_request:null,
+        education_background_request:null,
+        annual_income_request:null,
+        asset_house_request:null,
+        asset_car_request:null,
+        marital_status_request:null,
+        want_child_request:null,
+      },
+
+      education_background_request_options:[
+            {label:"大专以上",value:"1"},
+            {label:"本科以上",value:"2"},
+            {label:"硕士以上",value:"3"},
+            {label:"博士及以上",value:"4"}
+        ],
+        annual_income_request_options:[
+          {label:"5w-10w",value:"5w-10w"},
+          {label:"10w-15w",value:"10w-15w"},
+          {label:"15w-20w",value:"15w-20w"},
+          {label:"20w-30w",value:"20w-30w"},
+          {label:"30w-50w",value:"30w-50w"},
+          {label:"50w以上",value:"50w以上"},
+      ],
+      car_asset_request_options:[
+            {label:"暂无",value:"暂无"},
+            {label:"准备买车",value:"准备买车"},
+            {label:"有车",value:"有车"}
+        ],
+      house_asset_request_options:[
+            {label:"暂无",value:"暂无"},
+            {label:"准备买房",value:"准备买房"},
+            {label:"有房",value:"有房"}
+        ],
+      marital_status_request_options:[
+            {label:"未婚",value:"未婚"},
+            {label:"未婚有孩",value:"未婚有孩"},
+            {label:"离婚无孩",value:"离婚无孩"},
+            {label:"离婚有孩",value:"离婚有孩"},
+        ],
+      want_child_request_options:[
+            {label:"想要孩子",value:"想要孩子"},
+            {label:"想要多个孩子",value:"想要多个孩子"},
+            {label:"看情况",value:"看情况"},
+            {label:"丁克",value:"丁克"},
+        ],
+      smoke_request_options:[
+            {label:"不吸烟",value:"不吸烟"},
+            {label:"稍微抽点",value:"稍微抽点"},
+            {label:"正常吸烟",value:"正常吸烟"},
+            {label:"特定场合会吸",value:"特定场合会吸"},
+            {label:"抽得比较多",value:"抽得比较多"},
+        ],
+      drink_request_options:[
+            {label:"不喝酒",value:"不喝酒"},
+            {label:"偶尔喝一点",value:"偶尔喝一点"},
+            {label:"正常喝酒",value:"正常喝酒"},
+            {label:"特定场合会喝",value:"特定场合会喝"},
+            {label:"喝得比较多",value:"喝得比较多"},
+        ],
+      height_request_options:[
+        {label:"140cm 以上",value:140},
+        {label:"141cm 以上",value:141},
+        {label:"142cm 以上",value:142},
+        {label:"143cm 以上",value:143},
+        {label:"144cm 以上",value:144},
+        {label:"145cm 以上",value:145},
+        {label:"146cm 以上",value:146},
+        {label:"147cm 以上",value:147},
+        {label:"148cm 以上",value:148},
+        {label:"149cm 以上",value:149},
+        {label:"150cm 以上",value:150},
+        {label:"151cm 以上",value:151},
+        {label:"152cm 以上",value:152},
+        {label:"153cm 以上",value:153},
+        {label:"154cm 以上",value:154},
+        {label:"155cm 以上",value:155},
+        {label:"156cm 以上",value:156},
+        {label:"157cm 以上",value:157},
+        {label:"158cm 以上",value:158},
+        {label:"159cm 以上",value:159},
+        {label:"160cm 以上",value:160},
+        {label:"161cm 以上",value:161},
+        {label:"162cm 以上",value:162},
+        {label:"163cm 以上",value:163},
+        {label:"164cm 以上",value:164},
+        {label:"165cm 以上",value:165},
+        {label:"166cm 以上",value:166},
+        {label:"167cm 以上",value:167},
+        {label:"168cm 以上",value:168},
+        {label:"169cm 以上",value:169},
+        {label:"170cm 以上",value:170},
+        {label:"171cm 以上",value:171},
+        {label:"172cm 以上",value:172},
+        {label:"173cm 以上",value:173},
+        {label:"174cm 以上",value:174},
+        {label:"175cm 以上",value:175},
+        {label:"176cm 以上",value:176},
+        {label:"177cm 以上",value:177},
+        {label:"178cm 以上",value:178},
+        {label:"179cm 以上",value:179},
+        {label:"180cm 以上",value:180},
+        {label:"181cm 以上",value:181},
+        {label:"182cm 以上",value:182},
+        {label:"183cm 以上",value:183},
+        {label:"184cm 以上",value:184},
+        {label:"185cm 以上",value:185},
+        {label:"186cm 以上",value:186},
+        {label:"187cm 以上",value:187},
+        {label:"188cm 以上",value:188},
+        {label:"189cm 以上",value:189},
+        {label:"190cm 以上",value:190},
+      ],
     }
   },
   methods:{
@@ -111,6 +320,18 @@ export default {
     //将来需要再次发请求，你只需要在调用这个函数即可
     getData() {
       this.$store.dispatch("member/getMemberList", this.searchParams);
+    },
+    clearSearch() {
+      this.searchParams.key_word = null;
+      this.searchParams.age_min_request = null;
+      this.searchParams.age_max_request = null;
+      this.searchParams.height_request = null;
+      this.searchParams.education_background_request = null;
+      this.searchParams.annual_income_request = null;
+      this.searchParams.asset_house_request = null;
+      this.searchParams.asset_car_request = null;
+      this.searchParams.marital_status_request = null;
+      this.searchParams.want_child_request = null;
     },
     handleSizeChange(val) {
         this.searchParams.per_page = val;
@@ -121,8 +342,6 @@ export default {
       this.getData();
     },
     routeToViewMemberDetail(memberId) {
-      //console.log('memberId',memberId);
-      //this.$router.push({ name: "/member", params: {member_id:memberId} });
       this.$router.push('/member/' + memberId);
     }
   },
@@ -317,5 +536,24 @@ export default {
   -webkit-transition: all .5s ease-out;
   transition: all .5s ease-out;
 }
-
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
 </style>

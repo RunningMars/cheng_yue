@@ -1,14 +1,12 @@
 <template>
 
+
 <div class="content">
+  <div style="background-color: #7d7777;height:1px;" ></div>
 
-    <div class="member_info">
-
-          <li class="el-icon-back" @click="$router.back()"></li>
-
+    <div class="member_info_content">
           <!--  member detail header-->
           <div class="member_header clearfix">
-
                 <div class="profile_photo fl">
                     <viewer :image="member.profile_photo">
                         <img :src="member.profile_photo"
@@ -19,16 +17,20 @@
                 <div class="member_name fl">{{member.nick_name}}</div>
 
                 <ul class="member_abstract fl clearfix">
-                    <li class="fl">{{member.age}}岁</li>
-                    <li class="fl">{{member.height}}cm</li>
-                    <li class="fl">{{member.city}}</li>
-                    <li class="fl">{{member.job}}</li>
+                    <li class="fl" v-if="member.age" >{{member.age}}岁</li>
+                    <li class="fl" v-if="member.height" >{{member.height}}cm</li>
+                    <li class="fl" v-if="member.city" >{{member.city}}</li>
+                    <li class="fl" v-if="member.job" >{{member.job}}</li>
                 </ul>
           </div>
 
-          <!-- TA的信息 -->
-          <div class="member_info">
+          <!-- 返回按钮 -->
+          <div style="margin-top:8px;margin-bottom:8px;">
+               <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
+          </div>
 
+          <!-- TA的信息 -->
+          <div class="member_info" style="margin-top:32px;margin-bottom:8px;">
 
             <span class="" style="font-size:20px;">TA的信息</span>
             <!-- 基本资料 -->
@@ -39,100 +41,90 @@
                 </div>
 
                 <div class="block_content fl clearfix">
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.age">
                       <span>{{member.age}}岁</span>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.height">
                       <span>{{member.height}}cm</span>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.weight">
                       <span>{{member.weight}}kg</span>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.body_size">
                       <span>{{member.body_size}}</span>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.education_background">
                       <span>{{member.education_background}}</span>
                     </div>
-                    <div class="info fl">
-                      <span>{{member.province}}</span>
-                      <span>/{{member.city}}</span>
+                    <div class="info fl" v-if="member.city">
+                      <span>{{member.city}}</span>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl" v-if="member.job">
                       <span>{{member.job}}</span>
                     </div>
                   
-                    <div v-show="member.annual_income" class="info fl">
+                    <div class="info fl" v-if="member.annual_income">
                       <span>{{member.annual_income}}</span>
                     </div>
 
-                    <div v-show="member.asset_house" class="info fl">
+                    <div v-if="member.asset_house" class="info fl">
                       <span>{{member.asset_house}}</span>
                     </div>
 
-                    <div v-show="member.asset_car" class="info fl">
+                    <div v-if="member.asset_car" class="info fl">
                       <span>{{member.asset_car}}</span>
                     </div>
                 </div>
             </div>
-          
-          
 
-              <div class="member_basic_info clearfix">
+            <div class="member_basic_info clearfix">
               <div class="block_label fl">
                   <span class="">家庭情况</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.ethnic">
                     <span>{{member.ethnic}}</span>
                   </div>
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.about_family">
                     <span>{{member.about_family}}</span>
                   </div>
-                  <div class="info fl">
-                    <span>{{member.city}}</span>
-                  </div>
+
               </div>
             </div>
-
 
             <div class="member_basic_info clearfix">
               <div class="block_label fl">
                   <span class="">婚姻观念</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.marital_status">
                     <span>{{member.marital_status}}</span>
                   </div>
-                  <div class="info fl">
-                    <span>{{member.about_marry}}</span>
+                  <div class="info fl" v-if="member.want_marry">
+                    <span>{{member.want_marry}}</span>
                   </div>
-                  <div class="info fl">
-                    <span>{{member.about_child}}</span>
+                  <div class="info fl" v-if="member.want_child">
+                    <span>{{member.want_child}}</span>
                   </div>
-                  <div class="info fl">
-                    <span>{{member.about_child}}</span>
+                  <div class="info fl" v-if="member.want_child">
+                    <span>{{member.want_child}}</span>
                   </div>
               </div>
             </div>
-
 
             <div class="member_basic_info clearfix">
               <div class="block_label fl">
                   <span class="">生活习惯</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.about_smoke">
                     <span>{{member.about_smoke}}</span>
                   </div>
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.about_drink">
                     <span>{{member.about_drink}}</span>
                   </div>
               </div>
             </div>
-
-
-
 
             <div class="member_basic_info clearfix">
               <div class="block_label fl">
@@ -140,7 +132,7 @@
               </div>
               
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.interest">
                     <span>{{ member.interest }}</span>
                   </div>
 
@@ -153,20 +145,18 @@
               </div>
               
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.about_me">
                       <span class="">{{ member.about_me }}</span>
                   </div>
               </div>
             </div>
-
-
 
             <div class="member_basic_info clearfix">
               <div class="block_label fl">
                   <span class="">希望你</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl">
+                  <div class="info fl" v-if="member.hope_you">
                     <span>{{ member.hope_you }}</span>
                   </div>
               </div>
@@ -178,107 +168,93 @@
                   <span class="">择偶要求</span>
               </div>
 
-              <div class="info fl">
+              <div class="info fl" v-if="member.mating_requirement">
                     <span>{{member.mating_requirement}}</span>
                   </div>
             </div>
 
-
-          
           </div>
-
 
           <!-- TA的信息 -->
-          <div class="member_info">
+          <div class="member_info" style="margin-top:35px;">
 
-
-                <span class="" style="font-size:20px;">TA的择偶观</span>
-                <!-- 基本资料 -->
-                <div class="member_basic_info clearfix">
-                  <div class="block_label fl">
-                      <span class="">基本要求</span>
+            <span class="" style="font-size:20px;">TA的择偶观</span>
+            <!-- 基本资料 -->
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">基本要求</span>
+              </div>
+              <div class="block_content fl clearfix">
+                  <div class="info fl" v-if="member && member.member_request.age_request">
+                    <span>{{ member && member.member_request.age_request }}</span>
                   </div>
-                  <div class="block_content fl clearfix">
-                      <div class="info fl">
-                        <span>{{ member && member.member_request.age_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member && member.member_request.height_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member && member.member_request.weight_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member && member.member_request.body_size_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.education_background_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.annual_income_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.job_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.asset_house_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.asset_car_request }}</span>
-                      </div>
+                  <div class="info fl" v-if="member && member.member_request.height_request">
+                    <span>{{ member && member.member_request.height_request }}</span>
                   </div>
-                </div>
-
-
-
-                <div class="member_basic_info clearfix">
-                  <div class="block_label fl">
-                      <span class="">婚姻观念</span>
+                  <div class="info fl" v-if="member && member.member_request.weight_request">
+                    <span>{{ member && member.member_request.weight_request }}</span>
                   </div>
-                  <div class="block_content fl clearfix">
-                      <div class="info fl">
-                        <span>{{ member.member_request.marital_status_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.about_child_request }}</span>
-                      </div>
+                  <div class="info fl" v-if="member && member.member_request.body_size_request">
+                    <span>{{ member && member.member_request.body_size_request }}</span>
                   </div>
-                </div>
-
-
-                <div class="member_basic_info clearfix">
-                  <div class="block_label fl">
-                      <span class="">生活习惯</span>
+                  <div class="info fl" v-if="member && member.member_request.education_background_request">
+                    <span>{{ member.member_request.education_background_request }}</span>
                   </div>
-                  <div class="block_content fl clearfix">
-                     <div class="info fl">
-                        <span>{{ member.member_request.about_smoke_request }}</span>
-                      </div>
-                      <div class="info fl">
-                        <span>{{ member.member_request.about_drink_request }}</span>
-                      </div>
+                  <div class="info fl" v-if="member && member.member_request.annual_income_request">
+                    <span>{{ member.member_request.annual_income_request }}</span>
                   </div>
-                </div>
-
-
-
-
-                <div class="member_basic_info clearfix">
-                  <div class="block_label fl">
-                      <span class="">其他要求</span>
+                  <div class="info fl" v-if="member && member.member_request.job_request">
+                    <span>{{ member.member_request.job_request }}</span>
                   </div>
-                  <div class="block_content fl clearfix">
-                      <div class="info fl">
-                        <span>{{ member.member_request.about_family_request }}</span>
-                      </div>
+                  <div class="info fl" v-if="member && member.member_request.asset_house_request">
+                    <span>{{ member.member_request.asset_house_request }}</span>
                   </div>
-                </div>
+                  <div class="info fl" v-if="member && member.member_request.asset_car_request">
+                    <span>{{ member.member_request.asset_car_request }}</span>
+                  </div>
+              </div>
+            </div>
 
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">婚姻观念</span>
+              </div>
+              <div class="block_content fl clearfix">
+                  <div class="info fl" v-if="member && member.member_request.marital_status_request">
+                    <span>{{ member.member_request.marital_status_request }}</span>
+                  </div>
+                  <div class="info fl" v-if="member && member.member_request.want_child_request">
+                    <span>{{ member.member_request.want_child_request }}</span>
+                  </div>
+              </div>
+            </div>
 
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">生活习惯</span>
+              </div>
+              <div class="block_content fl clearfix">
+                  <div class="info fl" v-if="member && member.member_request.about_smoke_request">
+                    <span>{{ member.member_request.about_smoke_request }}</span>
+                  </div>
+                  <div class="info fl" v-if="member && member.member_request.about_drink_request">
+                    <span>{{ member.member_request.about_drink_request }}</span>
+                  </div>
+              </div>
+            </div>
 
+            <div class="member_basic_info clearfix">
+              <div class="block_label fl">
+                  <span class="">其他要求</span>
+              </div>
+              <div class="block_content fl clearfix">
+                  <div class="info fl" v-if="member && member.member_request.about_family_request">
+                    <span>{{ member.member_request.about_family_request }}</span>
+                  </div>
+              </div>
+            </div>
               
           </div>
-
 
           <div class="member_pics">
               <viewer :images="member.member_image">
@@ -306,12 +282,9 @@
               </div>
             </div>
           </div>
-        
-
 
     </div>
   
-         
 </div>
 
 </template>
@@ -438,6 +411,9 @@ export default {
     color:whitesmoke;
 }
 
+.member_basic_info {
+  margin-top:36px;
+}
 .member_basic_info .block_label {
   width:130px;
 }
@@ -445,13 +421,17 @@ export default {
   width:550px;
   /* width:100px; */
 }
+
+.member_info_content .member_info {
+  margin-left:26px;
+}
 .content .member_info .info {
     font-size:16px;
     background-color: rgb(244,244,244);
     border-radius: 8px;
     margin-left: 20px;
-    padding: 5px;
     margin-top: 4px;
+    padding: 5px;
 }
 
 .content .member_info .member_pics {

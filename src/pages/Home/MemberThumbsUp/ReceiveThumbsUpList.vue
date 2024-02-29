@@ -1,9 +1,10 @@
 <template>
 
   <div class="private_message">
-    <li class="el-icon-back" @click="$router.back()"></li>
+
     <!--搜索栏-->
     <div class="search clearfix">
+        <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         <div class="search_input fr">
             <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
@@ -28,7 +29,7 @@
                 <template slot-scope="scope">
                   <div class="demo-type">
                     <div>
-                      <el-avatar :src="scope.row.profile_photo"></el-avatar>
+                      <el-avatar :src="scope.row.member.profile_photo"></el-avatar>
                     </div>   
                   </div>
                 </template>
@@ -37,7 +38,7 @@
 
               <!-- 对方昵称 -->
               <el-table-column
-                prop="nick_name"
+                prop="member.nick_name"
                 width="180">
               </el-table-column>
 
@@ -53,7 +54,7 @@
                 <template slot-scope="scope">
                   <div class="demo-type">
                     <div>
-                      <span>{{ formatDateTime(scope.row.member_thumbs_up_member[0].created_at) }}</span>
+                      <span>{{ formatDateTime(scope.row.created_at) }}</span>
                     </div>   
                   </div>
                 </template>
@@ -145,7 +146,7 @@ export default {
     },
     cellClick(row){
 
-        this.routeToViewMemberDetail(row.id);
+        this.routeToViewMemberDetail(row.member.id);
     } 
   },
   mounted() {
