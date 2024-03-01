@@ -117,18 +117,18 @@ export default {
 }
 .header .logo img{
     float:left;
-    margin-left:20px;
+    margin-left:12px;
     margin-top:3px;
     margin-bottom:3px;
     border-radius:23px;
     width:45px;
 }
 .header .nav li{
-    margin-top:10px;
+    margin-top:6px;
     font:18px white;
     font-weight: bold;
-    padding-right:15px;
-    margin-right:15px;
+    padding-right:12px;
+    margin-right:6px;
     float:left;
     border-right:1px solid gray;
 }
