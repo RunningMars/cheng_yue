@@ -548,6 +548,16 @@
                                     </el-option>
                                     </el-select>
                                 </el-form-item> -->
+                                <!-- <el-form-item label="子女情况">
+                                    <el-select v-model="member.member_request.child_status_request" placeholder="请选择">
+                                    <el-option
+                                        v-for="item in child_status_request_options"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                    </el-select>
+                                </el-form-item> -->
 
                                 <el-form-item label="是否要孩子">
                                     <el-select v-model="member.member_request.want_child_request" placeholder="请选择">
@@ -717,6 +727,13 @@ export default {
             {label:"住在单位宿舍",value:"住在单位宿舍"},
         ],
         child_status_options:[
+            {label:"没有小孩",value:"没有小孩"},
+            {label:"有小孩且住在一起",value:"有小孩且住在一起"},
+            {label:"有小孩且偶尔会一起住",value:"有小孩且偶尔会一起住"},
+            {label:"有小孩但不在身边",value:"有小孩但不在身边"},
+        ],
+        child_status_request_options:[
+            {label:"不限",value:"不限"},
             {label:"没有小孩",value:"没有小孩"},
             {label:"有小孩且住在一起",value:"有小孩且住在一起"},
             {label:"有小孩且偶尔会一起住",value:"有小孩且偶尔会一起住"},

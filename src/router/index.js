@@ -27,6 +27,10 @@ VueRouter.prototype.replace = function replace (to) {
 const router = new VueRouter({
     routes: [
         {
+            path: "/",
+            redirect: "/home",
+        },
+        {
             path: '/login',
             component: LoginPage,
             meta:{title:'登录'}
@@ -36,7 +40,6 @@ const router = new VueRouter({
             component: RegisterPage,
             meta:{title:'注册'}
         },
-
 
         {
             path: '/home',

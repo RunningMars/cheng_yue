@@ -306,7 +306,6 @@ export default {
           {label:"有小孩但不在身边",value:"有小孩但不在身边"},
         ],
       want_child_request_options:[
-          {label:"不限",value:"不限"},
           {label:"想要孩子",value:"想要孩子"},
           {label:"视情况而定",value:"视情况而定"},
           {label:"不想要孩子",value:"不想要孩子"},
