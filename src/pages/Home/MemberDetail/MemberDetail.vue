@@ -201,7 +201,7 @@
                     <span>{{ member.member_request.education_background_request }}</span>
                   </div>
                   <div class="info fl" v-if="member && member.member_request.annual_income_request">
-                    <span>{{ member.member_request.annual_income_request }}</span>
+                    <span>{{ member.member_request.annual_income_request }}w以上</span>
                   </div>
                   <div class="info fl" v-if="member && member.member_request.job_request">
                     <span>{{ member.member_request.job_request }}</span>
