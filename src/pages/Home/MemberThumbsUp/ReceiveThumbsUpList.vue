@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="content">
+    <div class="content" style="margin-top:24px;">
         <div  class="chat_list">
             <div>
               <span style="font-size:18px;weight:bold;">我收到的点赞  </span><span style="font-size:20px;weight:bold;">{{ thumbs_up_count }}</span>
@@ -198,5 +198,9 @@ export default {
 }
 .row_hover:hover {
   cursor:pointer;
+}
+.pagination {
+  margin-top:32px;
+  margin-left:42px;
 }
 </style>
