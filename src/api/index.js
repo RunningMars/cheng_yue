@@ -76,3 +76,8 @@ export const reqUploadImage = (params) => requests({url:"/uploadImage" , params 
  * captcha
  */
 export const reqCaptchaVerify = (params) => requests.post("/captcha/verify" , params );
+
+/**
+ * 发送短信验证码
+ */
+export const reqSendSmsValidateCode = (params) => requests.post("/sms/validate/send" , params );

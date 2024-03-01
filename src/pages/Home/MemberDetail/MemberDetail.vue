@@ -434,14 +434,14 @@ export default {
     padding: 5px;
 }
 
-.content .member_info .member_pics {
+.content .member_info_content .member_pics {
     margin-bottom: 5px;
     display:flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.content .member_info .member_pics img{
+.content .member_info_content .member_pics img{
     width: 300px;
     /* height:auto; */
     /* float:left; */
@@ -449,7 +449,7 @@ export default {
     border-radius: 4px;
     
 }
-.content .member_info .member_pics img:first-child{
+.content .member_info_content .member_pics img:first-child{
     margin-left:2px;
 }
 

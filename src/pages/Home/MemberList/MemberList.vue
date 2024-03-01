@@ -11,18 +11,45 @@
         <div style="height:130px;margin-left:12px;margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-around; align-content:space-evenly;">
 
           <div class="search_item">
-            <el-input class="input" style="width:190px;" v-model="searchParams.key_word" placeholder="搜索昵称" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <el-input class="input" style="width:190px;" v-model="searchParams.key_word" placeholder="搜索昵称/ID" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
           </div>
 
           <div class="search_item">
-            <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <!-- <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
             <span style="color:grey;"> 至 </span>
-            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input> -->
+         
+            <el-select v-model="searchParams.age_min_request" style="width:95px;" placeholder="年龄(起)" clearable size="small">
+              <el-option
+                  v-for="item in age_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+            <!-- <span style="color:grey;"> 至 </span> -->
+            <span style="color:grey;"> </span>
+            <el-select v-model="searchParams.age_max_request" style="width:95px;"  placeholder="年龄(止)" clearable size="small">
+              <el-option
+                  v-for="item in age_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
           </div>
 
           <div class="search_item">
-            <!-- <el-input class="input" style="width:190px;" v-model="searchParams.height_request" placeholder="请输入搜索的身高(cm)" v-on:keyup.enter.native="getData()" ></el-input> -->
-            <el-select v-model="searchParams.height_request" placeholder="搜索身高" clearable size="small">
+            <el-select v-model="searchParams.height_min_request" style="width:95px;" placeholder="身高(起)" clearable size="small">
+              <el-option
+                  v-for="item in height_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+            <span style="color:grey;"> </span>
+            <el-select v-model="searchParams.height_max_request" style="width:95px;"  placeholder="身高(止)" clearable size="small">
               <el-option
                   v-for="item in height_request_options"
                   :key="item.value"
@@ -33,9 +60,9 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.education_background_request" placeholder="搜索学历" clearable size="small">
+            <el-select v-model="searchParams.education_background_code_request" placeholder="搜索学历" clearable size="small">
               <el-option
-                  v-for="item in education_background_request_options"
+                  v-for="item in education_background_code_request_options"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -44,9 +71,17 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.annual_income_request" placeholder="选择年收入" clearable size="small">
+            <!-- <el-select v-model="searchParams.annual_income_request" placeholder="选择年收入" clearable size="small"> -->
+              <!-- <el-option
+                  v-for="item in annual_income_range_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option> -->
+            <!-- </el-select> -->
+            <el-select v-model="searchParams.annual_income_min_request" placeholder="选择年收入" clearable size="small">
               <el-option
-                  v-for="item in annual_income_request_options"
+                  v-for="item in annual_income_min_request_options"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -77,6 +112,17 @@
           </div>
 
           <div class="search_item">
+            <el-select v-model="searchParams.child_status_request" placeholder="搜索小孩情况" clearable size="small">
+              <el-option
+                  v-for="item in child_status_request_options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="search_item">
             <el-select v-model="searchParams.marital_status_request" placeholder="搜索婚姻情况" clearable size="small">
               <el-option
                   v-for="item in marital_status_request_options"
@@ -98,14 +144,13 @@
             </el-select>
           </div>
 
-          <div class="search_item">
-            <el-button type="primary" icon="el-icon-delete" @click="clearSearch()"  >清除</el-button>
-            <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
-
-          </div>
-
       </div>
 
+      <div class="search_item fr">
+            
+          <el-button type="primary" icon="el-icon-search" @click="getData()" >搜索</el-button>
+          <el-button type="primary" icon="el-icon-s-open" @click="clearSearch()" >清空条件</el-button>
+      </div>
     </div>
 
     <div class="content">
@@ -123,13 +168,13 @@
                     </viewer>
                   </div>
                   <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
-                    <span>{{member.age}}岁</span>
-                    <span>/{{member.height}}cm</span>
-                    <span>/{{member.education_background}}</span>
+                    <span v-show="member.age">{{member.age}}岁</span>
+                    <span v-show="member.height">/{{member.height}}cm</span>
+                    <span v-show="member.education_background">/{{member.education_background}}</span>
                   </div>
                   <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
-                    <span>{{member.province}}</span>
-                    <span>/{{member.city}}</span>
+                    <span v-show="member.province">{{member.province}}</span>
+                    <span v-show="member.city">/{{member.city}}</span>
                   </div>
                   <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
                     <span>{{member.job}}</span>
@@ -139,8 +184,8 @@
                 <div class="item_middle member_detail_hover" @click="routeToViewMemberDetail(member.id)">
                       <!-- <img> -->
                     <!-- <span>点赞99</span> -->
-                    <div class="request about_me fl"><span>关于我  </span><span> {{ member.about_me }}</span></div>
-                    <div class="request hope_you fl"><span>希望你  </span><span> {{ member.hope_you }}</span></div>
+                    <div class="request about_me fl" v-show="member.about_me"><span>关于我  </span><span> {{ member.about_me }}</span></div>
+                    <div class="request hope_you fl" v-show="member.hope_you"><span>希望你  </span><span> {{ member.hope_you }}</span></div>
                   </div>
 
                 <div class="item_bottom">
@@ -201,117 +246,215 @@ export default {
 
         age_min_request:null,
         age_max_request:null,
-        height_request:null,
-        education_background_request:null,
+        height_min_request:null,
+        height_max_request:null,
+        education_background_code_request:null,
         annual_income_request:null,
+        annual_income_min_request:null,
         asset_house_request:null,
         asset_car_request:null,
         marital_status_request:null,
+        child_status_request:null,
         want_child_request:null,
       },
 
-      education_background_request_options:[
-            {label:"大专以上",value:"1"},
-            {label:"本科以上",value:"2"},
-            {label:"硕士以上",value:"3"},
-            {label:"博士及以上",value:"4"}
+      education_background_code_request_options:[
+          {label:"高中及以上",value:1},
+          {label:"中专及以上",value:2},
+          {label:"大专及以上",value:3},
+          {label:"本科及以上",value:4},
+          {label:"硕士及以上",value:5},
+          {label:"博士及以上",value:6},
+          {label:"博士后",value:7},
         ],
-        annual_income_request_options:[
+      annual_income_range_request_options:[
           {label:"5w-10w",value:"5w-10w"},
           {label:"10w-15w",value:"10w-15w"},
           {label:"15w-20w",value:"15w-20w"},
           {label:"20w-30w",value:"20w-30w"},
           {label:"30w-50w",value:"30w-50w"},
-          {label:"50w以上",value:"50w以上"},
+          {label:"50w 以上",value:"50w以上"},
+      ],
+      annual_income_min_request_options:[
+          {label:"5w 以上",value:5},
+          {label:"10w 以上",value:10},
+          {label:"15w 以上",value:15},
+          {label:"20w 以上",value:20},
+          {label:"30w 以上",value:30},
+          {label:"50w 以上",value:50},
       ],
       car_asset_request_options:[
-            {label:"暂无",value:"暂无"},
-            {label:"准备买车",value:"准备买车"},
-            {label:"有车",value:"有车"}
+          {label:"未购车",value:"未购车"},
+          {label:"已购车",value:"已购车"}
         ],
       house_asset_request_options:[
-            {label:"暂无",value:"暂无"},
-            {label:"准备买房",value:"准备买房"},
-            {label:"有房",value:"有房"}
+          {label:"和家人同住",value:"和家人同住"},
+          {label:"已购房",value:"已购房"},
+          {label:"租房",value:"租房"},
+          {label:"打算婚后购房",value:"打算婚后购房"},
+          {label:"住在单位宿舍",value:"住在单位宿舍"},
         ],
       marital_status_request_options:[
-            {label:"未婚",value:"未婚"},
-            {label:"未婚有孩",value:"未婚有孩"},
-            {label:"离婚无孩",value:"离婚无孩"},
-            {label:"离婚有孩",value:"离婚有孩"},
+          {label:"未婚",value:"未婚"},
+          {label:"离异",value:"离异"},
+          {label:"丧偶",value:"丧偶"},
+        ],
+      child_status_request_options:[
+          {label:"没有小孩",value:"没有小孩"},
+          {label:"有小孩且住在一起",value:"有小孩且住在一起"},
+          {label:"有小孩且偶尔会一起住",value:"有小孩且偶尔会一起住"},
+          {label:"有小孩但不在身边",value:"有小孩但不在身边"},
         ],
       want_child_request_options:[
-            {label:"想要孩子",value:"想要孩子"},
-            {label:"想要多个孩子",value:"想要多个孩子"},
-            {label:"看情况",value:"看情况"},
-            {label:"丁克",value:"丁克"},
+          {label:"不限",value:"不限"},
+          {label:"想要孩子",value:"想要孩子"},
+          {label:"视情况而定",value:"视情况而定"},
+          {label:"不想要孩子",value:"不想要孩子"},
         ],
       smoke_request_options:[
-            {label:"不吸烟",value:"不吸烟"},
-            {label:"稍微抽点",value:"稍微抽点"},
-            {label:"正常吸烟",value:"正常吸烟"},
-            {label:"特定场合会吸",value:"特定场合会吸"},
-            {label:"抽得比较多",value:"抽得比较多"},
+          {label:"不吸烟",value:"不吸烟"},
+          {label:"稍微抽点",value:"稍微抽点"},
+          {label:"正常吸烟",value:"正常吸烟"},
+          {label:"特定场合会吸",value:"特定场合会吸"},
+          {label:"抽得比较多",value:"抽得比较多"},
         ],
       drink_request_options:[
-            {label:"不喝酒",value:"不喝酒"},
-            {label:"偶尔喝一点",value:"偶尔喝一点"},
-            {label:"正常喝酒",value:"正常喝酒"},
-            {label:"特定场合会喝",value:"特定场合会喝"},
-            {label:"喝得比较多",value:"喝得比较多"},
+          {label:"不喝酒",value:"不喝酒"},
+          {label:"偶尔喝一点",value:"偶尔喝一点"},
+          {label:"正常喝酒",value:"正常喝酒"},
+          {label:"特定场合会喝",value:"特定场合会喝"},
+          {label:"喝得比较多",value:"喝得比较多"},
         ],
       height_request_options:[
-        {label:"140cm 以上",value:140},
-        {label:"141cm 以上",value:141},
-        {label:"142cm 以上",value:142},
-        {label:"143cm 以上",value:143},
-        {label:"144cm 以上",value:144},
-        {label:"145cm 以上",value:145},
-        {label:"146cm 以上",value:146},
-        {label:"147cm 以上",value:147},
-        {label:"148cm 以上",value:148},
-        {label:"149cm 以上",value:149},
-        {label:"150cm 以上",value:150},
-        {label:"151cm 以上",value:151},
-        {label:"152cm 以上",value:152},
-        {label:"153cm 以上",value:153},
-        {label:"154cm 以上",value:154},
-        {label:"155cm 以上",value:155},
-        {label:"156cm 以上",value:156},
-        {label:"157cm 以上",value:157},
-        {label:"158cm 以上",value:158},
-        {label:"159cm 以上",value:159},
-        {label:"160cm 以上",value:160},
-        {label:"161cm 以上",value:161},
-        {label:"162cm 以上",value:162},
-        {label:"163cm 以上",value:163},
-        {label:"164cm 以上",value:164},
-        {label:"165cm 以上",value:165},
-        {label:"166cm 以上",value:166},
-        {label:"167cm 以上",value:167},
-        {label:"168cm 以上",value:168},
-        {label:"169cm 以上",value:169},
-        {label:"170cm 以上",value:170},
-        {label:"171cm 以上",value:171},
-        {label:"172cm 以上",value:172},
-        {label:"173cm 以上",value:173},
-        {label:"174cm 以上",value:174},
-        {label:"175cm 以上",value:175},
-        {label:"176cm 以上",value:176},
-        {label:"177cm 以上",value:177},
-        {label:"178cm 以上",value:178},
-        {label:"179cm 以上",value:179},
-        {label:"180cm 以上",value:180},
-        {label:"181cm 以上",value:181},
-        {label:"182cm 以上",value:182},
-        {label:"183cm 以上",value:183},
-        {label:"184cm 以上",value:184},
-        {label:"185cm 以上",value:185},
-        {label:"186cm 以上",value:186},
-        {label:"187cm 以上",value:187},
-        {label:"188cm 以上",value:188},
-        {label:"189cm 以上",value:189},
-        {label:"190cm 以上",value:190},
+          {label:"140cm",value:140},
+          {label:"141cm",value:141},
+          {label:"142cm",value:142},
+          {label:"143cm",value:143},
+          {label:"144cm",value:144},
+          {label:"145cm",value:145},
+          {label:"146cm",value:146},
+          {label:"147cm",value:147},
+          {label:"148cm",value:148},
+          {label:"149cm",value:149},
+          {label:"150cm",value:150},
+          {label:"151cm",value:151},
+          {label:"152cm",value:152},
+          {label:"153cm",value:153},
+          {label:"154cm",value:154},
+          {label:"155cm",value:155},
+          {label:"156cm",value:156},
+          {label:"157cm",value:157},
+          {label:"158cm",value:158},
+          {label:"159cm",value:159},
+          {label:"160cm",value:160},
+          {label:"161cm",value:161},
+          {label:"162cm",value:162},
+          {label:"163cm",value:163},
+          {label:"164cm",value:164},
+          {label:"165cm",value:165},
+          {label:"166cm",value:166},
+          {label:"167cm",value:167},
+          {label:"168cm",value:168},
+          {label:"169cm",value:169},
+          {label:"170cm",value:170},
+          {label:"171cm",value:171},
+          {label:"172cm",value:172},
+          {label:"173cm",value:173},
+          {label:"174cm",value:174},
+          {label:"175cm",value:175},
+          {label:"176cm",value:176},
+          {label:"177cm",value:177},
+          {label:"178cm",value:178},
+          {label:"179cm",value:179},
+          {label:"180cm",value:180},
+          {label:"181cm",value:181},
+          {label:"182cm",value:182},
+          {label:"183cm",value:183},
+          {label:"184cm",value:184},
+          {label:"185cm",value:185},
+          {label:"186cm",value:186},
+          {label:"187cm",value:187},
+          {label:"188cm",value:188},
+          {label:"189cm",value:189},
+          {label:"190cm",value:190},
+          {label:"191cm",value:191},
+          {label:"192cm",value:192},
+          {label:"193cm",value:193},
+          {label:"194cm",value:194},
+          {label:"195cm",value:195},
+          {label:"196cm",value:196},
+          {label:"197cm",value:197},
+          {label:"198cm",value:198},
+          {label:"199cm",value:199},
+          {label:"200cm",value:200},
+      ],
+      age_request_options:[
+          {label:"18岁",value:18},
+          {label:"19岁",value:19},
+          {label:"20岁",value:20},
+          {label:"21岁",value:21},
+          {label:"22岁",value:22},
+          {label:"23岁",value:23},
+          {label:"24岁",value:24},
+          {label:"26岁",value:26},
+          {label:"27岁",value:27},
+          {label:"28岁",value:28},
+          {label:"29岁",value:29},
+          {label:"30岁",value:30},
+          {label:"31岁",value:31},
+          {label:"32岁",value:32},
+          {label:"33岁",value:33},
+          {label:"34岁",value:34},
+          {label:"36岁",value:36},
+          {label:"37岁",value:37},
+          {label:"38岁",value:38},
+          {label:"39岁",value:39},
+          {label:"40岁",value:40},
+          {label:"41岁",value:41},
+          {label:"42岁",value:42},
+          {label:"43岁",value:43},
+          {label:"44岁",value:44},
+          {label:"46岁",value:46},
+          {label:"47岁",value:47},
+          {label:"48岁",value:48},
+          {label:"49岁",value:49},
+          {label:"50岁",value:50},
+          {label:"51岁",value:51},
+          {label:"52岁",value:52},
+          {label:"53岁",value:53},
+          {label:"54岁",value:54},
+          {label:"56岁",value:56},
+          {label:"57岁",value:57},
+          {label:"58岁",value:58},
+          {label:"59岁",value:59},
+          {label:"60岁",value:60},
+          {label:"61岁",value:61},
+          {label:"62岁",value:62},
+          {label:"63岁",value:63},
+          {label:"64岁",value:64},
+          {label:"66岁",value:66},
+          {label:"67岁",value:67},
+          {label:"68岁",value:68},
+          {label:"69岁",value:69},
+          {label:"70岁",value:70},
+          {label:"71岁",value:71},
+          {label:"72岁",value:72},
+          {label:"73岁",value:73},
+          {label:"74岁",value:74},
+          {label:"76岁",value:76},
+          {label:"77岁",value:77},
+          {label:"78岁",value:78},
+          {label:"79岁",value:79},
+          {label:"80岁",value:80},
+          {label:"81岁",value:81},
+          {label:"82岁",value:82},
+          {label:"83岁",value:83},
+          {label:"84岁",value:84},
+          {label:"86岁",value:86},
+          {label:"87岁",value:87},
+          {label:"88岁",value:88},
+          {label:"89岁",value:89},
+          {label:"90岁",value:90},
       ],
     }
   },
@@ -325,12 +468,15 @@ export default {
       this.searchParams.key_word = null;
       this.searchParams.age_min_request = null;
       this.searchParams.age_max_request = null;
-      this.searchParams.height_request = null;
-      this.searchParams.education_background_request = null;
+      this.searchParams.height_min_request = null;
+      this.searchParams.height_max_request = null;
+      this.searchParams.education_background_code_request = null;
       this.searchParams.annual_income_request = null;
+      this.searchParams.annual_income_min_request = null;
       this.searchParams.asset_house_request = null;
       this.searchParams.asset_car_request = null;
       this.searchParams.marital_status_request = null;
+      this.searchParams.child_status_request = null;
       this.searchParams.want_child_request = null;
     },
     handleSizeChange(val) {
