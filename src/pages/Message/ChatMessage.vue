@@ -268,8 +268,8 @@ export default {
 }
 
 .pagination {
-  margin-left:30px;
-  margin-top:35px;
+  margin-left:60px;
+  margin-top:44px;
 }
 
 
