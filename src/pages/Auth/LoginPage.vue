@@ -2,7 +2,7 @@
     
     <div class="login_container">
 
-        <div class="login_content">
+        <div class="login_content" style="margin-top:12%;">
             
             <el-form ref="form" :model="form" label-width="80px">
                     <el-form-item label="手机号">

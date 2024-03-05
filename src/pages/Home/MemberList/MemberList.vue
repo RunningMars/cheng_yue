@@ -8,7 +8,7 @@
           <el-button type="primary" v-show="this.is_favorite || this.is_thumbs_up" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         </div>
 
-        <div style="height:130px;margin-left:12px;margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-around; align-content:space-evenly;">
+        <div style="margin-left:12px;margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-around; align-content:space-evenly;">
 
           <div class="search_item">
             <el-input class="input" style="width:190px;" v-model="searchParams.key_word" placeholder="搜索昵称/ID" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
@@ -144,14 +144,13 @@
             </el-select>
           </div>
 
-      </div>
+        </div>
 
-      <div class="search_item fr">
-            
-          <el-button type="primary" icon="el-icon-search" @click="getData()" >搜索</el-button>
-          <el-button type="primary" icon="el-icon-s-open" @click="clearSearch()" >清空条件</el-button>
+        <div class="search_item fr">
+            <el-button type="primary" icon="el-icon-search" @click="getData()" >搜索</el-button>
+            <el-button type="primary" icon="el-icon-s-open" @click="clearSearch()" >清空条件</el-button>
+        </div>
       </div>
-    </div>
 
     <div class="content">
         <div  class="member_list">
@@ -531,6 +530,7 @@ export default {
 
 /*搜索*/
 .search {
+  overflow: hidden;
     padding:10px;
 }
 .search .input{

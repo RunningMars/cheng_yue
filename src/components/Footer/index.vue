@@ -5,9 +5,9 @@
 
     <div>
       <ul class="footer_items">
-          <li class="footer_item "> <router-link to="/about">联系方式</router-link></li>
-          <li class="footer_item "> <router-link to="/about">备案</router-link></li>
-          <li class="footer_item "> <router-link to="/about">关于我们</router-link></li>
+          <li class="footer_item "> <router-link to="/about">Copyright ©2024-2026 缘来网 版权所有 </router-link></li>
+          <!-- <li class="footer_item "> <router-link to="/about">川ICP备2024030656 </router-link></li>
+          <li class="footer_item "> <router-link to="/about">关于我们</router-link></li> -->
       </ul>
     </div>
 
@@ -31,7 +31,8 @@ export default {
   margin: 0 auto;
   margin-top:100px;
   margin-bottom:10px;
-  background-color: lightgray;
+  color:#4e6e8e;
+  /* background-color: lightgray; */
 }
 .footer .footer_items {
   display:flex;

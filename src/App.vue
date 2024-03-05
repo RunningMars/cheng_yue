@@ -1,10 +1,10 @@
 <template>
 
-  <div id="app">
+  <div id="app" class="app_container">
 
     <HeaderComponent></HeaderComponent>
 
-     <div>
+     <div  class="router-view">
         <router-view :key="$route.path"></router-view>
      </div>
 
@@ -52,6 +52,21 @@ export default {
   /* text-align: center; */
   color: #2c3e50;
   margin: 0;
+	position: absolute;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  
+
+}
+.app_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.router-view {
+  flex: 1;
 }
 
 </style>
