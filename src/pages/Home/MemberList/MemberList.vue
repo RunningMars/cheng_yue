@@ -159,25 +159,47 @@
               <div v-for="member in memberList" :key="member.id"   class="member_list_item hover clearfix">
 
                 <div class="item_top">
-                  <div class="member_name fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">{{member.nick_name}}</div>
-                  <div class="avatar fr"> 
+
+                  <div class="fl clearfix" style="width:73%;">
+
+                    <div class="member_name fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">{{member.nick_name}}</div>
+
+                    <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
+                      <span v-show="member.age">{{member.age}}岁</span>
+                      <span v-show="member.height">/{{member.height}}cm</span>
+                      <span v-show="member.education_background">/{{member.education_background}}</span>
+                    </div>
+                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                      <span v-show="member.province">{{member.province}}</span>
+                      <span v-show="member.city">/{{member.city}}</span>
+                    </div>
+                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                      <span>{{member.job}}</span>
+                    </div>
+                  </div>
+
+                  <div class="avatar fr" style="width:26%;"> 
                     <viewer :image="member.profile_photo">
                       <img :src="member.profile_photo"
                           class="pro-img">
                     </viewer>
                   </div>
-                  <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
-                    <span v-show="member.age">{{member.age}}岁</span>
-                    <span v-show="member.height">/{{member.height}}cm</span>
-                    <span v-show="member.education_background">/{{member.education_background}}</span>
-                  </div>
-                  <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
-                    <span v-show="member.province">{{member.province}}</span>
-                    <span v-show="member.city">/{{member.city}}</span>
-                  </div>
-                  <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
-                    <span>{{member.job}}</span>
-                  </div>
+<!--                   
+                  <div class="fl clearfix" >
+                    <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
+                      <span v-show="member.age">{{member.age}}岁</span>
+                      <span v-show="member.height">/{{member.height}}cm</span>
+                      <span v-show="member.education_background">/{{member.education_background}}</span>
+                    </div>
+                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                      <span v-show="member.province">{{member.province}}</span>
+                      <span v-show="member.city">/{{member.city}}</span>
+                    </div>
+                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                      <span>{{member.job}}</span>
+                    </div>
+                  </div> -->
+                  
                 </div>
 
                 <div class="item_middle member_detail_hover" @click="routeToViewMemberDetail(member.id)">
@@ -188,7 +210,7 @@
                   </div>
 
                 <div class="item_bottom">
-                    <viewer :images="member.member_image">
+                    <viewer :images="member.member_image" class="viewer_class">
                       <img
                           v-for="(member_image,index) in member.member_image"
                           :src="member_image.url"
@@ -604,17 +626,17 @@ export default {
 
 .content .member_list .info {
     font-size:13px;
-    background-color: rgb(244,244,244);
+    background-color: rgb(222 222 222);
     border-radius: 5px;
     margin-left: 9px;
     padding: 3px;
     margin-top: 4px;
 }
 
-.content .member_list .item_top div:nth-child(3) {
+/* .content .member_list .item_top div:nth-child(3) {
     margin-bottom:6px;
     margin-top: 2px;
-}
+} */
 
 .content .member_list .item_middle span{
     font-size:13px;
@@ -651,15 +673,22 @@ export default {
    cursor:pointer;
 }
 .content .member_list .item_bottom {
-    width: 256px;
+    width: 100%;
     margin-bottom: 5px;
     display:flex;
     justify-content: flex-start;
     align-items: center;
 }
+.content .member_list .viewer_class {
+    width: 100%;
+    margin-bottom: 5px;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
 .content .member_list .item_bottom img{
-    width: 60px;
+    width: 77px;
     /* height:auto; */
     /* float:left; */
     margin-right:3px;
