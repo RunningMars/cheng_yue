@@ -51,7 +51,7 @@
             <span style="margin-left:12px;color:antiquewhite;">缘来网</span>
           </div>
 
-          <el-submenu index="2" style="margin-left:18%;">
+          <el-submenu index="2" style="margin-left:12%;">
             <template slot="title" ><span style="color:antiquewhite;font-size:18px;font-weight:bold;">菜单栏</span></template>
 
             <el-menu-item index="2-1" v-show="!$store.state.user.token"><router-link to="/login" style="color:antiquewhite">登录</router-link></el-menu-item>
