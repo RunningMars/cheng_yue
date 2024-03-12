@@ -111,7 +111,7 @@
             </el-select>
           </div>
 
-          <div class="search_item">
+          <!-- <div class="search_item">
             <el-select v-model="searchParams.child_status_request" placeholder="小孩情况" clearable size="small">
               <el-option
                   v-for="item in child_status_request_options"
@@ -120,7 +120,7 @@
                   :value="item.value">
               </el-option>
             </el-select>
-          </div>
+          </div> -->
 
           <div class="search_item">
             <el-select v-model="searchParams.marital_status_request" placeholder="婚姻情况" clearable size="small">
@@ -133,7 +133,7 @@
             </el-select>
           </div>
 
-          <div class="search_item">
+          <!-- <div class="search_item">
             <el-select v-model="searchParams.want_child_request" placeholder="生孩观念" clearable size="small">
               <el-option
                   v-for="item in want_child_request_options"
@@ -142,7 +142,7 @@
                   :value="item.value">
               </el-option>
             </el-select>
-          </div>
+          </div> -->
 
         </div>
 
