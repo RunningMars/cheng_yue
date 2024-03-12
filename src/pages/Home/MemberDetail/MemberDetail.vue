@@ -259,7 +259,7 @@
           </div>
 
           <div class="member_pics">
-              <viewer :images="member.member_image">
+              <viewer :images="member.member_image" class="viewer_class">
                 <img
                     v-for="(member_image,index) in member.member_image"
                     :src="member_image.url"
@@ -270,7 +270,7 @@
           </div>  
 
           <div >
-            <div class="send" style="display:flex;justify-content:center;text-align:center;">
+            <div class="send" style="margin-top:20px;display:flex;justify-content:center;text-align:center;">
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
                 <el-button type="primary" @click="updateFavorites(member.id)" round> {{ !member.member_favorite_to_member || member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
               </div>
@@ -281,6 +281,10 @@
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
                 <el-button type="primary" @click="openChat(member.id)" round >私信</el-button>
+              </div>
+              <div class="search_input" ></div>
+              <div class="search_input"  style="margin-right:10px;" >
+                <el-button type="primary" @click="$router.back()" round>返回</el-button>
               </div>
             </div>
           </div>
@@ -387,11 +391,12 @@ export default {
     border-radius:60px;
     width:120px;
 }
+
 .member_header .member_abstract{
-  /* margin-top : 95px; */
-    margin-top : 20px;
-    margin-left : 90px;
-}
+    display:flex;
+    justify-content:center;
+        /* justify-content:space-evenly; */
+  }
 .member_header .member_abstract li{
     margin-top:10px;
     font:18px ;
@@ -401,6 +406,10 @@ export default {
     margin-right:15px;
     float:left;
     border-right:1px solid gray;
+}
+
+.member_header .member_abstract li:last-child{
+    border-right:0;
 }
 
 .member_header .member_name {
@@ -435,13 +444,21 @@ export default {
 }
 
 .content .member_info_content .member_pics {
+    margin-top: 15px;
     margin-bottom: 5px;
+
+}
+
+.content .member_info_content .viewer_class {
+    width:100%;
     display:flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .content .member_info_content .member_pics img{
+    margin-top:20px;
     width: 300px;
     /* height:auto; */
     /* float:left; */
@@ -473,15 +490,10 @@ export default {
       color:whitesmoke;
   }
   .right_side_box {
-    width:72%;
-    /* margin-top : 10px; */
+    width:100%;
+    margin-bottom : 15px;
   }
-  .member_header .member_abstract{
-  /* margin-top : 95px; */
-  
-    margin-top : 10px;
-    margin-left : 10px;
-  }
+
 
 }
 </style>

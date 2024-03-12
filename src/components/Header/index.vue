@@ -3,8 +3,9 @@
   <div>
     <!--    header-->
     <div class="header clearfix">
-      <div class="logo fl">
+      <div class="logo fl" style="width:10%;">
           <img src="../../assets/logo/rabbit.png" >
+          <span style="margin-left:12px;color:antiquewhite;">缘来网</span>
       </div>
 
       <ul id="nav_bar_normal" style="width:90%;" class="header nav fr clearfix">
@@ -47,9 +48,11 @@
         >
           <div class="logo fl">
             <img src="../../assets/logo/rabbit.png" >
+            <span style="margin-left:12px;color:antiquewhite;">缘来网</span>
           </div>
-          <el-submenu index="2">
-            <template slot="title" ><span style="color:antiquewhite;font-size:18px;weight:bold;">菜单栏</span></template>
+
+          <el-submenu index="2" style="margin-left:18%;">
+            <template slot="title" ><span style="color:antiquewhite;font-size:18px;font-weight:bold;">菜单栏</span></template>
 
             <el-menu-item index="2-1" v-show="!$store.state.user.token"><router-link to="/login" style="color:antiquewhite">登录</router-link></el-menu-item>
             <el-menu-item index="2-2" v-show="!$store.state.user.token"><router-link to="/register" style="color:antiquewhite">注册</router-link></el-menu-item>
@@ -150,10 +153,14 @@ export default {
 #nav_bar_normal {
     width:100%;
     display: flex; /* 水平布局 */
+    /* 靠近主轴终点,居右 */
+    justify-content:flex-end;
+    /* flex-direction:row-reverse; */
 }
 #nav_bar_collapsed {
     width:100%;
     display: none; /* 水平布局 */
+
 }
  
 /* 视口变小后的导航栏样式（折叠）*/

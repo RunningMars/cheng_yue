@@ -13,20 +13,21 @@
     </div>
 
     <div class="content">
-        <div  class="chat_list">
+        <div  class="chat_list" style="margin-top:12px;">
             <div >
               <div >
                 <h3>我的私信</h3>  
               </div>
               <div style="margin-top:15px;" >
-                <span>{{ this.$store.state.message.unread_chat_count ? ' 未读 ' + this.$store.state.message.unread_chat_count  : '' }}</span>
-                <el-button style="margin-left:20px;" @click="readAll" v-show="this.$store.state.message.unread_chat_count" type="info" size="mini" round>全部已读</el-button>
+                <span>{{ this.$store.state.message.unread_chat_count ? ' 未读  ' + this.$store.state.message.unread_chat_count  : '' }}</span>
+                <el-button style="margin-left:20px;" @click="readAll" v-show="this.$store.state.message.unread_chat_count" type="primary" size="mini" round>全部已读</el-button>
               </div>
             </div>
           <el-table
+            :show-header="false"
             :data="chatList"
             class="row_hover"
-            style="width: 100%;"
+            style="width: 100%;margin-top:10px;"
             @cell-click="cellClick"
             :row-class-name="tableRowClassName">
               <!-- 我是否已读chat -->

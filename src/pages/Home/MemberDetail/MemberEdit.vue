@@ -1249,8 +1249,8 @@ export default {
     width:120px;
 }
 .member_header .member_abstract{
-  margin-top : 95px;
-  margin-left : 50px;
+    display:flex;
+    justify-content:center;
 }
 .member_header .member_abstract li{
     margin-top:10px;
@@ -1262,7 +1262,9 @@ export default {
     float:left;
     border-right:1px solid gray;
 }
-
+.member_header .member_abstract li:last-child{
+    border-right:0;
+}
 .member_header .member_name {
     margin-top:24px;
     margin-left:40px;
@@ -1371,9 +1373,10 @@ export default {
       display:block;
       color:whitesmoke;
   }
+
   .right_side_box {
-    width:72%;
-    /* margin-top : 10px; */
+    width:100%;
+    margin-bottom : 15px;
   }
   .member_header .member_abstract{
   /* margin-top : 95px; */
