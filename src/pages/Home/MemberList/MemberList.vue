@@ -8,10 +8,10 @@
           <el-button type="primary" v-show="this.is_favorite || this.is_thumbs_up" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         </div>
 
-        <div style="margin-left:12px;margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-around; align-content:space-evenly;">
+        <div class="search_items">
 
           <div class="search_item">
-            <el-input class="input" style="width:190px;" v-model="searchParams.key_word" placeholder="搜索昵称/ID" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <el-input class="input" v-model="searchParams.key_word" placeholder="昵称/ID" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
           </div>
 
           <div class="search_item">
@@ -19,7 +19,7 @@
             <span style="color:grey;"> 至 </span>
             <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input> -->
          
-            <el-select v-model="searchParams.age_min_request" style="width:95px;" placeholder="年龄(起)" clearable size="small">
+            <el-select v-model="searchParams.age_min_request" style="width:90px;" placeholder="年龄(起)" clearable size="small">
               <el-option
                   v-for="item in age_request_options"
                   :key="item.value"
@@ -29,7 +29,7 @@
             </el-select>
             <!-- <span style="color:grey;"> 至 </span> -->
             <span style="color:grey;"> </span>
-            <el-select v-model="searchParams.age_max_request" style="width:95px;"  placeholder="年龄(止)" clearable size="small">
+            <el-select v-model="searchParams.age_max_request" style="width:90px;"  placeholder="年龄(止)" clearable size="small">
               <el-option
                   v-for="item in age_request_options"
                   :key="item.value"
@@ -40,7 +40,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.height_min_request" style="width:95px;" placeholder="身高(起)" clearable size="small">
+            <el-select v-model="searchParams.height_min_request" style="width:90px;" placeholder="身高(起)" clearable size="small">
               <el-option
                   v-for="item in height_request_options"
                   :key="item.value"
@@ -49,7 +49,7 @@
               </el-option>
             </el-select>
             <span style="color:grey;"> </span>
-            <el-select v-model="searchParams.height_max_request" style="width:95px;"  placeholder="身高(止)" clearable size="small">
+            <el-select v-model="searchParams.height_max_request" style="width:90px;"  placeholder="身高(止)" clearable size="small">
               <el-option
                   v-for="item in height_request_options"
                   :key="item.value"
@@ -60,7 +60,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.education_background_code_request" placeholder="搜索学历" clearable size="small">
+            <el-select v-model="searchParams.education_background_code_request" placeholder="学历" clearable size="small">
               <el-option
                   v-for="item in education_background_code_request_options"
                   :key="item.value"
@@ -79,7 +79,7 @@
                   :value="item.value">
               </el-option> -->
             <!-- </el-select> -->
-            <el-select v-model="searchParams.annual_income_min_request" placeholder="选择年收入" clearable size="small">
+            <el-select v-model="searchParams.annual_income_min_request" placeholder="年收入" clearable size="small">
               <el-option
                   v-for="item in annual_income_min_request_options"
                   :key="item.value"
@@ -90,7 +90,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.asset_house_request" placeholder="搜索住房情况" clearable size="small">
+            <el-select v-model="searchParams.asset_house_request" placeholder="住房" clearable size="small">
               <el-option
                   v-for="item in house_asset_request_options"
                   :key="item.value"
@@ -101,7 +101,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.asset_car_request" placeholder="搜索车辆情况" clearable size="small">
+            <el-select v-model="searchParams.asset_car_request" placeholder="车辆" clearable size="small">
               <el-option
                   v-for="item in car_asset_request_options"
                   :key="item.value"
@@ -112,7 +112,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.child_status_request" placeholder="搜索小孩情况" clearable size="small">
+            <el-select v-model="searchParams.child_status_request" placeholder="小孩情况" clearable size="small">
               <el-option
                   v-for="item in child_status_request_options"
                   :key="item.value"
@@ -123,7 +123,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.marital_status_request" placeholder="搜索婚姻情况" clearable size="small">
+            <el-select v-model="searchParams.marital_status_request" placeholder="婚姻情况" clearable size="small">
               <el-option
                   v-for="item in marital_status_request_options"
                   :key="item.value"
@@ -134,7 +134,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.want_child_request" placeholder="搜索生孩观念" clearable size="small">
+            <el-select v-model="searchParams.want_child_request" placeholder="生孩观念" clearable size="small">
               <el-option
                   v-for="item in want_child_request_options"
                   :key="item.value"
@@ -210,6 +210,7 @@
           :page-sizes="[1,5, 10, 20, 30, 50, 100]"
           :page-size="searchParams.per_page"
           :pager-count="21"
+          :small="true"
           layout="sizes, prev, pager, next, jumper, total "
           :total="total">
         </el-pagination>
@@ -533,15 +534,27 @@ export default {
   overflow: hidden;
     padding:10px;
 }
-.search .input{
+/* .search .input{
     width:200px;
-}
+} */
 
 /* 版心 */
 .content{
-    width:1190px;
+    width:100%;
     margin: 0 auto;
     /*background-color: lightblue;*/
+}
+.search_items {
+  margin-left:12px;
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  align-content:space-evenly; 
+}
+.search_items .search_item {
+  width:190px;
+  /* overflow:hidden; */
 }
 
 /* 内容列表 */
@@ -701,4 +714,48 @@ export default {
     padding: 10px 0;
     background-color: #f9fafc;
   }
+
+  /* 手机端 */
+@media (max-width: 468px) {
+
+    /*搜索*/
+    .search {
+      overflow: hidden;
+        padding:4px;
+    }
+
+    /* 版心 */
+    .content{
+        margin: 0 auto;
+        /*background-color: lightblue;*/
+    }
+    
+  .search_items {
+    font-size: 10px;
+    margin-left:4px;
+    margin-top:4px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    align-content:space-evenly; 
+  }
+  .search_item .el-input__inner {
+    font-size: 10px;
+  }
+  .search_items .search_item {
+    width:80px;
+  }
+  .content .member_list .member_list_item{
+    width:88%;
+  }
+  .pagination {
+    padding:0;
+  }
+
+  .content .member_list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-evenly;
+  }
+}
 </style>

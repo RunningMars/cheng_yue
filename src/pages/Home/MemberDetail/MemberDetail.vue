@@ -14,14 +14,16 @@
                    </viewer>
                 </div>
 
-                <div class="member_name fl">{{member.nick_name}}</div>
-
-                <ul class="member_abstract fl clearfix">
-                    <li class="fl" v-if="member.age" >{{member.age}}岁</li>
-                    <li class="fl" v-if="member.height" >{{member.height}}cm</li>
-                    <li class="fl" v-if="member.city" >{{member.city}}</li>
-                    <li class="fl" v-if="member.job" >{{member.job}}</li>
-                </ul>
+                <div class="right_side_box fl">
+                  <div class="member_name">{{member.nick_name}}</div>
+                  <ul class="member_abstract clearfix">
+                      <li class="fl" v-if="member.age" >{{member.age}}岁</li>
+                      <li class="fl" v-if="member.height" >{{member.height}}cm</li>
+                      <li class="fl" v-if="member.city" >{{member.city}}</li>
+                      <li class="fl" v-if="member.job" >{{member.job}}</li>
+                  </ul>
+                </div>
+                
           </div>
 
           <!-- 返回按钮 -->
@@ -267,7 +269,7 @@
               </viewer>
           </div>  
 
-          <div style="width:700px">
+          <div >
             <div class="send" style="display:flex;justify-content:center;text-align:center;">
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
                 <el-button type="primary" @click="updateFavorites(member.id)" round> {{ !member.member_favorite_to_member || member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
@@ -368,7 +370,7 @@ export default {
 <style scoped>
 /* 版心 */
 .content{
-    width:1190px;
+    width:100%;
     margin: 0 auto;
     /*background-color: lightblue;*/
 }
@@ -386,8 +388,9 @@ export default {
     width:120px;
 }
 .member_header .member_abstract{
-  margin-top : 95px;
-  margin-left : 50px;
+  /* margin-top : 95px; */
+    margin-top : 20px;
+    margin-left : 90px;
 }
 .member_header .member_abstract li{
     margin-top:10px;
@@ -417,10 +420,7 @@ export default {
 .member_basic_info .block_label {
   width:130px;
 }
-.member_basic_info .block_content {
-  width:550px;
-  /* width:100px; */
-}
+
 
 .member_info_content .member_info {
   margin-left:26px;
@@ -453,4 +453,35 @@ export default {
     margin-left:2px;
 }
 
+@media (max-width:789px){
+  .member_header .profile_photo img{
+      float:left;
+      margin-left:12px;
+      margin-top:15px;
+      margin-bottom:10px;
+      border-radius:60px;
+      width:24%;
+  }
+  .member_header .member_name {
+      margin-top:8px;
+      margin-left:10px;
+      /* margin-bottom:12px; */
+      width: 120px;
+      font-size:20px;
+      font-weight: bold;
+      display:block;
+      color:whitesmoke;
+  }
+  .right_side_box {
+    width:72%;
+    /* margin-top : 10px; */
+  }
+  .member_header .member_abstract{
+  /* margin-top : 95px; */
+  
+    margin-top : 10px;
+    margin-left : 10px;
+  }
+
+}
 </style>

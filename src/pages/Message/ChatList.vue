@@ -72,7 +72,7 @@
               <!-- 对方昵称 -->
               <el-table-column
                 prop="chat_room_member_opposite[0].member.nick_name"
-                width="180">
+                width="130">
               </el-table-column>
 
               <!-- 最新消息 -->
@@ -105,7 +105,8 @@
           :current-page.sync="searchParams.current_page"
           :page-sizes="[1, 5, 10, 20, 30, 50, 100]"
           :page-size="searchParams.per_page"
-          :pager-count="21"
+          :pager-count="11"
+          :small="true"
           layout="sizes, prev, pager, next, jumper, total "
           :total="total">
         </el-pagination>
@@ -267,7 +268,7 @@ export default {
 
 /* 版心 */
 .content{
-    width:1190px;
+    width:100%;
     margin: 0 auto;
     /*background-color: lightblue;*/
 }
@@ -283,7 +284,7 @@ export default {
   cursor:pointer;
 }
 .pagination {
-  margin-top:35px;
-  margin-left:55px;
+  margin-top:10%;
+  margin-left:2%;
 }
 </style>

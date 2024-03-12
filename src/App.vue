@@ -52,21 +52,23 @@ export default {
   /* text-align: center; */
   color: #2c3e50;
   margin: 0;
-	position: absolute;
+  
+  /* height: 100%; */
+	/* position: absolute;
   top:0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 0; */
   
 
 }
-.app_container {
+/* .app_container {
   display: flex;
   flex-direction: column;
   min-height: 100%;
 }
 .router-view {
   flex: 1;
-}
+} */
 
 </style>

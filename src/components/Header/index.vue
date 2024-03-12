@@ -7,10 +7,10 @@
           <img src="../../assets/logo/rabbit.png" >
       </div>
 
-      <ul id="nav_bar_normal" class="header nav fr clearfix">
+      <ul id="nav_bar_normal" style="width:90%;" class="header nav fr clearfix">
 
-          <li class="fl"> <router-link to="/login" v-show="!$store.state.user.token">登录</router-link></li>
-          <li class="fl"> <router-link to="/register" v-show="!$store.state.user.token">注册</router-link></li>
+          <li class="fl" v-show="!$store.state.user.token" > <router-link to="/login" >登录</router-link></li>
+          <li class="fl" v-show="!$store.state.user.token" > <router-link to="/register" >注册</router-link></li>
           
           <li class="fl"> <router-link to="/home">首页</router-link></li>
           <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
@@ -37,8 +37,7 @@
           <li class="fl"> <router-link to="/test">test</router-link></li> -->
       </ul>
 
-      <div id="nav_bar_collapsed" style="    font: 18px;
-    font-weight: bold">
+      <div id="nav_bar_collapsed" style="font-size:18px;font-weight:bold">
         
         <el-menu 
         class="el-menu-demo" 
@@ -149,14 +148,16 @@ export default {
 
 /* 默认情况下的导航栏样式 */
 #nav_bar_normal {
+    width:100%;
     display: flex; /* 水平布局 */
 }
 #nav_bar_collapsed {
+    width:100%;
     display: none; /* 水平布局 */
 }
  
 /* 视口变小后的导航栏样式（折叠）*/
-@media (max-width: 768px) {
+@media (max-width: 789px) {
     #nav_bar_normal {
         display: none; /* 隐藏导航栏 */
     }
@@ -179,8 +180,13 @@ export default {
     border-radius:23px;
     width:45px;
 }
+.header .nav {
+  text-align:center;
+  vertical-align:middle;
+}
 .header .nav li{
     margin-top:6px;
+    height:30px;
     font:18px white;
     font-weight: bold;
     padding-right:12px;

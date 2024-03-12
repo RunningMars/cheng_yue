@@ -1,27 +1,42 @@
 <template>
     <div class="register_container">
+        <div style="margin-top:5%;text-align:center;">
+            <h2>注册</h2>
+        </div>
         <div class="register_content">
+           
+            
             <el-form ref="form" :model="form" label-width="80px">
                     <el-form-item label="手机号">
-                        <el-input style="width:320px;" v-model="form.mobile"></el-input>
+                        <el-col :span="18">
+                            <el-input v-model="form.mobile"></el-input>
+                        </el-col>
                     </el-form-item>
                 
                     <el-form-item label="密码">
-                        <el-input style="width:320px;" type="password" v-model="form.password" show-password></el-input>
+                        <el-col :span="18">
+                            <el-input type="password" v-model="form.password" show-password></el-input>
+                        </el-col>
                     </el-form-item>
             
                     <el-form-item label="确认密码">
-                        <el-input style="width:320px;" type="password" v-model="form.password_confirmation" show-password></el-input>
+                        <el-col :span="18">
+                            <el-input type="password" v-model="form.password_confirmation" show-password></el-input>        
+                        </el-col>
                     </el-form-item>
 
                     <el-form-item label="验证码">
-                        <div>
-                            <el-input style="width:130px;" placeholder="请输入验证码" size="small" v-model="form.code" clearable></el-input>
-                            <el-button style="margin-left:20px;" :disabled="refresh_wait ? true : false" type="primary" @click="sendSmsValidateCode" size="mini">发送短信验证码</el-button>
-                            <div style="width:100px;margin-left:180px;">
-                                <span v-if="refresh_wait">{{ refresh_wait }}s 后重新发送</span>
+                        <el-col :span="18">
+                            <div>
+                                <el-col :span="10">
+                                    <el-input  placeholder="验证码" size="small" v-model="form.code" clearable></el-input>
+                                </el-col>
+                                <el-button style="margin-left:12px;" :disabled="refresh_wait ? true : false" type="primary" @click="sendSmsValidateCode" size="mini">发送短信验证码</el-button>
+                                <div style="width:100px;margin-left:180px;">
+                                    <span v-if="refresh_wait">{{ refresh_wait }}s 后重新发送</span>
+                                </div>
                             </div>
-                        </div>
+                        </el-col>
                     </el-form-item>
 
                     <!-- 验证码组件 -->
@@ -32,8 +47,10 @@
                     </el-form-item> -->
 
                     <el-form-item>
-                        <el-button type="primary" id="verify-button" @click="register">注册</el-button>
-                        <el-button>取消</el-button>
+                        <el-col :span="18">
+                            <el-button type="primary" id="verify-button" @click="register">注册</el-button>
+                             <el-button>取消</el-button>
+                        </el-col>
                     </el-form-item>
             </el-form>
         </div>
@@ -157,16 +174,27 @@
 
 /** 版心 */
 .register_container{
-      width:1190px;
+      /* width:1190px; */
       margin: 0 auto;
       /*background-color: lightblue;*/
   }
 
 .register_content {
-    width:400px;
+    margin-top:5%;
+}
+
+/* 根据需求调整样式 */
+.register_content {
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+}
+ 
+.el-form-item__label {
+  text-align: center; /* 标签居中 */
+}
+
+.el-form {
     margin: 0 auto;
-    text-align: center;
-    margin-top:30px;
 }
 
 </style>

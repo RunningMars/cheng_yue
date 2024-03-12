@@ -13,15 +13,17 @@
                             class="pro-img">
                    </viewer>
                 </div>
+                <div class="right_side_box fl">
+                    <div class="member_name">{{member.nick_name}}</div>
 
-                <div class="member_name fl">{{member.nick_name}}</div>
-
-                <ul class="member_abstract fl clearfix">
-                    <li class="fl" v-show="member.age" >{{member.age}}岁</li>
-                    <li class="fl" v-show="member.height" >{{member.height}}cm</li>
-                    <li class="fl" v-show="member.city" >{{member.city}}</li>
-                    <li class="fl" v-show="member.job" >{{member.job}}</li>
-                </ul>
+                    <ul class="member_abstract clearfix">
+                        <li class="fl" v-show="member.age" >{{member.age}}岁</li>
+                        <li class="fl" v-show="member.height" >{{member.height}}cm</li>
+                        <li class="fl" v-show="member.city" >{{member.city}}</li>
+                        <li class="fl" v-show="member.job" >{{member.job}}</li>
+                    </ul>
+                </div>
+                
           </div>
 
           <div class="edit_area_form">
@@ -31,8 +33,13 @@
                 </div>
 
                 <ul class="tabs_navi">
-                    <li :class="tab==1 ? 'active' : '' " @click="tab=1">我的信息</li>
-                    <li :class="tab==2 ? 'active' : '' " @click="tab=2">择偶要求</li>
+                    <div>
+                        <li :class="tab==1 ? 'active' : '' " @click="tab=1">我的信息</li>
+                    </div>
+                    <div>
+                        <li :class="tab==2 ? 'active' : '' " @click="tab=2"><span>择偶要求</span></li>
+                    </div>
+                    
                 
                 </ul>
                 <hr>
@@ -71,7 +78,7 @@
                                 </el-form-item>
 
                                 <!-- <el-form-item label="电话">
-                                    <el-input style="width:320px;" v-model="member.mobile"></el-input>
+                                    <el-input  v-model="member.mobile"></el-input>
                                 </el-form-item> -->
 
                                 <el-form-item 
@@ -287,7 +294,7 @@
                                 </el-form-item>
                 
                                 <el-form-item label="兄妹情况">
-                                <el-input style="width:320px;" v-model="member.brother_sister" placeholder="请填写你的兄弟姐妹情况"></el-input>
+                                <el-input  v-model="member.brother_sister" placeholder="请填写你的兄弟姐妹情况"></el-input>
                                 </el-form-item>
                 
 
@@ -593,11 +600,11 @@
                                 </el-form-item>
 
                                 <!-- <el-form-item label="微信号">
-                                    <el-input style="width:320px;" v-model="member.wechat_no"></el-input>
+                                    <el-input v-model="member.wechat_no"></el-input>
                                 </el-form-item>
                                 
                                 <el-form-item label="邮箱">
-                                    <el-input style="width:320px;" v-model="member.email"></el-input>
+                                    <el-input  v-model="member.email"></el-input>
                                 </el-form-item> -->
         
                             </div>
@@ -1224,7 +1231,7 @@ export default {
 <style scoped>
 /* 版心 */
 .content{
-    width:1190px;
+    width:100%;
     margin: 0 auto;
     /*background-color: lightblue;*/
 }
@@ -1276,7 +1283,7 @@ export default {
   width:130px;
 }
 .member_basic_info .block_content {
-  width:550px;
+  width:100%;
   /* width:100px; */
 }
 .content .edit_area_form .member_info {
@@ -1330,8 +1337,6 @@ export default {
     padding:1px;
     margin-left:10px;
     margin-right:10px;
-    width:8%;
-    /* height:20px; */
     border:1px solid lightgray;
     text-align:center;
     border-radius: 10px;
@@ -1344,5 +1349,37 @@ export default {
     align-items: center; */
     flex-wrap:wrap;
     justify-content:space-evenly;
+}
+
+
+@media (max-width:789px){
+  .member_header .profile_photo img{
+      float:left;
+      margin-left:12px;
+      margin-top:15px;
+      margin-bottom:10px;
+      border-radius:60px;
+      width:24%;
+  }
+  .member_header .member_name {
+      margin-top:8px;
+      margin-left:10px;
+      /* margin-bottom:12px; */
+      width: 120px;
+      font-size:20px;
+      font-weight: bold;
+      display:block;
+      color:whitesmoke;
+  }
+  .right_side_box {
+    width:72%;
+    /* margin-top : 10px; */
+  }
+  .member_header .member_abstract{
+  /* margin-top : 95px; */
+  
+    margin-top : 10px;
+    margin-left : 10px;
+  }
 }
 </style>

@@ -10,7 +10,7 @@
     </div>
 
     <div class="content">
-        <div  class="chat_message_list" style="margin-left:40px;width:680px">
+        <div  class="chat_message_list" >
             <div class="target_member_info" @click="routeToViewMemberDetail(chatMessage.to_member.id)">
                     <div style="max-height:40px;max-width:40px;margin:0 auto;">
                       <img class="profile_photo" style="border-radius:20px;" :src="chatMessage.to_member.profile_photo">
@@ -25,19 +25,19 @@
 
                 <div class="clearfix"  >
 
-                  <div class="fl" style="width:40px">
+                  <div class="fl" style="width:11%;text-align:center;">
                     <div style="height:40px">
                       <img v-if="!msg.is_send" class="profile_photo"  :src="msg.from_member.profile_photo">
                     </div>
                   </div>
 
-                  <div  class="fl" style="width:580px;margin-left:10px;margin-right:10px;" >
+                  <div  class="fl" style="width:78%;" >
                     <div  class="clearfix">
                       <span style="font-size: medium;" :class="msg.is_send ? 'fr' : 'fl' ">{{msg.message}}</span>
                     </div>
                   </div>
 
-                  <div class="fr"  style="width:40px">
+                  <div class="fr"  style="width:11%;text-align:center;">
                     <div style="height:40px">
                       <img v-if="msg.is_send" class="profile_photo"  :src="$store.state.user.userInfo.member.profile_photo">
                     </div>
@@ -53,8 +53,8 @@
 
             <div class="send_message_input" style="margin-top:20px;">
               <!-- <el-input style="width:590px" class="input" v-model="msg" v-on:keyup.enter.native="sendMessage()" ></el-input> -->
-              <el-input style="width:590px" class="input" v-model="msg" v-on:keypress.enter.native="sendMessage()" ></el-input>
-              <el-button style="width:90px" type="primary" icon="el-icon-search" @click="sendMessage()"  >发送</el-button>
+              <el-input style="width:78%" class="input" v-model="msg" v-on:keypress.enter.native="sendMessage()" ></el-input>
+              <el-button style="margin-left:5px;" type="primary" icon="el-icon-search" size="mini" @click="sendMessage()"  >发送</el-button>
             </div>
 
         </div>
@@ -66,7 +66,8 @@
           :current-page.sync="searchParams.current_page"
           :page-sizes="[1, 5, 10, 20, 30, 50, 100]"
           :page-size="searchParams.per_page"
-          :pager-count="21"
+          :pager-count="11"
+          :small="true"
           layout="sizes, prev, pager, next, jumper, total "
           :total="total">
         </el-pagination>
@@ -249,7 +250,7 @@ export default {
 
 /* 版心 */
 .content{
-    width:1190px;
+    width:100%;
     margin: 0 auto;
     /*background-color: lightblue;*/
 }
@@ -268,8 +269,8 @@ export default {
 }
 
 .pagination {
-  margin-left:60px;
-  margin-top:44px;
+  /* margin-left:5%; */
+  margin-top:10%;
 }
 
 

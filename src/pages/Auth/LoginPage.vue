@@ -1,16 +1,22 @@
 <template>
     
     <div class="login_container">
-
-        <div class="login_content" style="margin-top:12%;">
+        <div style="margin-top:10%;text-align:center;">
+            <h2>登录</h2>
+        </div>
+        <div class="login_content" >
             
-            <el-form ref="form" :model="form" label-width="80px">
-                    <el-form-item label="手机号">
-                    <el-input style="width:320px;" v-model="form.mobile"></el-input>
+            <el-form ref="form" :model="form" label-width="60px" class="demo-ruleForm">
+                    <el-form-item  label="手机号">
+                        <el-col :span="18">
+                            <el-input  v-model="form.mobile"></el-input>
+                        </el-col>
                     </el-form-item>
                 
                     <el-form-item label="密码">
-                    <el-input style="width:320px;" type="password" v-model="form.password" show-password></el-input>
+                        <el-col :span="18">
+                            <el-input  type="password" v-model="form.password" show-password></el-input>
+                        </el-col>
                     </el-form-item>
 
                     <!-- 验证码组件 -->
@@ -20,9 +26,11 @@
                     <el-switch v-model="form.is_agree"></el-switch>
                     </el-form-item> -->
 
-                    <el-form-item>
-                    <el-button type="primary" id="verify-button">登录</el-button>
-                    <el-button>取消</el-button>
+                    <el-form-item label-width="50px" >
+                        <el-col :span="20" >
+                            <el-button type="primary" id="verify-button">登录</el-button>
+                            <el-button>取消</el-button>
+                        </el-col>
                     </el-form-item>
 
                     <!-- <el-button type="primary" @click="refresh">Refresh</el-button> -->
@@ -49,24 +57,7 @@ export default {
         CaptchaA
     },
     methods: {
-        // async login() {
-        //     if (!this.captchaPass){
-        //         this.$message.warning("请点击进行验证.",1800);
-        //         return false;
-        //     }
-        //     await this.$store.dispatch("user/userLogin", {...this.form});
-            
-        //     if (this.$store.state.user.token)
-        //     {
-        //         let toPath = this.$route.query.redirect || "/home";
-                
-        //         this.$router.push(toPath);
-
-        //         this.$store.dispatch('message/getUnreadChatCount');
-
-        //         this.$bus.$emit('startQueryUnreadCount');
-        //     }
-        // },
+        
         refresh() {
             console.log('refresh!');
             this.$store.dispatch("user/userRefresh");
@@ -120,16 +111,39 @@ export default {
 
 /** 版心 */
 .login_container{
-      width:1190px;
+      /* width:1190px; */
       margin: 0 auto;
       /*background-color: lightblue;*/
   }
 
 .login_content {
-    width:400px;
+    margin-top:4%;
+}
+/* 根据需求调整样式 */
+.login_content {
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+}
+ 
+.el-form-item__label {
+  text-align: center; /* 标签居中 */
+}
+
+.el-form {
     margin: 0 auto;
-    text-align: center;
-    margin-top:30px;
+}
+/* .demo-ruleForm {
+    margin-left:20%;
+    margin-top:20%;
+} */
+  /* 手机端 */
+@media (max-width: 468px) {
+   
+    /*搜索*/
+    .search {
+        overflow: hidden;
+        padding:4px;
+    }
 }
 
 </style>
