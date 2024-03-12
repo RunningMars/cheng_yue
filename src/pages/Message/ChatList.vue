@@ -51,7 +51,7 @@
               <!-- 对方头像 -->
               <el-table-column
               :cell-class-name="cellStyle"
-                width="56px">
+                width="52px">
 
                 <template slot-scope="scope">
                   <el-badge v-show="scope.row.chat_room_member_me[0].is_new_to_read" is-dot class="item">
@@ -73,17 +73,18 @@
               <!-- 对方昵称 -->
               <el-table-column
                 prop="chat_room_member_opposite[0].member.nick_name"
-                width="130">
+                width="84">
               </el-table-column>
 
               <!-- 最新消息 -->
               <el-table-column
-
+              
                 prop="chat_room_last_message.message">
               </el-table-column>
 
               <!-- 最新消息发送时间 -->
-              <el-table-column>
+              <el-table-column
+              width="96">
 
                 <template slot-scope="scope">
                   <div class="demo-type">

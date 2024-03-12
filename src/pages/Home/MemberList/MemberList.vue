@@ -146,9 +146,17 @@
 
         </div>
 
-        <div class="search_item fr">
-            <el-button type="primary" icon="el-icon-search" @click="getData()" >搜索</el-button>
-            <el-button type="primary" icon="el-icon-s-open" @click="clearSearch()" >清空条件</el-button>
+        <div class="search_item fr" style="margin-top:10px;">
+
+            <template>
+              <el-checkbox v-model="searchParams.is_favorite" :false-label="0" :true-label="1">已收藏</el-checkbox>
+            </template>
+            <template>
+              <el-checkbox style="margin-right:8px;" v-model="searchParams.is_thumbs_up" :false-label="0" :true-label="1">已点赞</el-checkbox>
+            </template>
+
+            <el-button type="primary" icon="el-icon-search" size="mini" @click="getData()" >搜索</el-button>
+            <el-button type="primary" icon="el-icon-s-open" size="mini" @click="clearSearch()" >清空条件</el-button>
         </div>
       </div>
 
@@ -160,20 +168,20 @@
 
                 <div class="item_top">
 
-                  <div class="fl clearfix" style="width:73%;">
+                  <div class="fl clearfix" style="width:73%;" @click="routeToViewMemberDetail(member.id)">
 
-                    <div class="member_name fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">{{member.nick_name}}</div>
+                    <div class="member_name fl member_detail_hover" >{{member.nick_name}}</div>
 
-                    <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
+                    <div class="info fl member_detail_hover"  >
                       <span v-show="member.age">{{member.age}}岁</span>
                       <span v-show="member.height">/{{member.height}}cm</span>
                       <span v-show="member.education_background">/{{member.education_background}}</span>
                     </div>
-                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                    <div class="info fl member_detail_hover" >
                       <span v-show="member.province">{{member.province}}</span>
                       <span v-show="member.city">/{{member.city}}</span>
                     </div>
-                    <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
+                    <div class="info fl member_detail_hover" >
                       <span>{{member.job}}</span>
                     </div>
                   </div>
