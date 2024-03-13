@@ -5,7 +5,11 @@
 
     <div>
       <ul class="footer_items_container">
-          <li class="footer_item"> <router-link to="/about">Copyright ©2024 缘来网版权所有 </router-link></li>
+          <li class="footer_item"> 
+            <!-- <router-link to="/about"> -->
+            Copyright ©2024 缘来网版权所有 
+          <!-- </router-link> -->
+          </li>
           <!-- <li class="footer_item "> <router-link to="/about">川ICP备2024030656 </router-link></li>
           <li class="footer_item "> <router-link to="/about">关于我们</router-link></li> -->
       </ul>

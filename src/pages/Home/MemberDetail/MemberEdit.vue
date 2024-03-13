@@ -1171,11 +1171,14 @@ export default {
             }); 
             this.getData();   
         }else{
-            this.$message({
-                message: response.message,
-                type: 'warning',
-                duration:2000
-            });          
+            if (response.message){
+                this.$message({
+                    message: response.message,
+                    type: 'warning',
+                    duration:2000
+                });     
+            }
+                 
         }
         return response
         

@@ -39,11 +39,13 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_MEMBER_LIST", response.result);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });          
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    }); 
+                }
             }
             return response
         },
@@ -54,11 +56,14 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_RECEIVE_THUMBS_UP_LIST", response.result);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });          
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    });  
+                }
+                        
             }
             return response
         },
@@ -68,11 +73,14 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_MEMBER_DETAIL", response.result);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    });
+                }
+                
             }
             return response
         },

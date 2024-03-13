@@ -45,11 +45,13 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_CHAT_LIST", response.result);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });          
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    });    
+                }    
             }
             return response
         },
@@ -60,11 +62,14 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_CHAT_MESSAGE", response.result);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    });
+                }
+                
             }
             return response
         },
@@ -75,11 +80,14 @@ export default {
             if (response.status_code == 200) {
                 commit("GET_UNREAD_CHAT_COUNT", response.result.unread_chat_count);
             }else{
-                Message({
-                    message: response.message,
-                    type: 'warning',
-                    duration:2000
-                });          
+                if (response.message){
+                    Message({
+                        message: response.message,
+                        type: 'warning',
+                        duration:2000
+                    });  
+                }
+                        
             }
             return response
         },

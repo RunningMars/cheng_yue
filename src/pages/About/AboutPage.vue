@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
-    <h1> About page  </h1>
+
+    <div style="margin-top:8px;margin-bottom:8px;">
+      <el-button type="primary"  icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
+    </div>
+    <h3> About page  </h3>
 
   </div>
 </template>

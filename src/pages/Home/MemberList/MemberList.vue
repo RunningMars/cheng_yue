@@ -4,9 +4,9 @@
       <!--搜索栏-->
       <div class="search clearfix">
         
-        <div>
+        <!-- <div>
           <el-button type="primary" v-show="this.is_favorite || this.is_thumbs_up" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
-        </div>
+        </div> -->
 
         <div class="search_items">
 
@@ -148,15 +148,25 @@
 
         <div class="search_item fr" style="margin-top:10px;">
 
-            <template>
-              <el-checkbox v-model="searchParams.is_favorite" :false-label="0" :true-label="1">已收藏</el-checkbox>
-            </template>
-            <template>
-              <el-checkbox style="margin-right:8px;" v-model="searchParams.is_thumbs_up" :false-label="0" :true-label="1">已点赞</el-checkbox>
-            </template>
+            <el-checkbox  style="margin-right:6px;" v-model="searchParams.is_favorite" :false-label="0" :true-label="1">已收藏</el-checkbox>      
 
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="getData()" >搜索</el-button>
-            <el-button type="primary" icon="el-icon-s-open" size="mini" @click="clearSearch()" >清空条件</el-button>
+
+            <el-checkbox style="margin-right:6px;" v-model="searchParams.is_thumbs_up" :false-label="0" :true-label="1">已点赞</el-checkbox>
+
+            <router-link to="/chat" style="margin-right:10px;">
+              <el-button v-if="!$store.state.message.unread_chat_count" type="primary" size="mini" round>私信</el-button>
+              <el-badge 
+              v-if="$store.state.message.unread_chat_count" 
+              :value="$store.state.message.unread_chat_count" 
+              class="item"
+              >
+                <el-button  type="primary" size="mini" round>私信</el-button>
+                <!-- <span>私信</span> -->
+              </el-badge>
+            </router-link>
+            <el-button type="primary" icon="el-icon-s-open" size="mini" @click="clearSearch()" round>清空</el-button>
+            <el-button type="primary" icon="el-icon-search" size="mini" @click="getData()" round>搜索</el-button>
+
         </div>
       </div>
 
@@ -494,6 +504,8 @@ export default {
       this.$store.dispatch("member/getMemberList", this.searchParams);
     },
     clearSearch() {
+      this.searchParams.is_favorite = 0;
+      this.searchParams.is_thumbs_up = 0;
       this.searchParams.key_word = null;
       this.searchParams.age_min_request = null;
       this.searchParams.age_max_request = null;
