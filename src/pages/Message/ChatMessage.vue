@@ -273,5 +273,12 @@ export default {
   margin-top:10%;
 }
 
+.send_message_input {
+  margin-left:3%;
+}
+
+.pagination {
+  margin-left:2%;
+}
 
 </style>

@@ -294,7 +294,7 @@
                                 </el-form-item>
                 
                                 <el-form-item label="兄妹情况">
-                                <el-input  v-model="member.brother_sister" placeholder="请填写你的兄弟姐妹情况"></el-input>
+                                <el-input  v-model="member.brother_sister" style="width:190px;" placeholder="请填写你的兄弟姐妹情况"></el-input>
                                 </el-form-item>
                 
 
@@ -1251,7 +1251,18 @@ export default {
     border-radius:60px;
     width:120px;
 }
+
+.right_side_box {
+    width:70%;
+    margin-bottom : 15px;
+  }
+  .member_header .member_abstract {
+    margin-top : 10px;
+    margin-left : 10px;
+  }
+
 .member_header .member_abstract{
+    margin-left:3%;
     display:flex;
     justify-content:center;
 }

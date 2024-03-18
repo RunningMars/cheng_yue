@@ -7,7 +7,7 @@
       <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
       <!-- <li class="el-icon-back" @click="$router.back()"></li> -->
         <div class="search_input fr">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
+            <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keypress.enter.native="getData()"  ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
         </div>
     </div>

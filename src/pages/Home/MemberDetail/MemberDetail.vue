@@ -392,11 +392,22 @@ export default {
     width:120px;
 }
 
+.right_side_box {
+    width:70%;
+    margin-bottom : 15px;
+  }
+  .member_header .member_abstract {
+    margin-top : 10px;
+    margin-left : 10px;
+  }
+
 .member_header .member_abstract{
+    margin-left:3%;
     display:flex;
     justify-content:center;
-        /* justify-content:space-evenly; */
-  }
+          /* justify-content:space-evenly; */
+}
+
 .member_header .member_abstract li{
     margin-top:10px;
     font:18px ;

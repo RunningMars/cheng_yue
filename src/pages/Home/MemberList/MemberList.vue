@@ -11,13 +11,13 @@
         <div class="search_items">
 
           <div class="search_item">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="昵称/ID" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <el-input class="input" v-model="searchParams.key_word" placeholder="昵称/ID" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
           </div>
 
           <div class="search_item">
-            <!-- <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input>
+            <!-- <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
             <span style="color:grey;"> 至 </span>
-            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keyup.enter.native="getData()" size="small"></el-input> -->
+            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input> -->
          
             <el-select v-model="searchParams.age_min_request" style="width:90px;" placeholder="年龄(起)" clearable size="small">
               <el-option
