@@ -90,7 +90,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.asset_house_request" placeholder="住房" clearable size="small">
+            <el-select v-model="searchParams.asset_house_request" multiple placeholder="住房" clearable size="small">
               <el-option
                   v-for="item in house_asset_request_options"
                   :key="item.value"
@@ -123,7 +123,7 @@
           </div> -->
 
           <div class="search_item">
-            <el-select v-model="searchParams.marital_status_request" placeholder="婚姻情况" clearable size="small">
+            <el-select v-model="searchParams.marital_status_request" multiple placeholder="婚姻情况" clearable size="small">
               <el-option
                   v-for="item in marital_status_request_options"
                   :key="item.value"
@@ -279,7 +279,7 @@ export default {
         current_page: 1,
         page: 1,
         //每一页展示条数
-        per_page: 5,
+        per_page: 10,
         last_page: 1,
         //平台属性的操作
         props: [],
@@ -291,9 +291,9 @@ export default {
         education_background_code_request:null,
         annual_income_request:null,
         annual_income_min_request:null,
-        asset_house_request:null,
+        asset_house_request:[],
         asset_car_request:null,
-        marital_status_request:null,
+        marital_status_request:[],
         child_status_request:null,
         want_child_request:null,
       },
@@ -514,9 +514,9 @@ export default {
       this.searchParams.education_background_code_request = null;
       this.searchParams.annual_income_request = null;
       this.searchParams.annual_income_min_request = null;
-      this.searchParams.asset_house_request = null;
+      this.searchParams.asset_house_request = [];
       this.searchParams.asset_car_request = null;
-      this.searchParams.marital_status_request = null;
+      this.searchParams.marital_status_request = [];
       this.searchParams.child_status_request = null;
       this.searchParams.want_child_request = null;
     },
@@ -601,9 +601,11 @@ export default {
 
 /* 内容列表 */
 .content .member_list{
+    margin-left:20px;
     display:flex;
     flex-wrap:wrap;
     /* position:relative; */
+    /* justify-content: space-evenly; */
 }
 
 .content .member_list .member_list_item{
@@ -708,10 +710,10 @@ export default {
 }
 
 .content .member_list .item_bottom img{
-    width: 77px;
+    width: 67px;
     /* height:auto; */
     /* float:left; */
-    margin-right:3px;
+    margin-right:2px;
     border-radius: 4px;
     
 }
@@ -802,6 +804,7 @@ export default {
   }
 
   .content .member_list{
+    margin-left:0;
     display:flex;
     flex-wrap:wrap;
     justify-content: space-evenly;

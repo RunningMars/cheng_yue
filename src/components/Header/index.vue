@@ -8,7 +8,7 @@
           <router-link to="/home"><span style="margin-left:12px;color:antiquewhite;">缘来网</span></router-link>
       </div>
 
-      <ul id="nav_bar_normal" style="width:90%;" class="header nav fr clearfix">
+      <ul id="nav_bar_normal" style="width:90%;vertical-align:middle;" class="header nav fr clearfix">
 
           <li class="fl" v-show="!$store.state.user.token" > <router-link to="/login" >登录</router-link></li>
           <li class="fl" v-show="!$store.state.user.token" > <router-link to="/register" >注册</router-link></li>
@@ -158,6 +158,7 @@ export default {
     display: flex; /* 水平布局 */
     /* 靠近主轴终点,居右 */
     justify-content:flex-end;
+    align-items:center;
     /* flex-direction:row-reverse; */
 }
 #nav_bar_collapsed {
