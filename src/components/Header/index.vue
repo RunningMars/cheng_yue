@@ -17,7 +17,7 @@
           <li class="fl"> <router-link to="/favorite">已收藏</router-link></li>
           <li class="fl"> <router-link to="/thumbs_up">已点赞</router-link></li>
 
-          <li class="fl">
+          <!-- <li class="fl">
              <router-link to="/chat">
               <span v-if="!$store.state.message.unread_chat_count">私信</span>
                 <el-badge 
@@ -27,7 +27,7 @@
                   <span>私信</span>
                 </el-badge>
             </router-link>
-          </li>
+          </li> -->
 
           <li class="fl"> <router-link to="/personal/edit">编辑信息</router-link></li>
           <li class="fl"> <router-link to="/personal/info">预览信息</router-link></li>
@@ -59,7 +59,7 @@
             <router-link to="/home"><el-menu-item index="2-3"><span  style="color:antiquewhite">首页</span></el-menu-item></router-link>
             <router-link to="/favorite"><el-menu-item index="2-4"><span  style="color:antiquewhite">已收藏</span></el-menu-item></router-link>
             <router-link to="/thumbs_up"><el-menu-item index="2-5"><span  style="color:antiquewhite">已点赞</span></el-menu-item></router-link>
-            <router-link to="/chat"> 
+            <!-- <router-link to="/chat"> 
               <el-menu-item index="2-6">
               
                 <span v-if="!$store.state.message.unread_chat_count" style="color:antiquewhite">私信</span>
@@ -72,7 +72,7 @@
                 </el-badge>
               
               </el-menu-item>
-            </router-link>
+            </router-link> -->
             <router-link to="/personal/edit"><el-menu-item index="2-7"><span style="color:antiquewhite">编辑信息</span></el-menu-item></router-link>
             <router-link to="/personal/info"><el-menu-item index="2-8"><span style="color:antiquewhite">预览信息</span></el-menu-item></router-link>
             <router-link to="/receive_thumbs_up"><el-menu-item index="2-9"><span style="color:antiquewhite">我收到的点赞</span></el-menu-item></router-link>
