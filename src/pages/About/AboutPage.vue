@@ -5,9 +5,15 @@
       <el-button type="primary"  icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
     </div>
     <div style="margin-left:5%;text-align:center;">
-      <h3> 红娘联系方式  </h3>
-      <h4> 微信: 13666288348  </h4>
+      <div >
+        <h3> 红娘联系方式  </h3>
+      </div>
+     
+      <div style="margin-top:1.5%;">
+        <h4> 微信: 13666288348  </h4>
       <h4> 手机: 13666288348  </h4>
+      </div>
+
     </div>
 
   </div>
