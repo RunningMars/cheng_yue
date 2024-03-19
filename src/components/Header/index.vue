@@ -5,7 +5,7 @@
     <div class="header clearfix">
       <div class="logo fl" style="width:10%;">
           <img src="../../assets/logo/rabbit.png" >
-          <router-link to="/home"><span style="margin-left:12px;color:antiquewhite;">缘来网</span></router-link>
+          <router-link to="/home"><span style="margin-left:12px;color:antiquewhite;">缘来里</span></router-link>
       </div>
 
       <ul id="nav_bar_normal" style="width:90%;vertical-align:middle;" class="header nav fr clearfix">
@@ -48,7 +48,7 @@
         >
           <div class="logo fl">
             <img src="../../assets/logo/rabbit.png" >
-            <router-link to="/home"> <span style="margin-left:12px;color:antiquewhite;">缘来网</span></router-link>
+            <router-link to="/home"> <span style="margin-left:12px;color:antiquewhite;">缘来里</span></router-link>
           </div>
 
           <el-submenu index="2" style="margin-left:12%;">
