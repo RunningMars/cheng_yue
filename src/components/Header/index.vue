@@ -32,10 +32,10 @@
           <li class="fl"> <router-link to="/personal/edit">编辑信息</router-link></li>
           <li class="fl"> <router-link to="/personal/info">预览信息</router-link></li>
           <li class="fl"> <router-link to="/receive_thumbs_up">我收到的点赞</router-link></li>
-
+          <li class="fl"> <router-link to="/about">联系红娘</router-link></li>
           <li class="fl"> <a @click="logout">退出</a> </li>
-          <!-- <li class="fl"> <router-link to="/about">关于</router-link></li>
-          <li class="fl"> <router-link to="/test">test</router-link></li> -->
+          
+          <!-- <li class="fl"> <router-link to="/test">test</router-link></li> -->
       </ul>
 
       <div id="nav_bar_collapsed" style="font-size:18px;font-weight:bold">
