@@ -75,22 +75,22 @@ export default {
         },
         // 获取未读聊天数量
         async getUnreadChatCount({ commit }, params = {}) {
-            // let response = await reqGetUnreadChatCount(params);
-            // if (response ){
-            //     if (response.status_code == 200) {
-            //         commit("GET_UNREAD_CHAT_COUNT", response.result.unread_chat_count);
-            //     }else{
-            //         if (response.message){
-            //             Message({
-            //                 message: response.message,
-            //                 type: 'warning',
-            //                 duration:2000
-            //             });  
-            //         } 
-            //     }
-            // }
+            let response = await reqGetUnreadChatCount(params);
+            if (response ){
+                if (response.status_code == 200) {
+                    commit("GET_UNREAD_CHAT_COUNT", response.result.unread_chat_count);
+                }else{
+                    if (response.message){
+                        Message({
+                            message: response.message,
+                            type: 'warning',
+                            duration:2000
+                        });  
+                    } 
+                }
+            }
             
-            // return response
+            return response
         },
         // 全部已读
         async readAll({ commit }, params = {}) {

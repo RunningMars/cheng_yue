@@ -153,7 +153,7 @@
 
             <el-checkbox style="margin-right:6px;" v-model="searchParams.is_thumbs_up" :false-label="0" :true-label="1">已点赞</el-checkbox>
 
-            <!-- <router-link to="/chat" style="margin-right:10px;">
+            <router-link to="/chat" style="margin-right:10px;">
               <el-button v-if="!$store.state.message.unread_chat_count" type="primary" size="mini" round>私信</el-button>
               <el-badge 
               v-if="$store.state.message.unread_chat_count" 
@@ -161,8 +161,9 @@
               class="item"
               >
                 <el-button  type="primary" size="mini" round>私信</el-button>
+                <!-- <span>私信</span> -->
               </el-badge>
-            </router-link> -->
+            </router-link>
             <el-button type="primary" icon="el-icon-s-open" size="mini" @click="clearSearch()" round>清空</el-button>
             <el-button type="primary" icon="el-icon-search" size="mini" @click="getData()" round>搜索</el-button>
 
