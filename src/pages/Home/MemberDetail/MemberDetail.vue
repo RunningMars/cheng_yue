@@ -278,10 +278,10 @@
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
                 <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{ !member.member_thumbs_up_to_member || member.member_thumbs_up_to_member.length === 0 ? '点赞' : '已点赞'}} </el-button>
               </div>
-              <!-- <div class="search_input" ></div> -->
-              <!-- <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
+              <div class="search_input" ></div>
+              <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
                 <el-button type="primary" @click="openChat(member.id)" round >私信</el-button>
-              </div> -->
+              </div>
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" >
                 <el-button type="primary" @click="$router.back()" round>返回</el-button>
