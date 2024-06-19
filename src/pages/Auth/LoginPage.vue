@@ -19,8 +19,9 @@
                         </el-col>
                     </el-form-item>
 
+                    <!-- 阿里云付费验证码到期,暂时停用 -->
                     <!-- 验证码组件 -->
-                    <CaptchaA type="login"></CaptchaA>
+                    <!-- <CaptchaA type="login"></CaptchaA> -->
 
                     <!-- <el-form-item label="同意协议">
                     <el-switch v-model="form.is_agree"></el-switch>
@@ -28,7 +29,7 @@
 
                     <el-form-item label-width="50px" >
                         <el-col :span="20" >
-                            <el-button type="primary" id="verify-button">登录</el-button>
+                            <el-button type="primary" id="verify-button" @click="login">登录</el-button>
                             <el-button>取消</el-button>
                         </el-col>
                     </el-form-item>
@@ -41,11 +42,11 @@
 </template>
 
 <script>
-import CaptchaA from '../../components/Verify/CaptchaA.vue'
+//import CaptchaA from '../../components/Verify/CaptchaA.vue'
 export default {
     data() {
         return {
-            captchaPass : false,
+            captchaPass : true,
             form: {
                 mobile: '',
                 password: '',
@@ -54,7 +55,7 @@ export default {
         }
     },
     components: {
-        CaptchaA
+        //CaptchaA
     },
     methods: {
         
@@ -79,7 +80,25 @@ export default {
                 this.$bus.$emit('startQueryUnreadCount');
             }
 
-        }
+        },
+        async login(){
+
+            this.captchaPass = true;
+
+            await this.$store.dispatch("user/userLogin", {...this.form});
+            
+            if (this.$store.state.user.token)
+            {
+                let toPath = this.$route.query.redirect || "/home";
+                
+                this.$router.push(toPath);
+
+                this.$store.dispatch('message/getUnreadChatCount');
+
+                this.$bus.$emit('startQueryUnreadCount');
+            }
+
+        },
     },
     mounted(){
         this.$bus.$on('loginCaptchaPass',this.captchaPassed);

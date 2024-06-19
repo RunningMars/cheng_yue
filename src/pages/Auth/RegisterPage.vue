@@ -39,8 +39,9 @@
                         </el-col>
                     </el-form-item>
 
+                    <!-- 阿里云付费验证码到期,暂时停用 -->
                     <!-- 验证码组件 -->
-                    <CaptchaA type="register"></CaptchaA>
+                    <!-- <CaptchaA type="register"></CaptchaA> -->
 
                     <!-- <el-form-item label="同意协议">
                     <el-switch v-model="form.is_agree"></el-switch>
@@ -48,7 +49,7 @@
 
                     <el-form-item>
                         <el-col :span="18">
-                            <el-button type="primary" id="verify-button" @click="register">注册</el-button>
+                            <el-button type="primary" id="verify-button" @click="registerSubmit">注册</el-button>
                              <el-button>取消</el-button>
                         </el-col>
                     </el-form-item>
@@ -58,7 +59,7 @@
 </template>
 
 <script>
-    import CaptchaA from '../../components/Verify/CaptchaA.vue';
+    //import CaptchaA from '../../components/Verify/CaptchaA.vue';
     import { reqSendSmsValidateCode } from '@/api';
 
     export default {
@@ -76,7 +77,7 @@
             }
         },
         components: {
-            CaptchaA
+            //CaptchaA
         },
         methods: {
             register() {
@@ -96,6 +97,36 @@
                 }
             },
             async registerCaptchaPassed(){
+                if (this.form.mobile && this.form.password && this.form.password_confirmation && this.form.code)
+                {
+                    console.log('registerCaptchaPassed 请求 register!');
+                    await this.$store.dispatch("user/userRegister", {...this.form});
+                    console.log('this.$store.state.user.userRegisterPass',)
+                    if (this.$store.state.user.userRegisterPass){
+                        this.$router.push("/login");
+                    }
+                }else{
+                    this.$message.warning("请填写手机号和密码或验证码.");
+                }
+            },
+            async registerSubmit(){
+                if (!this.form.mobile )
+                {
+                    this.$message.warning("请填写手机号和密码.");
+                    return;
+                }
+
+                if (!this.form.mobile || !this.form.password || !this.form.password_confirmation )
+                {
+                    this.$message.warning("请填写手机号和密码.");
+                    return;
+                }
+
+                if (!this.form.code )
+                {
+                    this.$message.warning("请填写短信验证码.");
+                    return;
+                }
                 if (this.form.mobile && this.form.password && this.form.password_confirmation && this.form.code)
                 {
                     console.log('registerCaptchaPassed 请求 register!');
