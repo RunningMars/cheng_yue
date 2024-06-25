@@ -6,7 +6,7 @@
     <div class="search clearfix">
         <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         <div class="search_input fr">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
+            <el-input class="input" v-model="searchParams.keyWord" placeholder="请输入内容" v-on:keyup.enter.native="getData()" ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 <template slot-scope="scope">
                   <div class="demo-type">
                     <div>
-                      <el-avatar :src="scope.row.member.profile_photo"></el-avatar>
+                      <el-avatar :src="scope.row.member.profilePhoto"></el-avatar>
                     </div>   
                   </div>
                 </template>
@@ -38,7 +38,7 @@
 
               <!-- 对方昵称 -->
               <el-table-column
-                prop="member.nick_name"
+                prop="member.nickName"
                 width="134">
               </el-table-column>
 
@@ -74,9 +74,9 @@
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="searchParams.current_page"
+          :current-page.sync="searchParams.pageNum"
           :page-sizes="[1, 5, 10, 20, 30, 50, 100]"
-          :page-size="searchParams.per_page"
+          :page-size="searchParams.pageSize"
           :pager-count="11"
           :small="true"
           layout="sizes, prev, pager, next, jumper, total "
@@ -100,19 +100,19 @@ export default {
     return {
       searchParams: {
         //搜索的关键字
-        key_word:"",
+        keyWord:"",
 
         //排序:初始状态应该是综合且降序
         order: "1:desc",
 
         //第几页
-        current_page: 1,
+        pageNum: 1,
 
         //当前页
         page: 1,
 
         //每一页展示条数
-        per_page: 10,
+        pageSize: 10,
 
         //最后一页
         last_page: 1,
@@ -127,11 +127,11 @@ export default {
       this.$store.dispatch("member/getReceiveThumbsUpList", this.searchParams);
     },
     handleSizeChange(val) {
-        this.searchParams.per_page = val;
+        this.searchParams.pageSize = val;
         this.getData();
     },
     handleCurrentChange() {
-      this.searchParams.page = this.searchParams.current_page;
+      this.searchParams.page = this.searchParams.pageNum;
       this.getData();
     },
 

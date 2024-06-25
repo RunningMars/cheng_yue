@@ -14,16 +14,16 @@ import requests from "./ajax";
  * Auth
  */
 // 注册
-export const reqRegister = (params) => requests({url:"/auth/register", params , method:"post"});
+export const reqRegister = (data) => requests({url:"/user/register", data , method:"post"});
 
 // 登录
-export const reqLogin = (params) => requests({url:"/auth/login", params , method:"post"});
+export const reqLogin = (data) => requests({url:"/user/login", data , method:"post"});
 
 // 刷新
-export const reqRefresh = (params) => requests({url:"/auth/refresh", params , method:"post"});
+export const reqRefresh = (data) => requests({url:"/user/refresh", data , method:"post"});
 
 // 登出
-export const reqLogout = () => requests({url:"/auth/logout" , method:"post"});
+export const reqLogout = () => requests({url:"/user/logout" , method:"post"});
 
 /**
  * Member
@@ -36,13 +36,13 @@ export const reqGetMemberList = (params) => requests({url:"/member/list", params
 export const reqGetMemberDetail = (params) => requests({url:"/member/detail", params , method:"get"});
 
 // 更新member Detail
-export const reqUpdateMemberDetail = (params) => requests({url:"/member/save", params , method:"post"});
+export const reqUpdateMemberDetail = (data) => requests({url:"/member/save", data , method:"post"});
 
 // 更新收藏
-export const reqUpdateMyFavorite = (params) => requests({url:"/member/favorite/update", params , method:"post"});
+export const reqUpdateMyFavorite = (data) => requests({url:"/member/favorite/update", data , method:"post"});
 
 // 更新点赞
-export const reqUpdateMythumbsUp = (params) => requests({url:"/member/thumbs_up/update", params , method:"post"});
+export const reqUpdateMythumbsUp = (data) => requests({url:"/member/thumbs_up/update", data , method:"post"});
 
 // 获取被点赞列表
 export const reqReceiveMythumbsUpList = (params) => requests({url:"/member/thumbs_up/list", params , method:"get"});
@@ -59,7 +59,7 @@ export const reqGetChatList = (params) => requests({url:"/message/chat/list", pa
 export const reqGetChatMessage = (params) => requests({url:"/message/chat/message", params , method:"get"});
 
 // 发送消息 send message
-export const reqSendMessage = (params) => requests({url:"/message/chat/send", params , method:"post"});
+export const reqSendMessage = (data) => requests({url:"/message/chat/send", data , method:"post"});
 
 // 获取未读聊天数量
 export const reqGetUnreadChatCount = (params) => requests({url:"/message/chat/unread_count", params , method:"get"});
@@ -70,14 +70,14 @@ export const reqReadAll = (params) => requests({url:"/message/chat/read_all", pa
 /**
  * uploadImage
  */
-export const reqUploadImage = (params) => requests({url:"/uploadImage" , params ,method:"post"});
+export const reqUploadImage = (data) => requests({url:"/uploadImage" , data ,method:"post"});
 
 /**
  * captcha
  */
-export const reqCaptchaVerify = (params) => requests.post("/captcha/verify" , params );
+export const reqCaptchaVerify = (data) => requests.post("/captcha/verify" , data );
 
 /**
  * 发送短信验证码
  */
-export const reqSendSmsValidateCode = (params) => requests.post("/sms/validate/send" , params );
+export const reqSendSmsValidateCode = (data) => requests.post("/sms/validate/send" , data );

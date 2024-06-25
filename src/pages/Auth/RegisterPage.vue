@@ -21,7 +21,7 @@
             
                     <el-form-item label="确认密码">
                         <el-col :span="18">
-                            <el-input type="password" v-model="form.password_confirmation" show-password></el-input>        
+                            <el-input type="password" v-model="form.passwordConfirmation" show-password></el-input>        
                         </el-col>
                     </el-form-item>
 
@@ -70,9 +70,9 @@
                 form: {
                     mobile: '',
                     password: '',
-                    password_confirmation: '',
+                    passwordConfirmation: '',
                     code: '',
-                    is_agree: '',
+                    isAgree: '',
                 }
             }
         },
@@ -86,7 +86,7 @@
                     this.$message.warning("请填写手机号和密码.");
                 }
 
-                if (!this.form.mobile || !this.form.password || !this.form.password_confirmation )
+                if (!this.form.mobile || !this.form.password || !this.form.passwordConfirmation )
                 {
                     this.$message.warning("请填写手机号和密码.");
                 }
@@ -97,7 +97,7 @@
                 }
             },
             async registerCaptchaPassed(){
-                if (this.form.mobile && this.form.password && this.form.password_confirmation && this.form.code)
+                if (this.form.mobile && this.form.password && this.form.passwordConfirmation && this.form.code)
                 {
                     console.log('registerCaptchaPassed 请求 register!');
                     await this.$store.dispatch("user/userRegister", {...this.form});
@@ -116,7 +116,7 @@
                     return;
                 }
 
-                if (!this.form.mobile || !this.form.password || !this.form.password_confirmation )
+                if (!this.form.mobile || !this.form.password || !this.form.passwordConfirmation )
                 {
                     this.$message.warning("请填写手机号和密码.");
                     return;
@@ -127,7 +127,7 @@
                     this.$message.warning("请填写短信验证码.");
                     return;
                 }
-                if (this.form.mobile && this.form.password && this.form.password_confirmation && this.form.code)
+                if (this.form.mobile && this.form.password && this.form.passwordConfirmation && this.form.code)
                 {
                     console.log('registerCaptchaPassed 请求 register!');
                     await this.$store.dispatch("user/userRegister", {...this.form});
@@ -153,7 +153,7 @@
                
                 let response = await reqSendSmsValidateCode({mobile:this.form.mobile});
 
-                if (response.status_code == 200) {
+                if (response.code == 0) {
         
                     this.$message({
                         message: response.message,

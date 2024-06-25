@@ -31,7 +31,7 @@
       uploaded(response,file, fileList) {
         let img = '';
         fileList.forEach( i => {
-          if (i.response.status_code == 200){
+          if (i.response.code == 0){
             img = i.response.result.url;
           }
           return true;

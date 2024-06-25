@@ -7,7 +7,7 @@
       <el-button type="primary" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
       <!-- <li class="el-icon-back" @click="$router.back()"></li> -->
         <div class="search_input fr">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="请输入内容" v-on:keypress.enter.native="getData()"  ></el-input>
+            <el-input class="input" v-model="searchParams.keyWord" placeholder="请输入内容" v-on:keypress.enter.native="getData()"  ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="getData()"  >搜索</el-button>
         </div>
     </div>
@@ -19,8 +19,8 @@
                 <h3>我的私信</h3>  
               </div>
               <div style="margin-top:15px;" >
-                <span>{{ this.$store.state.message.unread_chat_count ? ' 未读  ' + this.$store.state.message.unread_chat_count  : '' }}</span>
-                <el-button style="margin-left:20px;" @click="readAll" v-show="this.$store.state.message.unread_chat_count" type="primary" size="mini" round>全部已读</el-button>
+                <span>{{ this.$store.state.message.unreadChatCount ? ' 未读  ' + this.$store.state.message.unreadChatCount  : '' }}</span>
+                <el-button style="margin-left:20px;" @click="readAll" v-show="this.$store.state.message.unreadChatCount" type="primary" size="mini" round>全部已读</el-button>
               </div>
             </div>
           <el-table
@@ -34,8 +34,8 @@
               <!-- <el-table-column
                 width="80">
                 <template slot-scope="scope">
-                  <span v-show="scope.row.chat_room_member_me[0].is_new_to_read">未读</span>
-                  <span v-show="!scope.row.chat_room_member_me[0].is_new_to_read">已读</span>
+                  <span v-show="scope.row.chatRoomMeMember[0].isNewToRead">未读</span>
+                  <span v-show="!scope.row.chatRoomMeMember[0].isNewToRead">已读</span>
                 </template>
               </el-table-column> -->
 
@@ -43,8 +43,8 @@
               <!-- <el-table-column
                 width="120">
                 <template slot-scope="scope">
-                  <span v-show="scope.row.chat_room_member_opposite[0].is_new_to_read">对方未读</span>
-                  <span v-show="!scope.row.chat_room_member_opposite[0].is_new_to_read">对方已读</span>
+                  <span v-show="scope.row.chatRoomOppositeMember[0].isNewToRead">对方未读</span>
+                  <span v-show="!scope.row.chatRoomOppositeMember[0].isNewToRead">对方已读</span>
                 </template>
               </el-table-column> -->
 
@@ -54,16 +54,16 @@
                 width="52px">
 
                 <template slot-scope="scope">
-                  <el-badge v-show="scope.row.chat_room_member_me[0].is_new_to_read" is-dot class="item">
+                  <el-badge v-show="scope.row.chatRoomMeMember[0].isNewToRead" is-dot class="item">
                     <div class="demo-type">
                       <div>
-                        <el-avatar :src="scope.row.chat_room_member_opposite[0].member.profile_photo"></el-avatar>
+                        <el-avatar :src="scope.row.chatRoomOppositeMember[0].member.profilePhoto"></el-avatar>
                       </div>   
                     </div>
                   </el-badge>
-                  <div class="demo-type" v-show="!scope.row.chat_room_member_me[0].is_new_to_read" >
+                  <div class="demo-type" v-show="!scope.row.chatRoomMeMember[0].isNewToRead" >
                       <div>
-                        <el-avatar :src="scope.row.chat_room_member_opposite[0].member.profile_photo"></el-avatar>
+                        <el-avatar :src="scope.row.chatRoomOppositeMember[0].member.profilePhoto"></el-avatar>
                       </div>   
                     </div>
                 </template>
@@ -72,14 +72,14 @@
 
               <!-- 对方昵称 -->
               <el-table-column
-                prop="chat_room_member_opposite[0].member.nick_name"
+                prop="chatRoomOppositeMember[0].member.nickName"
                 width="84">
               </el-table-column>
 
               <!-- 最新消息 -->
               <el-table-column
               
-                prop="chat_room_last_message.message">
+                prop="chatRoomLastMessage.message">
               </el-table-column>
 
               <!-- 最新消息发送时间 -->
@@ -89,7 +89,7 @@
                 <template slot-scope="scope">
                   <div class="demo-type">
                     <div>
-                      <span>{{ formatDateTime(scope.row.chat_room_last_message.created_at) }}</span>
+                      <span>{{ formatDateTime(scope.row.chatRoomLastMessage.createdAt) }}</span>
                     </div>   
                   </div>
                 </template>
@@ -104,9 +104,9 @@
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="searchParams.current_page"
+          :current-page.sync="searchParams.pageNum"
           :page-sizes="[1, 5, 10, 20, 30, 50, 100]"
-          :page-size="searchParams.per_page"
+          :page-size="searchParams.pageSize"
           :pager-count="11"
           :small="true"
           layout="sizes, prev, pager, next, jumper, total "
@@ -130,19 +130,19 @@ export default {
     return {
       searchParams: {
         //搜索的关键字
-        key_word:"",
+        keyWord:"",
 
         //排序:初始状态应该是综合且降序
         order: "1:desc",
 
         //第几页
-        current_page: 1,
+        pageNum: 1,
 
         //当前页
         page: 1,
 
         //每一页展示条数
-        per_page: 10,
+        pageSize: 10,
 
         //最后一页
         last_page: 1,
@@ -158,23 +158,23 @@ export default {
       this.$store.dispatch("message/getChatList", this.searchParams);
     },
     handleSizeChange(val) {
-        this.searchParams.per_page = val;
+        this.searchParams.pageSize = val;
         this.getData();
     },
     handleCurrentChange() {
-      this.searchParams.page = this.searchParams.current_page;
+      this.searchParams.page = this.searchParams.pageNum;
       this.getData();
     },
     tableRowClassName({row}) {
       // console.log('row',row);
       // console.log('rowIndex',rowIndex);
-        if (row.chat_room_member_me[0].is_new_to_read) {
+        if (row.chatRoomMeMember[0].isNewToRead) {
           return 'warning-row';
         } 
         return '';
     },
     cellStyle({row}) {
-        if (row.chat_room_member_me[0].is_new_to_read) {
+        if (row.chatRoomMeMember[0].isNewToRead) {
           return 'item';
         } 
         return '';
@@ -184,13 +184,13 @@ export default {
       // event.stopPropagation();
     },
     routeToViewChatMessage(row) {
-      this.$router.push({ path: "/message", query: {chat_id:row.id,to_member_id:row.chat_room_member_opposite[0].member_id} });
+      this.$router.push({ path: "/message", query: {chatRoomId:row.id,toMemberId:row.chatRoomOppositeMember[0].memberId} });
     },
     cellClick(row, column){
-        // if (column.property == 'chat_room_member_opposite[0].member.nick_name' || !column.property)
+        // if (column.property == 'chatRoomOppositeMember[0].member.nickName' || !column.property)
         if ( !column.property)
         {
-          this.routeToViewMemberDetail(row.chat_room_member_opposite[0].member_id);
+          this.routeToViewMemberDetail(row.chatRoomOppositeMember[0].memberId);
         }else{
           this.routeToViewChatMessage(row);
         }
@@ -202,7 +202,7 @@ export default {
     startTimer(){
       this.timer = setInterval(() => {
         this.getData();
-      },14 * 1000);
+      },20 * 1000);
 
       // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
       // this.$once('hook:beforeDestroy', () => {

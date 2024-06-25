@@ -8,13 +8,13 @@
           <div class="member_header clearfix">
 
                 <div class="profile_photo fl">
-                    <viewer :image="member.profile_photo">
-                        <img :src="member.profile_photo"
+                    <viewer :image="member.profilePhoto">
+                        <img :src="member.profilePhoto"
                             class="pro-img">
                    </viewer>
                 </div>
                 <div class="right_side_box fl">
-                    <div class="member_name">{{member.nick_name}}</div>
+                    <div class="member_name">{{member.nickName}}</div>
 
                     <ul class="member_abstract clearfix">
                         <li class="fl" v-show="member.age" >{{member.age}}岁</li>
@@ -60,21 +60,21 @@
 
                                 <el-form-item 
                                 label="上传头像" 
-                                prop="profile_photo" 
+                                prop="profilePhoto" 
                                 :rules="[
                                     { required: true, message: '请上传您本人头像', trigger: 'blur' },
                                 ]">
-                                    <UploadSingleImageComponet v-model="member.profile_photo" ></UploadSingleImageComponet>
+                                    <UploadSingleImageComponet v-model="member.profilePhoto" ></UploadSingleImageComponet>
                                 </el-form-item>
                           
                                 <el-form-item 
                                 label="昵称"  
-                                prop="nick_name"  
+                                prop="nickName"  
                                 :rules="[
                                     { required: true, message: '请设置您的昵称', trigger: 'blur' },
                                     { min: 1, max: 14, message: '长度在 1 到 14 个字符', trigger: 'blur' }
                                 ]">
-                                    <el-input style="width:190px;" v-model="member.nick_name"></el-input>
+                                    <el-input style="width:190px;" v-model="member.nickName"></el-input>
                                 </el-form-item>
 
                                 <!-- <el-form-item label="电话">
@@ -88,18 +88,18 @@
                                 :rules="[
                                     { required: true, message: '请选择你的性别', trigger: 'blur' },
                                 ]">
-                                <el-radio v-model="member.sex"  @change="changeSex" :label="1">男</el-radio>
-                                <el-radio v-model="member.sex"  @change="changeSex" :label="2">女</el-radio>
+                                <el-radio v-model="member.sex"  @change="changeSex" :label="'1'">男</el-radio>
+                                <el-radio v-model="member.sex"  @change="changeSex" :label="'2'">女</el-radio>
                                 </el-form-item>
                 
                                 <el-form-item 
                                 label="生日"  
-                                prop="birth_day"  
+                                prop="birthDay"  
                                 :rules="[
                                     { required: true, message: '请输入您的生日', trigger: 'blur' },
                                 ]">
                                     <el-date-picker
-                                        v-model="member.birth_day"
+                                        v-model="member.birthDay"
                                         type="date"
                                         placeholder="选择日期"
                                         value-format="yyyy-MM-dd"
@@ -118,11 +118,11 @@
                 
                                 <el-form-item 
                                 label="学历"    
-                                prop="education_background"  
+                                prop="educationBackground"  
                                 :rules="[
                                     { required: true, message: '请选择你的学历', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.education_background" placeholder="请选择" clearable>
+                                    <el-select v-model="member.educationBackground" placeholder="请选择" clearable>
                                         <el-option
                                             v-for="item in education_background_options"
                                             :key="item.value"
@@ -145,11 +145,11 @@
 
                                 <el-form-item 
                                 label="年收入"    
-                                prop="annual_income"  
+                                prop="annualIncome"  
                                 :rules="[
                                     { required: true, message: '请选择你的年收入', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.annual_income" placeholder="请选择">
+                                    <el-select v-model="member.annualIncome" placeholder="请选择">
                                         <el-option
                                             v-for="item in income_options"
                                             :key="item.value"
@@ -162,11 +162,11 @@
 
                                 <el-form-item 
                                 label="住房情况" 
-                                prop="asset_house"  
+                                prop="assetHouse"  
                                 :rules="[
                                     { required: true, message: '请选择你的住房情况', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.asset_house" placeholder="请选择">
+                                    <el-select v-model="member.assetHouse" placeholder="请选择">
                                         <el-option
                                             v-for="item in house_options"
                                             :key="item.value"
@@ -178,11 +178,11 @@
                 
                                 <el-form-item 
                                 label="购车情况"    
-                                prop="asset_car"  
+                                prop="assetCar"  
                                 :rules="[
                                     { required: true, message: '请选择你的购车情况', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.asset_car" placeholder="请选择">
+                                    <el-select v-model="member.assetCar" placeholder="请选择">
                                     <el-option
                                         v-for="item in car_options"
                                         :key="item.value"
@@ -194,11 +194,11 @@
 
 
                                 <el-form-item label="婚姻情况"    
-                                prop="marital_status"  
+                                prop="maritalStatus"  
                                 :rules="[
                                     { required: true, message: '请选择你的婚姻情况', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.marital_status" placeholder="请选择你的婚姻情况">
+                                    <el-select v-model="member.maritalStatus" placeholder="请选择你的婚姻情况">
                                     <el-option
                                         v-for="item in marital_status_options"
                                         :key="item.value"
@@ -213,7 +213,7 @@
                                 :rules="[
                                     { required: true, message: '请选择你的小孩情况', trigger: 'blur' },
                                 ]">
-                                    <el-select v-model="member.child_status" placeholder="请选择你的小孩情况">
+                                    <el-select v-model="member.childStatus" placeholder="请选择你的小孩情况">
                                     <el-option
                                         v-for="item in child_status_options"
                                         :key="item.value"
@@ -247,7 +247,7 @@
             
 
                                 <el-form-item label="体型">
-                                    <el-select v-if="member.sex == 1" v-model="member.body_size" placeholder="请选择">
+                                    <el-select v-if="member.sex == 1" v-model="member.bodySize" placeholder="请选择">
                                         <el-option
                                             v-for="item in body_boy_options"
                                             :key="item.value"
@@ -255,7 +255,7 @@
                                             :value="item.value">
                                         </el-option>
                                     </el-select>
-                                    <el-select v-if="member.sex == 2" v-model="member.body_size" placeholder="请选择">
+                                    <el-select v-if="member.sex == 2" v-model="member.bodySize" placeholder="请选择">
                                         <el-option
                                             v-for="item in body_girl_options"
                                             :key="item.value"
@@ -283,7 +283,7 @@
                 
 
                                 <el-form-item label="家庭情况">
-                                    <el-select v-model="member.about_family" placeholder="请选择">
+                                    <el-select v-model="member.aboutFamily" placeholder="请选择">
                                     <el-option
                                         v-for="item in family_options"
                                         :key="item.value"
@@ -294,12 +294,12 @@
                                 </el-form-item>
                 
                                 <el-form-item label="兄妹情况">
-                                <el-input  v-model="member.brother_sister" style="width:190px;" placeholder="请填写你的兄弟姐妹情况"></el-input>
+                                <el-input  v-model="member.brotherSister" style="width:190px;" placeholder="请填写你的兄弟姐妹情况"></el-input>
                                 </el-form-item>
                 
 
                                 <el-form-item label="何时结婚">
-                                    <el-select v-model="member.want_marry" placeholder="请选择">
+                                    <el-select v-model="member.wantMarry" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_marry_options"
                                         :key="item.value"
@@ -311,7 +311,7 @@
                 
 
                                 <el-form-item label="是否要孩子">
-                                    <el-select v-model="member.want_child" placeholder="请选择">
+                                    <el-select v-model="member.wantChild" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_child_options"
                                         :key="item.value"
@@ -322,7 +322,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="是否吸烟">
-                                    <el-select v-model="member.about_smoke" placeholder="请选择">
+                                    <el-select v-model="member.aboutSmoke" placeholder="请选择">
                                     <el-option
                                         v-for="item in smoke_options"
                                         :key="item.value"
@@ -333,7 +333,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="是否喝酒">
-                                    <el-select v-model="member.about_drink" placeholder="请选择">
+                                    <el-select v-model="member.aboutDrink" placeholder="请选择">
                                     <el-option
                                         v-for="item in drink_options"
                                         :key="item.value"
@@ -353,24 +353,24 @@
 
                                 <el-form-item label="自我介绍">
                                     <el-input  type="textarea"
-                                    :rows="2" v-model="member.about_me"></el-input>
+                                    :rows="2" v-model="member.aboutMe"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="希望你">
                                     <el-input  type="textarea"
-                                    :rows="2" v-model="member.hope_you"></el-input>
+                                    :rows="2" v-model="member.hopeYou"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="择偶要求">
                                     <el-input  type="textarea"
-                                    :rows="2" v-model="member.mating_requirement"></el-input>
+                                    :rows="2" v-model="member.matingRequirement"></el-input>
                                 </el-form-item>
                 
                                 <!-- <div class="member_pics">
-                                    <viewer :images="member.member_image">
+                                    <viewer :images="member.memberImages">
                                         <img
-                                            v-for="(member_image,index) in member.member_image"
-                                            :src="member_image.url"
+                                            v-for="(memberImage,index) in member.mmemberImages
+                                            :src="memberImage.url"
                                             :key="index"
                                             class="pro-img"
                                         >
@@ -378,7 +378,7 @@
                                 </div>   -->
                                 
                                 <el-form-item label="我的照片">
-                                    <UploadMultiImageComponet v-model="member.member_image" :fileList="member.member_image"></UploadMultiImageComponet>
+                                    <UploadMultiImageComponet v-model="member.memberImages" :fileList="member.memberImage"></UploadMultiImageComponet>
                                 </el-form-item>
                             </div>
                         </div>
@@ -402,7 +402,7 @@
                             <div class="block_content fl clearfix">
 
                                 <el-form-item label="年龄">
-                                    <el-select style="width:100px;"  v-model="member.member_request.age_min_request" placeholder="请选择">
+                                    <el-select style="width:100px;"  v-model="member.memberRequest.ageMinRequest" placeholder="请选择">
                                         <el-option
                                             v-for="item in age_request_options"
                                             :key="item.value"
@@ -411,7 +411,7 @@
                                         </el-option>
                                     </el-select>
                                     <span style="color:grey;"> 至 </span>
-                                    <el-select style="width:100px;"  v-model="member.member_request.age_max_request" placeholder="请选择">
+                                    <el-select style="width:100px;"  v-model="member.memberRequest.ageMaxRequest" placeholder="请选择">
                                         <el-option
                                             v-for="item in age_request_options"
                                             :key="item.value"
@@ -422,7 +422,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="身高">
-                                    <el-select v-model="member.member_request.height_min_request" style="width:100px;" placeholder="身高(起)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.heightMinRequest" style="width:100px;" placeholder="身高(起)" clearable size="small">
                                         <el-option
                                             v-for="item in height_options"
                                             :key="item.value"
@@ -431,7 +431,7 @@
                                         </el-option>
                                     </el-select>
                                     <span style="color:grey;"> 至 </span>
-                                    <el-select v-model="member.member_request.height_max_request" style="width:100px;"  placeholder="身高(止)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.heightMaxRequest" style="width:100px;"  placeholder="身高(止)" clearable size="small">
                                         <el-option
                                             v-for="item in height_options"
                                             :key="item.value"
@@ -443,7 +443,7 @@
 
 
                                 <el-form-item label="体重">
-                                    <el-select v-model="member.member_request.weight_min_request" style="width:100px;" placeholder="身高(起)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.weight_min_request" style="width:100px;" placeholder="身高(起)" clearable size="small">
                                         <el-option
                                             v-for="item in weight_options"
                                             :key="item.value"
@@ -452,7 +452,7 @@
                                         </el-option>
                                     </el-select>
                                     <span style="color:grey;"> 至 </span>
-                                    <el-select v-model="member.member_request.weight_max_request" style="width:100px;"  placeholder="身高(止)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.weight_max_request" style="width:100px;"  placeholder="身高(止)" clearable size="small">
                                         <el-option
                                             v-for="item in weight_options"
                                             :key="item.value"
@@ -463,7 +463,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="体型">
-                                    <el-select v-if="member.sex == 1" v-model="member.member_request.body_size_request" placeholder="请选择">
+                                    <el-select v-if="member.sex == 1" v-model="member.memberRequest.bodySizeRequest" placeholder="请选择">
                                         <el-option
                                             v-for="item in body_girl_request_options"
                                             :key="item.value"
@@ -471,7 +471,7 @@
                                             :value="item.value">
                                         </el-option>
                                     </el-select>
-                                    <el-select v-if="member.sex == 2" v-model="member.member_request.body_size_request" placeholder="请选择">
+                                    <el-select v-if="member.sex == 2" v-model="member.memberRequest.bodySizeRequest" placeholder="请选择">
                                         <el-option
                                             v-for="item in body_boy_request_options"
                                             :key="item.value"
@@ -482,7 +482,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="学历">
-                                <el-select v-model="member.member_request.education_background_request" placeholder="请选择">
+                                <el-select v-model="member.memberRequest.education_background_request" placeholder="请选择">
                                     <el-option
                                         v-for="item in education_background_request_options"
                                         :key="item.value"
@@ -493,11 +493,11 @@
                                 </el-form-item>
 
                                 <el-form-item label="职业">
-                                    <el-input style="width:100px;" v-model="member.member_request.job_request"></el-input>
+                                    <el-input style="width:100px;" v-model="member.memberRequest.jobRequest"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="年收入">
-                                <el-select  v-model="member.member_request.annual_income_request" placeholder="请选择">
+                                <el-select  v-model="member.memberRequest.annualIncomeRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in income_request_options"
                                         :key="item.value"
@@ -508,7 +508,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="住房情况">
-                                <el-select v-model="member.member_request.asset_house_request" placeholder="请选择">
+                                <el-select v-model="member.memberRequest.assetHouseRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in house_request_options"
                                         :key="item.value"
@@ -519,7 +519,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="购车情况">
-                                    <el-select v-model="member.member_request.asset_car_request" placeholder="请选择">
+                                    <el-select v-model="member.memberRequest.assetCarRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in car_request_options"
                                         :key="item.value"
@@ -531,11 +531,11 @@
 
 
                                 <el-form-item label="工作地区">
-                                    <el-input style="width:80px;" v-model="member.member_request.city_request"></el-input>
+                                    <el-input style="width:80px;" v-model="member.memberRequest.city_request"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="婚姻情况">
-                                    <el-select v-model="member.member_request.marital_status_request" placeholder="请选择你的婚姻情况">
+                                    <el-select v-model="member.memberRequest.maritalStatusRequest" placeholder="请选择你的婚姻情况">
                                     <el-option
                                         v-for="item in marital_status_request_options"
                                         :key="item.value"
@@ -546,7 +546,7 @@
                                 </el-form-item>
                                 
                                 <!-- <el-form-item label="家庭情况">
-                                    <el-select v-model="member.about_family_request" placeholder="请选择">
+                                    <el-select v-model="member.aboutFamilyRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in family_request_options"
                                         :key="item.value"
@@ -556,9 +556,9 @@
                                     </el-select>
                                 </el-form-item> -->
                                 <!-- <el-form-item label="子女情况">
-                                    <el-select v-model="member.member_request.child_status_request" placeholder="请选择">
+                                    <el-select v-model="member.memberRequest.childStatusRequest" placeholder="请选择">
                                     <el-option
-                                        v-for="item in child_status_request_options"
+                                        v-for="item in childStatusRequest_options"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value">
@@ -567,7 +567,7 @@
                                 </el-form-item> -->
 
                                 <el-form-item label="是否要孩子">
-                                    <el-select v-model="member.member_request.want_child_request" placeholder="请选择">
+                                    <el-select v-model="member.memberRequest.wantChildRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in want_child_request_options"
                                         :key="item.value"
@@ -578,7 +578,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="是否吸烟">
-                                    <el-select v-model="member.member_request.about_smoke_request" placeholder="请选择">
+                                    <el-select v-model="member.memberRequest.aboutSmokeRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in smoke_request_options"
                                         :key="item.value"
@@ -589,7 +589,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="是否喝酒">
-                                    <el-select v-model="member.member_request.about_drink_request" placeholder="请选择">
+                                    <el-select v-model="member.memberRequest.aboutDrinkRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in drink_request_options"
                                         :key="item.value"
@@ -649,38 +649,38 @@ export default {
       },
       tab:1,
       rules: {
-          nick_name: [
+          nickName: [
             { required: true, message: '请设置您的昵称', trigger: 'blur' },
             { min: 1, max: 14, message: '长度在 1 到 14 个字符', trigger: 'blur' }
           ],
           city: [
             { required: true, message: '请选择你所在的城市', trigger: 'change' }
           ],
-          profile_photo: [
+          profilePhoto: [
             { type: 'date', required: true, message: '请上传您本人的头像', trigger: 'change' }
           ],
-          education_background: [
+          educationBackground: [
             { type: 'date', required: true, message: '请选择您的学历', trigger: 'change' }
           ],
           job: [
             { type: 'array', required: true, message: '请输入您的职业', trigger: 'change' }
           ],
-          annual_income: [
+          annualIncome: [
             { type: 'array', required: true, message: '请选择您的年收入', trigger: 'change' }
           ],
-          asset_house: [
+          assetHouse: [
             { type: 'array', required: true, message: '请选择您的住房信息', trigger: 'change' }
           ],
-          asset_car: [
+          assetCar: [
             { type: 'array', required: true, message: '请选择您的购车信息', trigger: 'change' }
           ],
           sex: [
             { required: true, message: '请选择您的性别', trigger: 'change' }
           ],
-          birth_day: [
+          birthDay: [
             { required: true, message: '请输入您的生日', trigger: 'blur' }
           ],
-          marital_status: [
+          maritalStatus: [
             { required: true, message: '请选择您的婚姻情况', trigger: 'blur' }
           ]
         },
@@ -1162,7 +1162,7 @@ export default {
 
         let response = await reqUpdateMemberDetail({...this.member});
 
-        if (response.status_code == 200) {
+        if (response.code == 0) {
             
             this.$message({
                 message: response.message,
@@ -1185,22 +1185,22 @@ export default {
     },
     uploadedImages(uploadedImages){
             console.log('receive uploadedImages',uploadedImages);
-        this.member.member_image = uploadedImages
+        this.member.memberImages = uploadedImages
         // uploadedImages.forEach((itm) => {
-        //     let index = this.member.member_image.findIndex((it) => {
+        //     let index = this.member.memberImage.findIndex((it) => {
         //         return it.url == itm;
         //     });
-        //     if (-1 == index || this.member.member_image.length <= index) {
-        //         this.member.member_image.push({'url':itm})
+        //     if (-1 == index || this.member.memberImages.length <= index) {
+        //         this.member.memberImages.push({'url':itm})
         //     }
         // });
     },
     uploadedSingleImage(uploadedImage){
-        this.member.profile_photo = uploadedImage;
+        this.member.profilePhoto = uploadedImage;
     },
     changeSex(v){
         console.log('changeSex');
-        this.member.body_size = null;
+        this.member.bodySize = null;
     }
   },
   mounted() {

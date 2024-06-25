@@ -4,7 +4,7 @@
     <!--搜索栏-->
     <div class="search clearfix">
         <div class="search_input fr">
-            <el-input class="input" v-model="search_key_word" placeholder="请输入内容" ></el-input>
+            <el-input class="input" v-model="search_keyWord" placeholder="请输入内容" ></el-input>
             <el-button type="primary" icon="el-icon-search" @click="search()">搜索</el-button>
         </div>
     </div>
@@ -14,11 +14,11 @@
 
               <div class="member_list_item clearfix">
                 <div class="item_top">
-                  <div class="member_name fl">{{member.nick_name}}</div>
+                  <div class="member_name fl">{{member.nickName}}</div>
                   <div  class="avatar fr"> 
-                    <viewer :image="member.profile_photo">
+                    <viewer :image="member.profilePhoto">
                       <img
-                          :src="member.profile_photo"
+                          :src="member.profilePhoto"
                           class="pro-img"
                         >
                     </viewer>
@@ -26,7 +26,7 @@
                   <div class="info fl">
                     <span>{{member.age}}岁</span>
                     <span>/{{member.height}}cm</span>
-                    <span>/{{member.education_background}}</span>
+                    <span>/{{member.educationBackground}}</span>
                   </div>
                   <div class="info fl">
                     <span>{{member.province}}</span>
@@ -40,15 +40,15 @@
                 <div class="item_middle">
                       <!-- <img> -->
                     <!-- <span>点赞99</span> -->
-                    <div class="request about_me fl"><span>关于我  </span><span> {{ member.about_me }}</span></div>
-                    <div class="request hope_you fl"><span>希望你  </span><span> {{ member.hope_you }}</span></div>
+                    <div class="request aboutMe fl"><span>关于我  </span><span> {{ member.aboutMe }}</span></div>
+                    <div class="request hope_you fl"><span>希望你  </span><span> {{ member.hopeYou }}</span></div>
                   </div>
 
                 <div class="item_bottom">
-                    <viewer :images="member.member_image">
+                    <viewer :images="member.memberImages">
                       <img
-                          v-for="(member_image,index) in member.member_image"
-                          :src="member_image.image"
+                          v-for="(memberImage,index) in member.memberImages"
+                          :src="memberImage.image"
                           :key="index"
                           class="pro-img"
                         >
@@ -63,9 +63,9 @@
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="data.current_page"
+          :current-page.sync="data.pageNum"
           :page-sizes="[1,5, 10, 20, 30, 50, 100]"
-          :page-size="data.per_page"
+          :page-size="data.pageSize"
           :pager-count="21"
           layout="sizes, prev, pager, next, jumper, total "
           :total="data.total">
@@ -84,13 +84,13 @@ export default {
   },
   data(){
     return {
-      search_key_word:"",
+      search_keyWord:"",
       data:{
         data:[  
           ],
-          current_page: 1,
+          pageNum: 1,
           last_page: 1,
-          per_page: 10,
+          pageSize: 10,
           total: 0
       }
     }
@@ -98,18 +98,18 @@ export default {
   methods:{
     search(){
       this.$http
-      .get("/member/list?per_page=" + this.data.per_page + "&page=" + this.data.current_page + "&key_word=" + this.search_key_word)
+      .get("/member/list?pageSize=" + this.data.pageSize + "&page=" + this.data.pageNum + "&keyWord=" + this.search_keyWord)
       .then((response) => {
         this.data = response.data.result;
       });
     },
     handleSizeChange(val) {
-        this.data.per_page = val;
+        this.data.pageSize = val;
         this.handleCurrentChange();
     },
     handleCurrentChange() {
       this.$http
-      .get("/member/list?per_page=" + this.data.per_page + "&page=" + this.data.current_page)
+      .get("/member/list?pageSize=" + this.data.pageSize + "&page=" + this.data.pageNum)
       .then((response) => {
         this.data = response.data.result;
       });

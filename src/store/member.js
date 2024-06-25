@@ -9,7 +9,7 @@ export default {
 
         //member详情
         member:{
-            member_request:{}
+            memberRequest:{}
         },
 
         name:'rdgtest',
@@ -36,7 +36,7 @@ export default {
         async getMemberList({ commit }, params = {}) {
             let response = await reqGetMemberList(params);
            
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("GET_MEMBER_LIST", response.result);
             }else{
                 if (response.message){
@@ -53,7 +53,7 @@ export default {
         async getReceiveThumbsUpList({ commit }, params = {}) {
             let response = await reqReceiveMythumbsUpList(params);
           
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("GET_RECEIVE_THUMBS_UP_LIST", response.result);
             }else{
                 if (response.message){
@@ -70,7 +70,7 @@ export default {
         // 获取member info
         async getMemberDetail({ commit }, params = {}) {
             let response = await reqGetMemberDetail(params);
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("GET_MEMBER_DETAIL", response.result);
             }else{
                 if (response.message){
@@ -95,7 +95,7 @@ export default {
             //state.result.data 如果服务器数据回来了，没问题是一个数组
             //假如网络不给力|没有网state.result.data应该返回的是undefined
             //计算新的属性的属性值至少给人家来一个数组
-            return state.result.data || [];
+            return state.result.records || [];
         },
         member(state){
             return state.member || {};

@@ -50,7 +50,7 @@ export default {
             form: {
                 mobile: '',
                 password: '',
-                is_agree: '',
+                isAagree: '',
             }
         }
     },

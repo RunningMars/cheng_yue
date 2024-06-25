@@ -11,35 +11,36 @@
 
     <div class="content">
         <div  class="chat_message_list" >
-            <div class="target_member_info" @click="routeToViewMemberDetail(chatMessage.to_member.id)">
+            
+            <div class="target_member_info" @click="routeToViewMemberDetail(chatMessage.toMember?.id)">
                     <div style="max-height:40px;max-width:40px;margin:0 auto;">
-                      <img class="profile_photo" style="border-radius:20px;" :src="chatMessage.to_member.profile_photo">
+                      <!-- <img class="profile_photo" style="border-radius:20px;" :src="chatMessage.toMember.profilePhoto"> -->
                     </div>
-                    <h4 style="text-align:center;">{{chatMessage.to_member.nick_name}}</h4>
+                    <h4 style="text-align:center;">{{chatMessage.toMember?.nickName}}</h4>
             </div>
 
             <div style="margin-top:30px;">
-              <div class="chat_msg" v-for="msg in chatMessage.data" :key="msg.id"> 
+              <div class="chat_msg" v-for="msg in chatMessage.data?.records" :key="msg.id"> 
 
-                <div><span style="display:block;text-align:center;font-size:11px;">{{formatDateTime(msg.created_at)}}</span></div>
+                <div><span style="display:block;text-align:center;font-size:11px;">{{formatDateTime(msg.createdAt)}}</span></div>
 
                 <div class="clearfix"  >
 
                   <div class="fl" style="width:11%;text-align:center;">
                     <div style="height:40px">
-                      <img v-if="!msg.is_send" class="profile_photo"  :src="msg.from_member.profile_photo">
+                      <img v-if="$store.state.user.userInfo.member.id != msg.fromMemberId" class="profile_photo"  :src="msg.fromMember?.profilePhoto">
                     </div>
                   </div>
 
                   <div  class="fl" style="width:78%;" >
                     <div  class="clearfix">
-                      <span style="font-size: medium;" :class="msg.is_send ? 'fr' : 'fl' ">{{msg.message}}</span>
+                      <span style="font-size: medium;" :class="$store.state.user.userInfo.member.id == msg.fromMemberId ? 'fr' : 'fl' ">{{msg.message}}</span>
                     </div>
                   </div>
 
                   <div class="fr"  style="width:11%;text-align:center;">
                     <div style="height:40px">
-                      <img v-if="msg.is_send" class="profile_photo"  :src="$store.state.user.userInfo.member.profile_photo">
+                      <img v-if="$store.state.user.userInfo.member.id == msg.fromMemberId" class="profile_photo"  :src="$store.state.user.userInfo.member.profilePhoto">
                     </div>
                   </div>
 
@@ -63,9 +64,9 @@
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="searchParams.current_page"
+          :current-page.sync="searchParams.pageNum"
           :page-sizes="[1, 5, 10, 20, 30, 50, 100]"
-          :page-size="searchParams.per_page"
+          :page-size="searchParams.pageSize"
           :pager-count="11"
           :small="true"
           layout="sizes, prev, pager, next, jumper, total "
@@ -84,34 +85,34 @@ import moment from 'moment';
 export default {
   name: 'ChatMessage',
   // props: {
-  //   chat_id: String
+  //   chatRoomId: String
   // },
   data(){
     return {
-      chat_id:null,
-      to_member_id:null,
+      chatRoomId:null,
+      toMemberId:null,
       // chatMessage:{
       //   data:[],
       //   opposite_member:{
-      //     nick_name:''
+      //     nickName:''
       //   }
       // },
       msg:"",
       searchParams: {
         //搜索的关键字
-        key_word:"",
+        keyWord:"",
 
         //排序:初始状态应该是综合且降序
         order: "1:desc",
 
         //第几页
-        current_page: 1,
+        pageNum: 1,
 
         //当前页
         page: 1,
 
         //每一页展示条数
-        per_page: 10,
+        pageSize: 10,
 
         //最后一页
         last_page: 1,
@@ -123,25 +124,25 @@ export default {
     //把发请求的这个action封装到一个函数里面
     //将来需要再次发请求，你只需要在调用这个函数即可
     async getData() {
-      this.$store.dispatch("message/getChatMessage", {...this.searchParams,chat_id:this.chat_id,to_member_id:this.to_member_id});
+      this.$store.dispatch("message/getChatMessage", {...this.searchParams, chatRoomId:this.chatRoomId, toMemberId:this.toMemberId});
     },
 
     sendMessage(){
-      // this.$store.dispatch("message/sendMessage", {to_member_id:this.msg,to_member_id:this.to_member_id});
+      // this.$store.dispatch("message/sendMessage", {toMemberId:this.msg,toMemberId:this.toMemberId});
       console.log('sendMessage',this.msg);
-      console.log('this.to_member_id',this.to_member_id);
+      console.log('this.toMemberId',this.toMemberId);
       if (this.msg === '')
       {
         return true;
       }
-      let response = reqSendMessage({chat_id:this.chat_id,to_member_id:this.to_member_id,message:this.msg});
+      let response = reqSendMessage({chatRoomId:this.chatRoomId,toMemberId:this.toMemberId,message:this.msg});
       console.log('response',response)
       //console.log('status_code',response.status_code)
       //console.log('messae',response.messae)
          
             response.then((result)=>{
                 //console.log('result',result);\
-                if (result.status_code == 200) {
+                if (result.code == 0) {
                   console.log(',this.getData')
                   this.getData();
                   this.msg = '';
@@ -156,11 +157,11 @@ export default {
     },
 
     handleSizeChange(val) {
-        this.searchParams.per_page = val;
+        this.searchParams.pageSize = val;
         this.getData();
     },
     handleCurrentChange() {
-      this.searchParams.page = this.searchParams.current_page;
+      this.searchParams.page = this.searchParams.pageNum;
       this.getData();
     },
   
@@ -173,7 +174,7 @@ export default {
     startTimer(){
       this.timer = setInterval(()=>{
           this.getData();
-      },7 * 1000);
+      },20 * 1000);
 
       // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
       // this.$once('hook:beforeDestroy', () => {
@@ -186,18 +187,18 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.query.chat_id)
+    if (this.$route.query.chatRoomId)
     {
-      this.chat_id = this.$route.query.chat_id
+      this.chatRoomId = this.$route.query.chatRoomId
     }
     //console.log('this.$route.query',this.$route.query);
     
-    if (this.$route.query.to_member_id)
+    if (this.$route.query.toMemberId)
     {
-      this.to_member_id = this.$route.query.to_member_id
+      this.toMemberId = this.$route.query.toMemberId
     }
-    //console.log('this.chat_id',this.chat_id);
-    //console.log('this.to_member_id',this.to_member_id);
+    //console.log('this.chatRoomId',this.chatRoomId);
+    //console.log('this.toMemberId',this.toMemberId);
 
     if (this.$store.state.user.token){
       this.getData();
@@ -206,6 +207,7 @@ export default {
     }
     this.startTimer();
     this.$store.dispatch("message/getUnreadChatCount");
+    // console.log("this.chatMessage",this.chatMessage)
   },
   // unmounted(){
   //   console.log('unmounted');
@@ -230,7 +232,7 @@ export default {
     //mapGetters里面的写法：传递的数组，因为getters计算是没有划分模块【home,search】
     ...mapGetters('message',["chatMessage"]),
     total(){
-      return this.$store.state.message.chat_message.total || 0;
+      return this.$store.state.message.chatMessage.data.total || 0;
     }
   }
 }

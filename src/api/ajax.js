@@ -14,6 +14,9 @@ let requests = axios.create({
     baseURL: "/api",
     //请求不能超过5S
     timeout: 10000,
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
 
   //请求拦截器----在项目中发请求（请求没有发出去）可以做一些事情

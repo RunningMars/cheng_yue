@@ -57,7 +57,7 @@ const router = new VueRouter({
             meta:{title:'已收藏'},
             props($route) {
                 return {
-                  is_favorite: 1,
+                  isFavorite: 1,
                   id: $route.query.id,
                 }
             }
@@ -68,7 +68,7 @@ const router = new VueRouter({
             meta:{title:'已点赞'},
             props($route) {
                 return {
-                  is_thumbs_up: 1,
+                  isThumbsUp: 1,
                   id: $route.query.id,
                 }
             }

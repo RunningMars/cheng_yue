@@ -7,10 +7,13 @@ export default {
         //chat列表
         result:[], 
         //聊天消息记录
-        chat_message:{
-            to_member:{}
+        chatMessage:{
+            data:{
+                records:[]
+            },
+            toMember:{}
         },
-        unread_chat_count: null
+        unreadChatCount: null
     },
     mutations:{
         GET_CHAT_LIST(state, result) {
@@ -18,7 +21,7 @@ export default {
         },
        
         GET_CHAT_MESSAGE(state, result) {
-            state.chat_message = result;
+            state.chatMessage = result;
         },
 
         CLEAR_CHAT_LIST(state) {
@@ -26,15 +29,15 @@ export default {
         },
 
         CLEAR_CHAT_MEASSAGE(state) {
-            state.chat_message = [];
+            state.chatMessage = {};
         },
 
         GET_UNREAD_CHAT_COUNT(state,result) {
-            state.unread_chat_count = result;
+            state.unreadChatCount = result;
         },
 
         READ_ALL(state) {
-            state.unread_chat_count = null;
+            state.unreadChatCount = null;
         },
     },
     actions:{
@@ -42,7 +45,7 @@ export default {
         async getChatList({ commit }, params = {}) {
             let response = await reqGetChatList(params);
            
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("GET_CHAT_LIST", response.result);
             }else{
                 if (response.message){
@@ -59,7 +62,8 @@ export default {
         // 获取Chat Message 
         async getChatMessage({ commit }, params = {}) {
             let response = await reqGetChatMessage(params);
-            if (response.status_code == 200) {
+            if (response.code == 0) {
+                console.log("response.result",response.result)
                 commit("GET_CHAT_MESSAGE", response.result);
             }else{
                 if (response.message){
@@ -77,8 +81,8 @@ export default {
         async getUnreadChatCount({ commit }, params = {}) {
             let response = await reqGetUnreadChatCount(params);
             if (response ){
-                if (response.status_code == 200) {
-                    commit("GET_UNREAD_CHAT_COUNT", response.result.unread_chat_count);
+                if (response.code == 0) {
+                    commit("GET_UNREAD_CHAT_COUNT", response.result.unreadChatCount);
                 }else{
                     if (response.message){
                         Message({
@@ -96,7 +100,7 @@ export default {
         async readAll({ commit }, params = {}) {
             let response = await reqReadAll(params);
         
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("READ_ALL");
             }else{
                 Message({
@@ -123,10 +127,15 @@ export default {
             //state.result.data 如果服务器数据回来了，没问题是一个数组
             //假如网络不给力|没有网state.result.data应该返回的是undefined
             //计算新的属性的属性值至少给人家来一个数组
-            return state.result.data || [];
+            return state.result.records || [];
         },
         chatMessage(state){
-            return state.chat_message || [];
+            return state.chatMessage || {
+                data:{
+                    records:[]
+                },
+                toMember:{}
+            };
         }
     }
 }

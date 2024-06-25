@@ -5,21 +5,21 @@
       <div class="search clearfix">
         
         <!-- <div>
-          <el-button type="primary" v-show="this.is_favorite || this.is_thumbs_up" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
+          <el-button type="primary" v-show="this.isFavorite || this.isThumbsUp" icon="el-icon-arrow-left" @click="$router.back()" size="small" round>返回</el-button>
         </div> -->
 
         <div class="search_items">
 
           <div class="search_item">
-            <el-input class="input" v-model="searchParams.key_word" placeholder="昵称/ID" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
+            <el-input class="input" v-model="searchParams.keyWord" placeholder="昵称/ID" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
           </div>
 
           <div class="search_item">
-            <!-- <el-input class="input" style="width:100px;" v-model="searchParams.age_min_request" placeholder="年龄(起)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
+            <!-- <el-input class="input" style="width:100px;" v-model="searchParams.ageMinRequest" placeholder="年龄(起)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input>
             <span style="color:grey;"> 至 </span>
-            <el-input class="input" style="width:100px;" v-model="searchParams.age_max_request" placeholder="年龄(止)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input> -->
+            <el-input class="input" style="width:100px;" v-model="searchParams.ageMaxRequest" placeholder="年龄(止)" clearable v-on:keypress.enter.native="getData()" size="small"></el-input> -->
          
-            <el-select v-model="searchParams.age_min_request" style="width:90px;" placeholder="年龄(起)" clearable size="small">
+            <el-select v-model="searchParams.ageMinRequest" style="width:90px;" placeholder="年龄(起)" clearable size="small">
               <el-option
                   v-for="item in age_request_options"
                   :key="item.value"
@@ -29,7 +29,7 @@
             </el-select>
             <!-- <span style="color:grey;"> 至 </span> -->
             <span style="color:grey;"> </span>
-            <el-select v-model="searchParams.age_max_request" style="width:90px;"  placeholder="年龄(止)" clearable size="small">
+            <el-select v-model="searchParams.ageMaxRequest" style="width:90px;"  placeholder="年龄(止)" clearable size="small">
               <el-option
                   v-for="item in age_request_options"
                   :key="item.value"
@@ -40,7 +40,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.height_min_request" style="width:90px;" placeholder="身高(起)" clearable size="small">
+            <el-select v-model="searchParams.heightMinRequest" style="width:90px;" placeholder="身高(起)" clearable size="small">
               <el-option
                   v-for="item in height_request_options"
                   :key="item.value"
@@ -49,7 +49,7 @@
               </el-option>
             </el-select>
             <span style="color:grey;"> </span>
-            <el-select v-model="searchParams.height_max_request" style="width:90px;"  placeholder="身高(止)" clearable size="small">
+            <el-select v-model="searchParams.heightMaxRequest" style="width:90px;"  placeholder="身高(止)" clearable size="small">
               <el-option
                   v-for="item in height_request_options"
                   :key="item.value"
@@ -60,7 +60,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.education_background_code_request" placeholder="学历" clearable size="small">
+            <el-select v-model="searchParams.educationBackgroundCodeRequest" placeholder="学历" clearable size="small">
               <el-option
                   v-for="item in education_background_code_request_options"
                   :key="item.value"
@@ -71,7 +71,7 @@
           </div>
 
           <div class="search_item">
-            <!-- <el-select v-model="searchParams.annual_income_request" placeholder="选择年收入" clearable size="small"> -->
+            <!-- <el-select v-model="searchParams.annualIncomeRequest" placeholder="选择年收入" clearable size="small"> -->
               <!-- <el-option
                   v-for="item in annual_income_range_request_options"
                   :key="item.value"
@@ -79,7 +79,7 @@
                   :value="item.value">
               </el-option> -->
             <!-- </el-select> -->
-            <el-select v-model="searchParams.annual_income_min_request" placeholder="年收入" clearable size="small">
+            <el-select v-model="searchParams.annualIncomeMinRequest" placeholder="年收入" clearable size="small">
               <el-option
                   v-for="item in annual_income_min_request_options"
                   :key="item.value"
@@ -90,7 +90,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.asset_house_request" multiple placeholder="住房" clearable size="small">
+            <el-select v-model="searchParams.assetHouseRequest" multiple placeholder="住房" clearable size="small">
               <el-option
                   v-for="item in house_asset_request_options"
                   :key="item.value"
@@ -101,7 +101,7 @@
           </div>
 
           <div class="search_item">
-            <el-select v-model="searchParams.asset_car_request" placeholder="车辆" clearable size="small">
+            <el-select v-model="searchParams.assetCarRequest" placeholder="车辆" clearable size="small">
               <el-option
                   v-for="item in car_asset_request_options"
                   :key="item.value"
@@ -112,7 +112,7 @@
           </div>
 
           <!-- <div class="search_item">
-            <el-select v-model="searchParams.child_status_request" placeholder="小孩情况" clearable size="small">
+            <el-select v-model="searchParams.childStatusRequest" placeholder="小孩情况" clearable size="small">
               <el-option
                   v-for="item in child_status_request_options"
                   :key="item.value"
@@ -123,7 +123,7 @@
           </div> -->
 
           <div class="search_item">
-            <el-select v-model="searchParams.marital_status_request" multiple placeholder="婚姻情况" clearable size="small">
+            <el-select v-model="searchParams.maritalStatusRequest" multiple placeholder="婚姻情况" clearable size="small">
               <el-option
                   v-for="item in marital_status_request_options"
                   :key="item.value"
@@ -134,7 +134,7 @@
           </div>
 
           <!-- <div class="search_item">
-            <el-select v-model="searchParams.want_child_request" placeholder="生孩观念" clearable size="small">
+            <el-select v-model="searchParams.wantChildRequest" placeholder="生孩观念" clearable size="small">
               <el-option
                   v-for="item in want_child_request_options"
                   :key="item.value"
@@ -148,16 +148,16 @@
 
         <div class="search_item fr" style="margin-top:10px;">
 
-            <el-checkbox  style="margin-right:6px;" v-model="searchParams.is_favorite" :false-label="0" :true-label="1">已收藏</el-checkbox>      
+            <el-checkbox  style="margin-right:6px;" v-model="searchParams.isFavorite" :false-label="0" :true-label="1">已收藏</el-checkbox>      
 
 
-            <el-checkbox style="margin-right:6px;" v-model="searchParams.is_thumbs_up" :false-label="0" :true-label="1">已点赞</el-checkbox>
+            <el-checkbox style="margin-right:6px;" v-model="searchParams.isThumbsUp" :false-label="0" :true-label="1">已点赞</el-checkbox>
 
             <router-link to="/chat" style="margin-right:10px;">
-              <el-button v-if="!$store.state.message.unread_chat_count" type="primary" size="mini" round>私信</el-button>
+              <el-button v-if="!$store.state.message.unreadChatCount" type="primary" size="mini" round>私信</el-button>
               <el-badge 
-              v-if="$store.state.message.unread_chat_count" 
-              :value="$store.state.message.unread_chat_count" 
+              v-if="$store.state.message.unreadChatCount" 
+              :value="$store.state.message.unreadChatCount" 
               class="item"
               >
                 <el-button  type="primary" size="mini" round>私信</el-button>
@@ -180,12 +180,12 @@
 
                   <div class="fl clearfix" style="width:73%;" @click="routeToViewMemberDetail(member.id)">
 
-                    <div class="member_name fl member_detail_hover" >{{member.nick_name}}</div>
+                    <div class="member_name fl member_detail_hover" >{{member.nickName}}</div>
 
                     <div class="info fl member_detail_hover"  >
                       <span v-show="member.age">{{member.age}}岁</span>
                       <span v-show="member.height">/{{member.height}}cm</span>
-                      <span v-show="member.education_background">/{{member.education_background}}</span>
+                      <span v-show="member.educationBackground">/{{member.educationBackground}}</span>
                     </div>
                     <div class="info fl member_detail_hover" >
                       <span v-show="member.province">{{member.province}}</span>
@@ -197,8 +197,8 @@
                   </div>
 
                   <div class="avatar fr" style="width:26%;"> 
-                    <viewer :image="member.profile_photo">
-                      <img :src="member.profile_photo"
+                    <viewer :image="member.profilePhoto">
+                      <img :src="member.profilePhoto"
                           class="pro-img">
                     </viewer>
                   </div>
@@ -207,7 +207,7 @@
                     <div class="info fl member_detail_hover"  @click="routeToViewMemberDetail(member.id)">
                       <span v-show="member.age">{{member.age}}岁</span>
                       <span v-show="member.height">/{{member.height}}cm</span>
-                      <span v-show="member.education_background">/{{member.education_background}}</span>
+                      <span v-show="member.educationBackground">/{{member.education_background}}</span>
                     </div>
                     <div class="info fl member_detail_hover" @click="routeToViewMemberDetail(member.id)">
                       <span v-show="member.province">{{member.province}}</span>
@@ -223,15 +223,15 @@
                 <div class="item_middle member_detail_hover" @click="routeToViewMemberDetail(member.id)">
                       <!-- <img> -->
                     <!-- <span>点赞99</span> -->
-                    <div class="request about_me fl" v-show="member.about_me"><span>关于我  </span><span> {{ member.about_me }}</span></div>
-                    <div class="request hope_you fl" v-show="member.hope_you"><span>希望你  </span><span> {{ member.hope_you }}</span></div>
+                    <div class="request about_me fl" v-show="member.aboutMe"><span>关于我  </span><span> {{ member.aboutMe }}</span></div>
+                    <div class="request hope_you fl" v-show="member.hopeYou"><span>希望你  </span><span> {{ member.hopeYou }}</span></div>
                   </div>
 
                 <div class="item_bottom">
-                    <viewer :images="member.member_image" class="viewer_class">
+                    <viewer :images="member.memberImages" class="viewer_class">
                       <img
-                          v-for="(member_image,index) in member.member_image"
-                          :src="member_image.url"
+                          v-for="(memberImage,index) in member.memberImages"
+                          :src="memberImage.url"
                           :key="index"
                           class="pro-img"
                         >
@@ -246,9 +246,9 @@
           background
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="searchParams.current_page"
+          :current-page.sync="searchParams.pageNum"
           :page-sizes="[1,5, 10, 20, 30, 50, 100]"
-          :page-size="searchParams.per_page"
+          :page-size="searchParams.pageSize"
           :pager-count="21"
           :small="true"
           layout="sizes, prev, pager, next, jumper, total "
@@ -264,38 +264,38 @@
 import { mapGetters } from "vuex";
 export default {
   name: 'MemberList',
-  props: ['msg','is_favorite','is_thumbs_up'],
+  props: ['msg','isFavorite','isThumbsUp'],
   data(){
     return {
       searchParams: {
-        is_favorite:0,
-        is_thumbs_up:0,
+        isFavorite:0,
+        isThumbsUp:0,
         //搜索的关键字
-        key_word:"",
+        keyWord:"",
 
         //排序:初始状态应该是综合且降序
         order: "1:desc",
         //第几页
-        current_page: 1,
+        pageNum: 1,
         page: 1,
         //每一页展示条数
-        per_page: 10,
+        pageSize: 10,
         last_page: 1,
         //平台属性的操作
         props: [],
 
-        age_min_request:null,
-        age_max_request:null,
-        height_min_request:null,
-        height_max_request:null,
-        education_background_code_request:null,
-        annual_income_request:null,
-        annual_income_min_request:null,
-        asset_house_request:[],
-        asset_car_request:null,
-        marital_status_request:[],
-        child_status_request:null,
-        want_child_request:null,
+        ageMinRequest:null,
+        ageMaxRequest:null,
+        heightMinRequest:null,
+        heightMaxRequest:null,
+        educationBackgroundCodeRequest:null,
+        annualIncomeRequest:null,
+        annualIncomeMinRequest:null,
+        assetHouseRequest:[],
+        assetCarRequest:null,
+        maritalStatusRequest:[],
+        childStatusRequest:null,
+        wantChildRequest:null,
       },
 
       education_background_code_request_options:[
@@ -504,28 +504,28 @@ export default {
       this.$store.dispatch("member/getMemberList", this.searchParams);
     },
     clearSearch() {
-      this.searchParams.is_favorite = 0;
-      this.searchParams.is_thumbs_up = 0;
-      this.searchParams.key_word = null;
-      this.searchParams.age_min_request = null;
-      this.searchParams.age_max_request = null;
-      this.searchParams.height_min_request = null;
-      this.searchParams.height_max_request = null;
-      this.searchParams.education_background_code_request = null;
-      this.searchParams.annual_income_request = null;
-      this.searchParams.annual_income_min_request = null;
-      this.searchParams.asset_house_request = [];
-      this.searchParams.asset_car_request = null;
-      this.searchParams.marital_status_request = [];
-      this.searchParams.child_status_request = null;
-      this.searchParams.want_child_request = null;
+      this.searchParams.isFavorite = 0;
+      this.searchParams.isThumbsUp = 0;
+      this.searchParams.keyWord = null;
+      this.searchParams.ageMinRequest = null;
+      this.searchParams.ageMaxRequest = null;
+      this.searchParams.heightMinRequest = null;
+      this.searchParams.heightMaxRequest = null;
+      this.searchParams.educationBackgroundCodeRequest = null;
+      this.searchParams.annualIncomeRequest = null;
+      this.searchParams.annualIncomeMinRequest = null;
+      this.searchParams.assetHouseRequest = [];
+      this.searchParams.assetCarRequest = null;
+      this.searchParams.maritalStatusRequest = [];
+      this.searchParams.childStatusRequest = null;
+      this.searchParams.wantChildRequest = null;
     },
     handleSizeChange(val) {
-        this.searchParams.per_page = val;
+        this.searchParams.pageSize = val;
         this.getData();
     },
     handleCurrentChange() {
-      this.searchParams.page = this.searchParams.current_page;
+      this.searchParams.page = this.searchParams.pageNum;
       this.getData();
     },
     routeToViewMemberDetail(memberId) {
@@ -534,14 +534,14 @@ export default {
   },
   mounted() {
 
-    if (this.is_favorite)
+    if (this.isFavorite)
     {
-      this.searchParams.is_favorite = this.is_favorite;
+      this.searchParams.isFavorite = this.isFavorite;
     }
 
-    if (this.is_thumbs_up)
+    if (this.isThumbsUp)
     {
-      this.searchParams.is_thumbs_up = this.is_thumbs_up;
+      this.searchParams.isThumbsUp = this.isThumbsUp;
     }
     if (this.$store.state.user.token){
       this.getData();
@@ -563,7 +563,7 @@ export default {
 }
 // search(){
 //   this.$http
-//   .get("/member/list?per_page=" + this.result.per_page + "&page=" + this.result.current_page + "&key_word=" + this.search_key_word)
+//   .get("/member/list?pageSize=" + this.result.pageSize + "&page=" + this.result.pageNum + "&keyWord=" + this.search_keyWord)
 //   .then((response) => { this.result = response.data.result; });
 // },
 </script>

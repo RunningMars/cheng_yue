@@ -8,14 +8,14 @@
           <!--  member detail header-->
           <div class="member_header clearfix">
                 <div class="profile_photo fl">
-                    <viewer :image="member.profile_photo">
-                        <img :src="member.profile_photo"
+                    <viewer :image="member.profilePhoto">
+                        <img :src="member.profilePhoto"
                             class="pro-img">
                    </viewer>
                 </div>
 
                 <div class="right_side_box fl">
-                  <div class="member_name">{{member.nick_name}}</div>
+                  <div class="member_name">{{member.nickName}}</div>
                   <ul class="member_abstract clearfix">
                       <li class="fl" v-if="member.age" >{{member.age}}岁</li>
                       <li class="fl" v-if="member.height" >{{member.height}}cm</li>
@@ -52,11 +52,11 @@
                     <div class="info fl" v-if="member.weight">
                       <span>{{member.weight}}kg</span>
                     </div>
-                    <div class="info fl" v-if="member.body_size">
-                      <span>{{member.body_size}}</span>
+                    <div class="info fl" v-if="member.bodySize">
+                      <span>{{member.bodySize}}</span>
                     </div>
-                    <div class="info fl" v-if="member.education_background">
-                      <span>{{member.education_background}}</span>
+                    <div class="info fl" v-if="member.educationBackground">
+                      <span>{{member.educationBackground}}</span>
                     </div>
                     <div class="info fl" v-if="member.city">
                       <span>{{member.city}}</span>
@@ -65,16 +65,16 @@
                       <span>{{member.job}}</span>
                     </div>
                   
-                    <div class="info fl" v-if="member.annual_income">
-                      <span>{{member.annual_income}}</span>
+                    <div class="info fl" v-if="member.annualIncome">
+                      <span>{{member.annualIncome}}</span>
                     </div>
 
-                    <div v-if="member.asset_house" class="info fl">
-                      <span>{{member.asset_house}}</span>
+                    <div v-if="member.assetHouse" class="info fl">
+                      <span>{{member.assetHouse}}</span>
                     </div>
 
-                    <div v-if="member.asset_car" class="info fl">
-                      <span>{{member.asset_car}}</span>
+                    <div v-if="member.assetCar" class="info fl">
+                      <span>{{member.assetCar}}</span>
                     </div>
                 </div>
             </div>
@@ -87,8 +87,8 @@
                   <div class="info fl" v-if="member.ethnic">
                     <span>{{member.ethnic}}</span>
                   </div>
-                  <div class="info fl" v-if="member.about_family">
-                    <span>{{member.about_family}}</span>
+                  <div class="info fl" v-if="member.aboutFamily">
+                    <span>{{member.aboutFamily}}</span>
                   </div>
 
               </div>
@@ -99,17 +99,17 @@
                   <span class="">婚姻观念</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member.marital_status">
-                    <span>{{member.marital_status}}</span>
+                  <div class="info fl" v-if="member.maritalStatus">
+                    <span>{{member.maritalStatus}}</span>
                   </div>
-                  <div class="info fl" v-if="member.want_marry">
-                    <span>{{member.want_marry}}</span>
+                  <div class="info fl" v-if="member.wantMarry">
+                    <span>{{member.wantMarry}}</span>
                   </div>
-                  <div class="info fl" v-if="member.want_child">
-                    <span>{{member.want_child}}</span>
+                  <div class="info fl" v-if="member.wantChild">
+                    <span>{{member.wantChild}}</span>
                   </div>
-                  <div class="info fl" v-if="member.want_child">
-                    <span>{{member.want_child}}</span>
+                  <div class="info fl" v-if="member.wantChild">
+                    <span>{{member.wantChild}}</span>
                   </div>
               </div>
             </div>
@@ -119,11 +119,11 @@
                   <span class="">生活习惯</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member.about_smoke">
-                    <span>{{member.about_smoke}}</span>
+                  <div class="info fl" v-if="member.aboutSmoke">
+                    <span>{{member.aboutSmoke}}</span>
                   </div>
-                  <div class="info fl" v-if="member.about_drink">
-                    <span>{{member.about_drink}}</span>
+                  <div class="info fl" v-if="member.aboutDrink">
+                    <span>{{member.aboutDrink}}</span>
                   </div>
               </div>
             </div>
@@ -147,8 +147,8 @@
               </div>
               
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member.about_me">
-                      <span class="">{{ member.about_me }}</span>
+                  <div class="info fl" v-if="member.aboutMe">
+                      <span class="">{{ member.aboutMe }}</span>
                   </div>
               </div>
             </div>
@@ -158,8 +158,8 @@
                   <span class="">希望你</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member.hope_you">
-                    <span>{{ member.hope_you }}</span>
+                  <div class="info fl" v-if="member.hopeYou">
+                    <span>{{ member.hopeYou }}</span>
                   </div>
               </div>
 
@@ -170,8 +170,8 @@
                   <span class="">择偶要求</span>
               </div>
 
-              <div class="info fl" v-if="member.mating_requirement">
-                    <span>{{member.mating_requirement}}</span>
+              <div class="info fl" v-if="member.matingRequirement">
+                    <span>{{member.matingRequirement}}</span>
                   </div>
             </div>
 
@@ -187,32 +187,32 @@
                   <span class="">基本要求</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member && member.member_request.age_request">
-                    <span>{{ member && member.member_request.age_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.ageMinRequest">
+                    <span>{{ member && member.memberRequest.ageMinRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.height_request">
-                    <span>{{ member && member.member_request.height_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.heightMinRequest">
+                    <span>{{ member && member.memberRequest.heightMinRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.weight_request">
-                    <span>{{ member && member.member_request.weight_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.weightMinRequest">
+                    <span>{{ member && member.memberRequest.weightMinRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.body_size_request">
-                    <span>{{ member && member.member_request.body_size_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.bodySizeRequest">
+                    <span>{{ member && member.memberRequest.bodySizeRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.education_background_request">
-                    <span>{{ member.member_request.education_background_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.educationBackgroundRequest">
+                    <span>{{ member.memberRequest.educationBackgroundRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.annual_income_request">
-                    <span>{{ member.member_request.annual_income_request }}w以上</span>
+                  <div class="info fl" v-if="member && member.memberRequest.annualIncomeRequest">
+                    <span>{{ member.memberRequest.annualIncomeRequest }}w以上</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.job_request">
-                    <span>{{ member.member_request.job_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.jobRequest">
+                    <span>{{ member.memberRequest.jobRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.asset_house_request">
-                    <span>{{ member.member_request.asset_house_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.assetHouseRequest">
+                    <span>{{ member.memberRequest.assetHouseRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.asset_car_request">
-                    <span>{{ member.member_request.asset_car_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.assetCarRequest">
+                    <span>{{ member.memberRequest.assetCarRequest }}</span>
                   </div>
               </div>
             </div>
@@ -222,11 +222,11 @@
                   <span class="">婚姻观念</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member && member.member_request.marital_status_request">
-                    <span>{{ member.member_request.marital_status_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.maritalStatusRequest">
+                    <span>{{ member.memberRequest.maritalStatusRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.want_child_request">
-                    <span>{{ member.member_request.want_child_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.wantChildRequest">
+                    <span>{{ member.memberRequest.wantChildRequest }}</span>
                   </div>
               </div>
             </div>
@@ -236,11 +236,11 @@
                   <span class="">生活习惯</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member && member.member_request.about_smoke_request">
-                    <span>{{ member.member_request.about_smoke_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.aboutSmokeRequest">
+                    <span>{{ member.memberRequest.aboutSmokeRequest }}</span>
                   </div>
-                  <div class="info fl" v-if="member && member.member_request.about_drink_request">
-                    <span>{{ member.member_request.about_drink_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.aboutDrinkRequest">
+                    <span>{{ member.memberRequest.aboutDrinkRequest }}</span>
                   </div>
               </div>
             </div>
@@ -250,8 +250,8 @@
                   <span class="">其他要求</span>
               </div>
               <div class="block_content fl clearfix">
-                  <div class="info fl" v-if="member && member.member_request.about_family_request">
-                    <span>{{ member.member_request.about_family_request }}</span>
+                  <div class="info fl" v-if="member && member.memberRequest.aboutFamilyRequest">
+                    <span>{{ member.memberRequest.aboutFamilyRequest }}</span>
                   </div>
               </div>
             </div>
@@ -259,10 +259,10 @@
           </div>
 
           <div class="member_pics">
-              <viewer :images="member.member_image" class="viewer_class">
+              <viewer :images="member.memberImages" class="viewer_class">
                 <img
-                    v-for="(member_image,index) in member.member_image"
-                    :src="member_image.url"
+                    v-for="(memberImage,index) in member.memberImages"
+                    :src="memberImage.url"
                     :key="index"
                     class="pro-img"
                   >
@@ -272,11 +272,11 @@
           <div >
             <div class="send" style="margin-top:20px;display:flex;justify-content:center;text-align:center;">
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
-                <el-button type="primary" @click="updateFavorites(member.id)" round> {{ !member.member_favorite_to_member || member.member_favorite_to_member.length === 0 ? '收藏' : '已收藏'}} </el-button>
+                <el-button type="primary" @click="updateFavorites(member.id)" round> {{ !member.memberFavoriteToMember || member.memberFavoriteToMember.length === 0 ? '收藏' : '已收藏'}} </el-button>
               </div>
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
-                <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{ !member.member_thumbs_up_to_member || member.member_thumbs_up_to_member.length === 0 ? '点赞' : '已点赞'}} </el-button>
+                <el-button type="primary" @click="updateThumbsUp(member.id)" round > {{ !member.memberThumbsUpToMember || member.memberThumbsUpToMember.length === 0 ? '点赞' : '已点赞'}} </el-button>
               </div>
               <div class="search_input" ></div>
               <div class="search_input"  style="margin-right:10px;" v-if="member.id != $store.state.user.userInfo.member.id">
@@ -306,7 +306,7 @@ export default {
     return {
       searchParams: {
         //搜索的关键字
-        key_word:"",
+        keyWord:"",
         //相应的id
         category1Id: "",
       }
@@ -323,18 +323,18 @@ export default {
     },
     async updateFavorites(to_member_id){
 
-      let is_favorite = this.$store.state.member.member.member_favorite_to_member.length === 0 ? 1 : 0;
+      let isFavorite = this.$store.state.member.member.memberFavoriteToMember.length === 0 ? 1 : 0;
       
-      await reqUpdateMyFavorite({to_member_id:to_member_id,is_favorite:is_favorite});
+      await reqUpdateMyFavorite({to_member_id:to_member_id,isFavorite:isFavorite});
 
       this.getData(to_member_id);
     },
     async updateThumbsUp(to_member_id){
       // if (to_member_id != this.$store.state.user.userInfo.member.id)
       // {
-        let is_thumbs_up = this.$store.state.member.member.member_thumbs_up_to_member.length === 0 ? 1 : 0;
+        let isThumbsUp = this.$store.state.member.member.memberThumbsUpToMember.length === 0 ? 1 : 0;
 
-        await reqUpdateMythumbsUp({to_member_id:to_member_id,is_thumbs_up:is_thumbs_up});
+        await reqUpdateMythumbsUp({to_member_id:to_member_id,isThumbsUp:isThumbsUp});
 
         this.getData(to_member_id);
       // }

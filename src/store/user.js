@@ -27,7 +27,7 @@ export default {
             //本地存储数据清空
             removeToken();
             removeUserInfo();
-            //this.$store.state.message.unread_chat_count = null;
+            //this.$store.state.message.unreadChatCount = null;
         },
         USER_REGISTER_PASS(state) {
             state.userRegisterPass = true;
@@ -38,7 +38,7 @@ export default {
         async userRegister({ commit }, params = {}) {
             let response = await reqRegister(params);
            
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("USER_REGISTER_PASS");
 
                 Message({
@@ -60,15 +60,15 @@ export default {
         async userLogin({ commit }, params = {}) {
             let response = await reqLogin(params);
 
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 //用户已经登录成功且获取到token
 
-                commit("USER_LOGIN", response.result.access_token);
-                commit("USER_INFO", response.result.user_info);
+                commit("USER_LOGIN", response.result.accessToken);
+                commit("USER_INFO", response.result.userInfo);
                 
                 //持久化存储token
-                setToken(response.result.access_token);
-                setUserInfo(JSON.stringify(response.result.user_info));
+                setToken(response.result.accessToken);
+                setUserInfo(JSON.stringify(response.result.userInfo));
 
                 Message({
                     message: response.message,
@@ -89,12 +89,12 @@ export default {
         async userRefresh({ commit }, params = {}) {
             let response = await reqRefresh(params);
 
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 //用户已经登录成功且获取到token
 
-                commit("USER_REFRESH", response.result.access_token);
+                commit("USER_REFRESH", response.result.accessToken);
                 //持久化存储token
-                setToken(response.result.access_token);
+                setToken(response.result.accessToken);
                 return "ok";
             } else {
                 return false;
@@ -105,7 +105,7 @@ export default {
 
             let response = await reqLogout(params);
 
-            if (response.status_code == 200) {
+            if (response.code == 0) {
                 commit("USER_LOGOUT");
                 Message({
                     message: response.message,

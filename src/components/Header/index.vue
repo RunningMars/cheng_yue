@@ -19,10 +19,10 @@
 
           <li class="fl">
              <router-link to="/chat">
-              <span v-if="!$store.state.message.unread_chat_count">私信</span>
+              <span v-if="!$store.state.message.unreadChatCount">私信</span>
                 <el-badge 
-                v-if="$store.state.message.unread_chat_count" 
-                :value="$store.state.message.unread_chat_count" 
+                v-if="$store.state.message.unreadChatCount" 
+                :value="$store.state.message.unreadChatCount" 
                 class="item">
                   <span>私信</span>
                 </el-badge>
@@ -62,11 +62,11 @@
             <router-link to="/chat"> 
               <el-menu-item index="2-6">
               
-                <span v-if="!$store.state.message.unread_chat_count" style="color:antiquewhite">私信</span>
+                <span v-if="!$store.state.message.unreadChatCount" style="color:antiquewhite">私信</span>
 
                 <el-badge
-                  v-if="$store.state.message.unread_chat_count"
-                  :value="$store.state.message.unread_chat_count"
+                  v-if="$store.state.message.unreadChatCount"
+                  :value="$store.state.message.unreadChatCount"
                   class="item">
                   <span style="color:antiquewhite">私信</span>
                 </el-badge>
@@ -120,7 +120,7 @@ export default {
       if (!this.timer){
         this.timer = setInterval(() => {
           this.$store.dispatch("message/getUnreadChatCount");
-        }, 30 * 1000)
+        }, 32 * 1000)
       }
     },
     stopTimer(){

@@ -55,7 +55,7 @@
         this.$bus.$emit('uploadedImages',fileList)
         // let imgs = [];
         // fileList.forEach( i => {
-        //   if (i.response.status_code == 200){
+        //   if (i.response.code == 0){
         //     imgs.push(i.response.result.url);
         //   }
         //   return true;
