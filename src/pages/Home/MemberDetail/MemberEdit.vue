@@ -209,7 +209,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="小孩情况"    
-                                prop="child_status"  
+                                prop="childStatus"  
                                 :rules="[
                                     { required: true, message: '请选择你的小孩情况', trigger: 'blur' },
                                 ]">
@@ -378,7 +378,7 @@
                                 </div>   -->
                                 
                                 <el-form-item label="我的照片">
-                                    <UploadMultiImageComponet v-model="member.memberImages" :fileList="member.memberImage"></UploadMultiImageComponet>
+                                    <UploadMultiImageComponet v-model="member.memberImages" :fileList="member.memberImages"></UploadMultiImageComponet>
                                 </el-form-item>
                             </div>
                         </div>
@@ -443,7 +443,7 @@
 
 
                                 <el-form-item label="体重">
-                                    <el-select v-model="member.memberRequest.weight_min_request" style="width:100px;" placeholder="身高(起)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.weightMinRequest" style="width:100px;" placeholder="身高(起)" clearable size="small">
                                         <el-option
                                             v-for="item in weight_options"
                                             :key="item.value"
@@ -452,7 +452,7 @@
                                         </el-option>
                                     </el-select>
                                     <span style="color:grey;"> 至 </span>
-                                    <el-select v-model="member.memberRequest.weight_max_request" style="width:100px;"  placeholder="身高(止)" clearable size="small">
+                                    <el-select v-model="member.memberRequest.weightMaxRequest" style="width:100px;"  placeholder="身高(止)" clearable size="small">
                                         <el-option
                                             v-for="item in weight_options"
                                             :key="item.value"
@@ -482,7 +482,7 @@
                                 </el-form-item>
 
                                 <el-form-item label="学历">
-                                <el-select v-model="member.memberRequest.education_background_request" placeholder="请选择">
+                                <el-select v-model="member.memberRequest.educationBackgroundRequest" placeholder="请选择">
                                     <el-option
                                         v-for="item in education_background_request_options"
                                         :key="item.value"
@@ -531,7 +531,7 @@
 
 
                                 <el-form-item label="工作地区">
-                                    <el-input style="width:80px;" v-model="member.memberRequest.city_request"></el-input>
+                                    <el-input style="width:80px;" v-model="member.memberRequest.cityRequest"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="婚姻情况">
@@ -1146,6 +1146,7 @@ export default {
                 console.log(' submit validate! true');
             } else {
                 res = false;
+                //console.log('this.member',this.member);
                 console.log('error submit validate!!');
             }
             return res;

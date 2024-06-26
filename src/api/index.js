@@ -39,10 +39,10 @@ export const reqGetMemberDetail = (params) => requests({url:"/member/detail", pa
 export const reqUpdateMemberDetail = (data) => requests({url:"/member/save", data , method:"post"});
 
 // 更新收藏
-export const reqUpdateMyFavorite = (data) => requests({url:"/member/favorite/update", data , method:"post"});
+export const reqUpdateMyFavorite = (params) => requests({url:"/member/favorite/update", params , method:"post"});
 
 // 更新点赞
-export const reqUpdateMythumbsUp = (data) => requests({url:"/member/thumbs_up/update", data , method:"post"});
+export const reqUpdateMythumbsUp = (params) => requests({url:"/member/thumbs_up/update", params , method:"post"});
 
 // 获取被点赞列表
 export const reqReceiveMythumbsUpList = (params) => requests({url:"/member/thumbs_up/list", params , method:"get"});
@@ -80,4 +80,4 @@ export const reqCaptchaVerify = (data) => requests.post("/captcha/verify" , data
 /**
  * 发送短信验证码
  */
-export const reqSendSmsValidateCode = (data) => requests.post("/sms/validate/send" , data );
+export const reqSendSmsValidateCode = (params) => requests.post("/sms/validate/send" , params );

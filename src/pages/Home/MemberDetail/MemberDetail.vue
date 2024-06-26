@@ -318,25 +318,25 @@ export default {
     getData(id) {
         this.$store.dispatch("member/getMemberDetail", {id:id});
     },
-    openChat(to_member_id){
-      this.$router.push({ path: "/message", query: {to_member_id:to_member_id} });
+    openChat(toMemberId){
+      this.$router.push({ path: "/message", query: {toMemberId:toMemberId} });
     },
-    async updateFavorites(to_member_id){
+    async updateFavorites(toMemberId){
 
       let isFavorite = this.$store.state.member.member.memberFavoriteToMember.length === 0 ? 1 : 0;
       
-      await reqUpdateMyFavorite({to_member_id:to_member_id,isFavorite:isFavorite});
+      await reqUpdateMyFavorite({toMemberId:toMemberId,isFavorite:isFavorite});
 
-      this.getData(to_member_id);
+      this.getData(toMemberId);
     },
-    async updateThumbsUp(to_member_id){
-      // if (to_member_id != this.$store.state.user.userInfo.member.id)
+    async updateThumbsUp(toMemberId){
+      // if (toMemberId != this.$store.state.user.userInfo.member.id)
       // {
         let isThumbsUp = this.$store.state.member.member.memberThumbsUpToMember.length === 0 ? 1 : 0;
 
-        await reqUpdateMythumbsUp({to_member_id:to_member_id,isThumbsUp:isThumbsUp});
+        await reqUpdateMythumbsUp({toMemberId:toMemberId,isThumbsUp:isThumbsUp});
 
-        this.getData(to_member_id);
+        this.getData(toMemberId);
       // }
      
     }

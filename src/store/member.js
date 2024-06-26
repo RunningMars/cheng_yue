@@ -15,14 +15,14 @@ export default {
         name:'rdgtest',
         
         //收到的点赞列表
-        thumbs_up_result:[], 
+        thumbsUpResult:[], 
     },
     mutations:{
         GET_MEMBER_LIST(state, result) {
             state.result = result;
         },
         GET_RECEIVE_THUMBS_UP_LIST(state, result) {
-            state.thumbs_up_result = result;
+            state.thumbsUpResult = result;
         },
         CLEAR_GET_MEMBER_LIST(state) {
             state.result = [];
@@ -101,7 +101,7 @@ export default {
             return state.member || {};
         },
         receiveThumbsUpList(state){
-            return state.thumbs_up_result.data || [];
+            return state.thumbsUpResult.thumbsUpListPage.records || [];
         }
     }
 }

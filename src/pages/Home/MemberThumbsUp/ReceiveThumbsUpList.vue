@@ -14,7 +14,7 @@
     <div class="content" style="margin-top:24px;">
         <div  class="chat_list">
             <div>
-              <span style="font-size:18px;weight:bold;">我收到的点赞  </span><span style="font-size:20px;weight:bold;">{{ thumbs_up_count }}</span>
+              <span style="font-size:18px;weight:bold;">我收到的点赞  </span><span style="font-size:20px;weight:bold;">{{ allThumbsUpCount }}</span>
             </div>
           <el-table
             :data="receiveThumbsUpList"
@@ -54,7 +54,7 @@
                 <template slot-scope="scope">
                   <div class="demo-type">
                     <div>
-                      <span>{{ formatDateTime(scope.row.created_at) }}</span>
+                      <span>{{ formatDateTime(scope.row.createdAt) }}</span>
                     </div>   
                   </div>
                 </template>
@@ -140,7 +140,7 @@ export default {
     },
 
     // routeToViewChatMessage(row) {
-    //   this.$router.push({ path: "/message", query: {chat_id:row.id,to_member_id:row.chat_room_member_opposite[0].member_id} });
+    //   this.$router.push({ path: "/message", query: {chat_id:row.id,toMemberId:row.chat_room_member_opposite[0].member_id} });
     // },
     formatDateTime(dateTime) {
       return moment(dateTime).format('YYYY-MM-DD HH:mm'); // 将时间按指定格式进行格式化
@@ -162,10 +162,10 @@ export default {
     //mapGetters里面的写法：传递的数组，因为getters计算是没有划分模块【home,search】
     ...mapGetters('member',["receiveThumbsUpList"]),
     total(){
-      return this.$store.state.member.thumbs_up_result.total || 0;
+      return this.$store.state.member.thumbsUpResult.total || 0;
     },
-    thumbs_up_count(){
-      return this.$store.state.member.thumbs_up_result.thumbs_up_count || 0
+    allThumbsUpCount(){
+      return this.$store.state.member.thumbsUpResult.allThumbsUpCount || 0
     }
   }
 }
