@@ -15,7 +15,10 @@ export default {
         name:'rdgtest',
         
         //收到的点赞列表
-        thumbsUpResult:[], 
+        thumbsUpResult:{
+            thumbsUpListPage:[]
+        }, 
+
     },
     mutations:{
         GET_MEMBER_LIST(state, result) {

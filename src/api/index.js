@@ -70,7 +70,11 @@ export const reqReadAll = (params) => requests({url:"/message/chat/read_all", pa
 /**
  * uploadImage
  */
-export const reqUploadImage = (data) => requests({url:"/uploadImage" , data ,method:"post"});
+export const reqUploadImage = (data) => requests({
+        url:"/uploadImage",
+        data,
+        method:"post"
+    });
 
 /**
  * captcha

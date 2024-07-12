@@ -88,8 +88,8 @@
                                 :rules="[
                                     { required: true, message: '请选择你的性别', trigger: 'blur' },
                                 ]">
-                                <el-radio v-model="member.sex"  @change="changeSex" :label="'1'">男</el-radio>
-                                <el-radio v-model="member.sex"  @change="changeSex" :label="'2'">女</el-radio>
+                                <el-radio v-model="member.sex"  @change="changeSex" :label="1">男</el-radio>
+                                <el-radio v-model="member.sex"  @change="changeSex" :label="2">女</el-radio>
                                 </el-form-item>
                 
                                 <el-form-item 

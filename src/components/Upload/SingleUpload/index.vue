@@ -3,6 +3,7 @@
     <el-upload
       class="upload-demo"
       action="/api/uploadImage"
+      :http-request="uploadRequest"
       :on-preview="handlePreview"
       :on-remove="handleRemove"
       :file-list="fileList"
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+  import axios from 'axios'; // Import axios library
+  import store from '@/store';
   export default {
     name:"UploadSingleImageComponet",
     data() {
@@ -38,7 +41,25 @@
         });
 
         this.$bus.$emit('uploadedSingleImage',img)
-      }
+      },
+      uploadRequest({ file, data, headers, onSuccess, onError }) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        axios.post('/api/uploadImage', formData, {
+          headers: {
+            ...headers,
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${store.state.user.token}`
+          }
+        })
+        .then(response => {
+          onSuccess(response.data);
+        })
+        .catch(error => {
+          onError(error);
+        });
+      },
     }
   }
 </script>
